@@ -2,6 +2,10 @@ package com.ryfsystems.smi;
 
 public class Constants {
     public static String INFRA_SERVER_ADDRESS = "http://192.168.18.2/smi/";
-    public static String SAVE_USER_OPERATION = "save.php";
+    public static String SAVE_USER = "save.php";
+    public static String GET_USER = "getUser.php?id=";
     public static String GET_ALL_USERS = "getUsers.php";
+    public static String UPDATE_USER = "updateUser.php";
+    public static String DELETE_USER = "deleteUser.php";
+    public static String LOGIN = "login.php";
 }

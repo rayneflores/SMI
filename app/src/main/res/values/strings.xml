@@ -1,4 +1,7 @@
 <resources>
     <string name="app_name">SMI</string>
     <string name="usuarios">LISTA DE USUARIOS</string>
+    <string name="smi_logo">Sistema de Manejo de Inventario</string>
+    <string name="usuario">Usuario</string>
+    <string name="password">Password</string>
 </resources>

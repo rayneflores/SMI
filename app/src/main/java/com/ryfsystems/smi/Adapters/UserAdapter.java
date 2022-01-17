@@ -45,7 +45,7 @@ public class UserAdapter extends RecyclerView.Adapter<UserViewHolder> {
             userSelected = new User();
             userSelected.setId(userList.get(position).getId());
             userSelected.setUserName(userList.get(position).getUserName());
-            userSelected.setPassword(userList.get(position).getPassword());
+            userSelected.setPassword(null);
             userSelected.setName(userList.get(position).getName());
             userSelected.setRol(userList.get(position).getRol());
 

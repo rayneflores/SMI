@@ -124,6 +124,7 @@
         android:layout_marginStart="16dp"
         android:text="Crear"
         android:textAllCaps="false"
+        android:textColor="@color/black"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
 
@@ -135,6 +136,7 @@
         android:layout_marginStart="20dp"
         android:text="Modificar"
         android:textAllCaps="false"
+        android:textColor="@color/black"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toEndOf="@+id/btnGuardar" />
 
@@ -146,6 +148,7 @@
         android:layout_marginStart="20dp"
         android:text="Eliminar"
         android:textAllCaps="false"
+        android:textColor="@color/black"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toEndOf="@+id/btnModificar" />
 

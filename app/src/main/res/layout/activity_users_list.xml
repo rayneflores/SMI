@@ -21,9 +21,9 @@
     <LinearLayout
         android:id="@+id/llRvUsers"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:layout_below="@+id/tvUserListTitle">
+        android:layout_height="match_parent"
+        android:layout_below="@+id/tvUserListTitle"
+        android:orientation="horizontal">
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/rvUsers"
@@ -39,8 +39,9 @@
         android:layout_height="wrap_content"
         android:layout_alignParentEnd="true"
         android:layout_alignParentBottom="true"
+        android:textColor="@color/black"
         android:layout_marginEnd="16dp"
         android:layout_marginBottom="16dp"
-        android:text="Nuevo Usuario" />
+        android:text="Nuevo" />
 
 </RelativeLayout>

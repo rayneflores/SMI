@@ -2,12 +2,6 @@ package com.ryfsystems.smi.Models;
 
 import java.io.Serializable;
 
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
-
-
 public class User implements Serializable {
 
     private int id;
@@ -23,6 +17,11 @@ public class User implements Serializable {
         this.id = id;
         this.userName = userName;
         this.password = password;
+        this.name = name;
+        this.rol = rol;
+    }
+
+    public User(String name, String rol) {
         this.name = name;
         this.rol = rol;
     }

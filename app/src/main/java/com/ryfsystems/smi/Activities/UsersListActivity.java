@@ -31,6 +31,7 @@ import java.util.List;
 public class UsersListActivity extends AppCompatActivity {
 
     Button btnNuevo;
+    Intent nextIntent;
     JsonObjectRequest jsonObjectRequest;
     List<User> userList = new ArrayList<>();
     ProgressDialog progressDialog;
@@ -80,7 +81,7 @@ public class UsersListActivity extends AppCompatActivity {
                     User user = new User(
                             jsonObject.getInt("id"),
                             jsonObject.getString("username"),
-                            jsonObject.getString("password"),
+                            null,
                             jsonObject.getString("name"),
                             jsonObject.getString("rol")
                     );
@@ -98,5 +99,13 @@ public class UsersListActivity extends AppCompatActivity {
         });
         RequestQueue requestQueue = Volley.newRequestQueue(this);
         requestQueue.add(jsonObjectRequest);
+    }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        nextIntent = new Intent(getApplicationContext(), MainActivity.class);
+        startActivity(nextIntent);
+        finish();
     }
 }
