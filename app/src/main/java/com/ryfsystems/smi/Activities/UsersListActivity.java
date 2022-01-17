@@ -1,0 +1,102 @@
+package com.ryfsystems.smi.Activities;
+
+import static com.ryfsystems.smi.Constants.GET_ALL_USERS;
+import static com.ryfsystems.smi.Constants.INFRA_SERVER_ADDRESS;
+
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+
+import android.app.ProgressDialog;
+import android.content.Intent;
+import android.os.Bundle;
+import android.view.View;
+import android.widget.Button;
+import android.widget.Toast;
+
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.toolbox.JsonObjectRequest;
+import com.android.volley.toolbox.Volley;
+import com.ryfsystems.smi.Adapters.UserAdapter;
+import com.ryfsystems.smi.Models.User;
+import com.ryfsystems.smi.R;
+
+import org.json.JSONArray;
+import org.json.JSONObject;
+
+import java.util.ArrayList;
+import java.util.List;
+
+public class UsersListActivity extends AppCompatActivity {
+
+    Button btnNuevo;
+    JsonObjectRequest jsonObjectRequest;
+    List<User> userList = new ArrayList<>();
+    ProgressDialog progressDialog;
+    RecyclerView rvUsers;
+    RecyclerView.LayoutManager layoutManager;
+    UserAdapter userAdapter;
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_users_list);
+
+        btnNuevo = findViewById(R.id.btnNuevo);
+
+        progressDialog = new ProgressDialog(this);
+        progressDialog.setTitle("Espere...");
+        progressDialog.setMessage("Listando Usuarios...");
+        progressDialog.setCanceledOnTouchOutside(false);
+
+        rvUsers = findViewById(R.id.rvUsers);
+        rvUsers.setHasFixedSize(true);
+        layoutManager = new LinearLayoutManager(getApplicationContext());
+        rvUsers.setLayoutManager(layoutManager);
+
+        btnNuevo.setOnClickListener(view -> {
+            Intent intent = new Intent(getApplicationContext(), UserActivity.class);
+            startActivity(intent);
+            finish();
+        });
+
+        listUsers(INFRA_SERVER_ADDRESS + GET_ALL_USERS);
+    }
+
+    private void listUsers(String path) {
+
+        progressDialog.setMessage("Listando Usuarios...");
+        progressDialog.show();
+
+        jsonObjectRequest = new JsonObjectRequest(Request.Method.GET, path, null, response -> {
+
+            try {
+                userList.clear();
+                JSONArray jsonArray = response.getJSONArray("Users");
+                for (int i = 0; i < jsonArray.length(); i++) {
+                    JSONObject jsonObject = jsonArray.getJSONObject(i);
+                    System.out.println("Usuario: " + jsonObject);
+                    User user = new User(
+                            jsonObject.getInt("id"),
+                            jsonObject.getString("username"),
+                            jsonObject.getString("password"),
+                            jsonObject.getString("name"),
+                            jsonObject.getString("rol")
+                    );
+                    userList.add(user);
+                }
+                userAdapter = new UserAdapter(UsersListActivity.this, userList);
+                rvUsers.setAdapter(userAdapter);
+                progressDialog.dismiss();
+            } catch (Exception exception) {
+                exception.printStackTrace();
+            }
+        }, error -> {
+            Toast.makeText(getApplicationContext(), error.getMessage(), Toast.LENGTH_LONG).show();
+            progressDialog.dismiss();
+        });
+        RequestQueue requestQueue = Volley.newRequestQueue(this);
+        requestQueue.add(jsonObjectRequest);
+    }
+}
