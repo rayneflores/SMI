@@ -15,6 +15,7 @@ public class Constants {
 
     //Products Querys
     public static String GET_PRODUCT = "getProduct.php?cbarra=";
+    public static String SET_PRODUCT = "setProduct.php";
 
     //Login
     public static String LOGIN = "login.php";
