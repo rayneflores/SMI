@@ -4,4 +4,7 @@
     <string name="smi_logo">Sistema de Manejo de Inventario</string>
     <string name="usuario">Usuario</string>
     <string name="password">Password</string>
+    <string name="inventario">Toma de Inventario</string>
+    <string name="bienvenido">Bienvenido </string>
+    <string name="conteo_de_articulo">Conteo de Articulo</string>
 </resources>

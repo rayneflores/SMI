@@ -37,5 +37,11 @@ dependencies {
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.4.0'
     implementation 'org.projectlombok:lombok:1.18.20'
 
+    //HttpRequest
     implementation 'com.android.volley:volley:1.1.1'
+
+    //Codigos de Barra
+    implementation 'me.dm7.barcodescanner:zbar:1.9.13'
+    implementation 'com.google.android.gms:play-services-basement:18.0.0'
+    implementation 'com.google.android.gms:play-services-vision:20.1.3'
 }

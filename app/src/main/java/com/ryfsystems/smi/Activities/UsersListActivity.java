@@ -91,11 +91,12 @@ public class UsersListActivity extends AppCompatActivity {
                 rvUsers.setAdapter(userAdapter);
                 progressDialog.dismiss();
             } catch (Exception exception) {
-                exception.printStackTrace();
+                Toast.makeText(getApplicationContext(), "Sql: " + exception.getMessage(), Toast.LENGTH_SHORT).show();
             }
         }, error -> {
-            Toast.makeText(getApplicationContext(), error.getMessage(), Toast.LENGTH_LONG).show();
+            Toast.makeText(getApplicationContext(), "Error de Conexion", Toast.LENGTH_LONG).show();
             progressDialog.dismiss();
+            onBackPressed();
         });
         RequestQueue requestQueue = Volley.newRequestQueue(this);
         requestQueue.add(jsonObjectRequest);

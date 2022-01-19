@@ -2,22 +2,34 @@ package com.ryfsystems.smi.Activities;
 
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.cardview.widget.CardView;
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
 
+import android.Manifest;
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.ryfsystems.smi.R;
 
+import java.text.MessageFormat;
+
 public class MainActivity extends AppCompatActivity implements View.OnClickListener{
 
     Button btnSettings;
+    CardView cvInventario;
     Intent nextIntent;
+    ProgressDialog progressDialog;
     String rol, usuario;
+    TextView tvBienvenida;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -26,12 +38,30 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         SharedPreferences preferences = getSharedPreferences("smiPreferences", Context.MODE_PRIVATE);
         rol = preferences.getString("role", "");
-        usuario = preferences.getString("usuario", "");
+        usuario = preferences.getString("name", "");
+
+        cvInventario = findViewById(R.id.cvInventario);
+        cvInventario.setOnClickListener(this);
+
+        tvBienvenida = findViewById(R.id.tvBienvenida);
+
+        tvBienvenida.setText(MessageFormat.format("{0} {1}", getString(R.string.bienvenido), usuario));
 
         btnSettings = findViewById(R.id.btnSettings);
         btnSettings.setOnClickListener(this);
 
+        getPermissions();
+
         validateRole(rol);
+    }
+
+    private void getPermissions() {
+        ActivityCompat.requestPermissions(MainActivity.this, new String[] {Manifest.permission.CAMERA}, 0);
+        progressDialog = new ProgressDialog(this);
+        progressDialog.setTitle("Espere...");
+        progressDialog.setMessage("Cargando Detalles de Producto...");
+        progressDialog.setIndeterminate(true);
+        progressDialog.setCanceledOnTouchOutside(false);
     }
 
     @Override
@@ -63,10 +93,16 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     @Override
     public void onClick(View view) {
+        Intent i;
         switch (view.getId()) {
             case R.id.btnSettings:
                 nextIntent = new Intent(getApplicationContext(), UsersListActivity.class);
                 startActivity(nextIntent);
+                finish();
+                break;
+            case R.id.cvInventario:
+                i = new Intent(getApplicationContext(), TomaInventarioActivity.class);
+                startActivity(i);
                 finish();
                 break;
         }

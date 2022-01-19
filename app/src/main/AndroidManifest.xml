@@ -2,6 +2,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.ryfsystems.smi">
 
+    <uses-permission android:name="android.permission.CAMERA" />
     <uses-permission android:name="android.permission.INTERNET" />
 
     <application
@@ -13,20 +14,25 @@
         android:theme="@style/Theme.SMI"
         android:usesCleartextTraffic="true">
         <activity
+            android:name=".Activities.SplashActivity"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".Activities.ConteoActivity"
+            android:exported="true" />
+        <activity
+            android:name=".Activities.TomaInventarioActivity"
+            android:exported="true" />
+        <activity
             android:name=".Activities.UsersListActivity"
             android:exported="true" />
         <activity
             android:name=".Activities.UserActivity"
             android:exported="true" />
-        <activity
-            android:name=".Activities.SplashActivity"
-            android:exported="true">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-        </activity>
         <activity
             android:name=".Activities.LoginActivity"
             android:exported="true" />
