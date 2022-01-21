@@ -7,4 +7,7 @@
     <string name="inventario">Toma de Inventario</string>
     <string name="bienvenido">Bienvenido </string>
     <string name="conteo_de_articulo">Conteo de Articulo</string>
+    <string name="etiquetas">Generacion de Etiquetas</string>
+    <string name="checklist">Checklist</string>
+    <string name="productos">LISTA DE PRODUCTOS</string>
 </resources>

@@ -210,38 +210,88 @@
         android:id="@+id/tvConteoCantidad"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Cantidad: "
         android:layout_marginStart="16dp"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="25dp"
+        android:text="Cantidad: "
         android:textSize="16sp"
         android:textStyle="bold"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tvConteoSucursal" />
 
+    <TextView
+        android:id="@+id/tvConteoPrevio2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="25dp"
+        android:layout_marginStart="16dp"
+        android:text="0"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toStartOf="@+id/tvConteoCantidad2"
+        app:layout_constraintStart_toEndOf="@+id/tvConteoCantidad"
+        app:layout_constraintTop_toBottomOf="@+id/tvConteoSucursal" />
+
+    <TextView
+        android:id="@+id/tvConteoPventa"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="18dp"
+        android:text="Precio de Venta: "
+        android:textSize="16sp"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tvConteoPrevio2" />
+
+    <TextView
+        android:id="@+id/tvConteoPrevio"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="97dp"
+        android:layout_marginTop="16dp"
+        android:text="Previo"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toStartOf="@+id/tvConteoCantidad2"
+        app:layout_constraintStart_toEndOf="@+id/tvConteoCantidad"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tvConteoPrevio2" />
+
     <com.google.android.material.textfield.TextInputEditText
         android:id="@+id/tvConteoCantidad2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="18dp"
-        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginTop="12dp"
         android:textSize="14sp"
         android:inputType="number"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintBottom_toTopOf="@+id/btnConteoContar" />
+        app:layout_constraintTop_toBottomOf="@id/tvConteoSucursal2" />
+
+    <com.google.android.material.textfield.TextInputEditText
+        android:id="@+id/tvConteoPventa2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="8dp"
+        android:layout_marginTop="4dp"
+        android:textSize="14sp"
+        android:inputType="number"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tvConteoCantidad2" />
 
     <Button
         android:id="@+id/btnConteoContar"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
-        android:layout_marginTop="8dp"
+        android:layout_marginTop="12dp"
         android:layout_marginBottom="8dp"
         android:text="Contar"
         android:textColor="@color/black"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tvConteoCantidad" />
+        app:layout_constraintTop_toBottomOf="@+id/tvConteoPrevio" />
 
 
 

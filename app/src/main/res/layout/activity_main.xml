@@ -20,9 +20,9 @@
 
     <androidx.cardview.widget.CardView
         android:id="@+id/cvInventario"
-        android:layout_width="230dp"
+        android:layout_width="260dp"
         android:layout_height="50dp"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="32dp"
         android:background="@color/white"
         app:cardBackgroundColor="@color/white"
         app:cardCornerRadius="10sp"
@@ -45,6 +45,72 @@
             android:layout_marginStart="24dp"
             android:layout_gravity="center_horizontal|center_vertical"
             android:text="@string/inventario"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            android:textColor="@color/design_default_color_primary"/>
+
+    </androidx.cardview.widget.CardView>
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/cvEtiquetas"
+        android:layout_width="260dp"
+        android:layout_height="50dp"
+        android:layout_marginTop="32dp"
+        android:background="@color/white"
+        app:cardBackgroundColor="@color/white"
+        app:cardCornerRadius="10sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/cvInventario">
+
+        <ImageView
+            android:id="@+id/ivEtiquetas"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_gravity="center_vertical"
+            android:layout_marginStart="4dp"
+            android:src="@drawable/ic_etiquetas" />
+
+        <TextView
+            android:id="@+id/tvEtiquetas"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="24dp"
+            android:layout_gravity="center_horizontal|center_vertical"
+            android:text="@string/etiquetas"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            android:textColor="@color/design_default_color_primary"/>
+
+    </androidx.cardview.widget.CardView>
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/cvChecklist"
+        android:layout_width="260dp"
+        android:layout_height="50dp"
+        android:layout_marginTop="32dp"
+        android:background="@color/white"
+        app:cardBackgroundColor="@color/white"
+        app:cardCornerRadius="10sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/cvEtiquetas">
+
+        <ImageView
+            android:id="@+id/ivChecklist"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_gravity="center_vertical"
+            android:layout_marginStart="4dp"
+            android:src="@drawable/ic_checklist" />
+
+        <TextView
+            android:id="@+id/tvChecklist"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="24dp"
+            android:layout_gravity="center_horizontal|center_vertical"
+            android:text="@string/checklist"
             android:textSize="18sp"
             android:textStyle="bold"
             android:textColor="@color/design_default_color_primary"/>

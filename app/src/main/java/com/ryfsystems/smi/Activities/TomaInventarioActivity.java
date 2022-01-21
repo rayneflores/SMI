@@ -18,7 +18,6 @@ import com.android.volley.RequestQueue;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
 import com.ryfsystems.smi.Models.Product;
-import com.ryfsystems.smi.R;
 
 import org.json.JSONObject;
 
@@ -27,6 +26,9 @@ import me.dm7.barcodescanner.zbar.ZBarScannerView;
 
 public class TomaInventarioActivity extends AppCompatActivity implements ZBarScannerView.ResultHandler {
 
+    Bundle extras;
+    Bundle receieved;
+    int module;
     Intent nextIntent;
     private static final String TAG = "ScannerLog";
     String path = INFRA_SERVER_ADDRESS;
@@ -37,6 +39,12 @@ public class TomaInventarioActivity extends AppCompatActivity implements ZBarSca
         super.onCreate(savedInstanceState);
         mScannerView = new ZBarScannerView(this);
         setContentView(mScannerView);
+        receieved = getIntent().getExtras();
+        if (receieved != null) {
+            module = receieved.getInt("module");
+        }
+        extras = new Bundle();
+        extras.putInt("module", module);
     }
 
     @Override
@@ -69,13 +77,13 @@ public class TomaInventarioActivity extends AppCompatActivity implements ZBarSca
             Ringtone r = RingtoneManager.getRingtone(getApplicationContext(), notification);
             r.play();
             /*Creacion de la Busqueda de Productos*/
-            buscarDatosUsuario(code);
+            buscarDatosProducto(code);
         } catch (Exception e) {
             Log.e(TAG, e.getLocalizedMessage());
         }
     }
 
-    public void buscarDatosUsuario(String code) {
+    public void buscarDatosProducto(String code) {
         JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.GET, path + GET_PRODUCT + code, null, response -> {
             try {
                 JSONObject jsonObject = response.getJSONObject("Product");
@@ -88,10 +96,12 @@ public class TomaInventarioActivity extends AppCompatActivity implements ZBarSca
                 product.setEan_13(jsonObject.getString("ean_13"));
                 product.setLinea(jsonObject.getInt("linea"));
                 product.setSucursal(jsonObject.getString("sucursal"));
+                product.setStock_(jsonObject.getLong("stock_"));
+                product.setPventa(jsonObject.getLong("pventa"));
 
                 //Toast.makeText(getApplicationContext(), product.toString(), Toast.LENGTH_LONG).show();
 
-                Bundle extras = new Bundle();
+
                 extras.putSerializable("Product", product);
                 Intent intent = new Intent(getApplicationContext(), ConteoActivity.class);
                 intent.putExtras(extras);
@@ -101,7 +111,8 @@ public class TomaInventarioActivity extends AppCompatActivity implements ZBarSca
                 exception.printStackTrace();
             }
         }, error -> {
-            Toast.makeText(getApplicationContext(), error.getMessage(), Toast.LENGTH_LONG).show();
+            Toast.makeText(getApplicationContext(), "Fallo en la Lectura, Reintente!!!", Toast.LENGTH_LONG).show();
+            //Toast.makeText(getApplicationContext(), error.getMessage(), Toast.LENGTH_LONG).show();
             onResume();
         });
         RequestQueue requestQueue = Volley.newRequestQueue(this);

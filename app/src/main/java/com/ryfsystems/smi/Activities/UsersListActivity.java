@@ -77,7 +77,6 @@ public class UsersListActivity extends AppCompatActivity {
                 JSONArray jsonArray = response.getJSONArray("Users");
                 for (int i = 0; i < jsonArray.length(); i++) {
                     JSONObject jsonObject = jsonArray.getJSONObject(i);
-                    System.out.println("Usuario: " + jsonObject);
                     User user = new User(
                             jsonObject.getInt("id"),
                             jsonObject.getString("username"),

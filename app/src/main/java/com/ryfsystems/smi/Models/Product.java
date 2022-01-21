@@ -12,11 +12,13 @@ public class Product implements Serializable {
     private Integer linea;
     private Integer code;
     private String detalle;
+    private Long stock_;
+    private Long pventa;
 
     public Product() {
     }
 
-    public Product(Integer codlocal, String sucursal, Integer activado, String dep, String ean_13, Integer linea, Integer code, String detalle) {
+    public Product(Integer codlocal, String sucursal, Integer activado, String dep, String ean_13, Integer linea, Integer code, String detalle, Long stock_, Long pventa) {
         this.codlocal = codlocal;
         this.sucursal = sucursal;
         this.activado = activado;
@@ -25,6 +27,8 @@ public class Product implements Serializable {
         this.linea = linea;
         this.code = code;
         this.detalle = detalle;
+        this.stock_ = stock_;
+        this.pventa = pventa;
     }
 
     public Integer getCodlocal() {
@@ -91,6 +95,22 @@ public class Product implements Serializable {
         this.detalle = detalle;
     }
 
+    public Long getStock_() {
+        return stock_;
+    }
+
+    public void setStock_(Long stock_) {
+        this.stock_ = stock_;
+    }
+
+    public Long getPventa() {
+        return pventa;
+    }
+
+    public void setPventa(Long pventa) {
+        this.pventa = pventa;
+    }
+
     @Override
     public String toString() {
         return "Product{" +
@@ -102,6 +122,8 @@ public class Product implements Serializable {
                 ", linea=" + linea +
                 ", code=" + code +
                 ", detalle='" + detalle + '\'' +
+                ", stock_=" + stock_ +
+                ", pventa=" + pventa +
                 '}';
     }
 }

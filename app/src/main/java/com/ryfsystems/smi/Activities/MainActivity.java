@@ -24,8 +24,9 @@ import java.text.MessageFormat;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener{
 
+    Bundle extras;
     Button btnSettings;
-    CardView cvInventario;
+    CardView cvInventario, cvEtiquetas, cvChecklist;
     Intent nextIntent;
     ProgressDialog progressDialog;
     String rol, usuario;
@@ -36,12 +37,20 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        extras = new Bundle();
+
         SharedPreferences preferences = getSharedPreferences("smiPreferences", Context.MODE_PRIVATE);
         rol = preferences.getString("role", "");
         usuario = preferences.getString("name", "");
 
         cvInventario = findViewById(R.id.cvInventario);
         cvInventario.setOnClickListener(this);
+
+        cvEtiquetas = findViewById(R.id.cvEtiquetas);
+        cvEtiquetas.setOnClickListener(this);
+
+        cvChecklist = findViewById(R.id.cvChecklist);
+        cvChecklist.setOnClickListener(this);
 
         tvBienvenida = findViewById(R.id.tvBienvenida);
 
@@ -101,7 +110,21 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 finish();
                 break;
             case R.id.cvInventario:
+                extras.putInt("module", 1);
                 i = new Intent(getApplicationContext(), TomaInventarioActivity.class);
+                i.putExtras(extras);
+                startActivity(i);
+                finish();
+                break;
+            case R.id.cvEtiquetas:
+                extras.putInt("module", 2);
+                i = new Intent(getApplicationContext(), TomaInventarioActivity.class);
+                i.putExtras(extras);
+                startActivity(i);
+                finish();
+                break;
+            case R.id.cvChecklist:
+                i = new Intent(getApplicationContext(), ProductListActivity.class);
                 startActivity(i);
                 finish();
                 break;

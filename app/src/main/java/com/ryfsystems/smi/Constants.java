@@ -14,11 +14,16 @@ public class Constants {
     //End User Querys
 
     //Products Querys
+    public static String GET_ALL_PRODUCTS = "getProducts.php";
     public static String GET_PRODUCT = "getProduct.php?cbarra=";
     public static String SET_PRODUCT = "setProduct.php";
+    public static String GET_EXISTENCE = "getExistence.php?ean_13=";
 
     //Login
     public static String LOGIN = "login.php";
+
+    //Send Data
+    public static String SEND_DATA = "sendData.php";
 
 
 }
