@@ -81,6 +81,13 @@
             android:text="Stock:"
             android:textSize="@dimen/fontMini" />
         <TextView
+            android:id="@+id/tvListProductPventa"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:text="Precio de Venta:"
+            android:textSize="@dimen/fontMini" />
+        <TextView
             android:id="@+id/tvListProductpOferta"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -88,14 +95,47 @@
             android:text="Precio Oferta: "
             android:textSize="@dimen/fontMini" />
         <TextView
-            android:id="@+id/tvListProductPventa"
+            android:id="@+id/tvListProductAvgProm"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:text="Avg_Prom:"
+            android:textSize="@dimen/fontMini" />
+        <TextView
+            android:id="@+id/tvListProductCostoProm"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:text="Costo Prom.:"
+            android:textSize="@dimen/fontMini" />
+        <TextView
+            android:id="@+id/tvListProductCodBarra"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:text="Codigo de Barras:"
+            android:textSize="@dimen/fontMini" />
+        <TextView
+            android:id="@+id/tvListProductPcadena"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:text="Precio Cadena:"
+            android:textSize="@dimen/fontMini" />
+        <TextView
+            android:id="@+id/tvListProductPedido"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:text="Pedido:"
+            android:textSize="@dimen/fontMini" />
+        <TextView
+            android:id="@+id/tvListProductUndDefect"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
             android:layout_marginBottom="8dp"
-            android:text="Precio de Venta:"
+            android:text="Unidades Defectuosas:"
             android:textSize="@dimen/fontMini" />
-
     </LinearLayout>
-
 </androidx.cardview.widget.CardView>

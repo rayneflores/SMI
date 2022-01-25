@@ -1,7 +1,7 @@
 package com.ryfsystems.smi.Activities;
 
-import static com.ryfsystems.smi.Constants.GET_ALL_USERS;
-import static com.ryfsystems.smi.Constants.INFRA_SERVER_ADDRESS;
+import static com.ryfsystems.smi.Utils.Constants.GET_ALL_USERS;
+import static com.ryfsystems.smi.Utils.Constants.INFRA_SERVER_ADDRESS;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -10,7 +10,6 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
-import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
 

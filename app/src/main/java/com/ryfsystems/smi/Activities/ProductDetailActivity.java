@@ -1,8 +1,8 @@
 package com.ryfsystems.smi.Activities;
 
-import static com.ryfsystems.smi.Constants.GET_REAL_EXISTENCE;
-import static com.ryfsystems.smi.Constants.INFRA_SERVER_ADDRESS;
-import static com.ryfsystems.smi.Constants.SET_PRODUCT_FULL;
+import static com.ryfsystems.smi.Utils.Constants.GET_REAL_EXISTENCE;
+import static com.ryfsystems.smi.Utils.Constants.INFRA_SERVER_ADDRESS;
+import static com.ryfsystems.smi.Utils.Constants.SET_PRODUCT_FULL;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -75,7 +75,7 @@ public class ProductDetailActivity extends AppCompatActivity {
                         productReceived.getDetalle(),
                         productReceived.getStock_(),
                         productReceived.getPventa(),
-                        productReceived.getP_oferta(),
+                        productReceived.getPoferta(),
                         productReceived.getAvg_pro(),
                         productReceived.getCosto_prom(),
                         productReceived.getCodBarra(),
@@ -104,7 +104,7 @@ public class ProductDetailActivity extends AppCompatActivity {
                 case 4:
                     productReceived = (Product) received.getSerializable("Product");
                     getStock2(productReceived.getCodBarra());
-                    poferta = productReceived.getP_oferta();
+                    poferta = productReceived.getPoferta();
                     pventa = productReceived.getPventa();
                     costoProm = productReceived.getCosto_prom();
 
@@ -132,7 +132,7 @@ public class ProductDetailActivity extends AppCompatActivity {
                 case 5:
                     productReceived = (Product) received.getSerializable("Product");
                     getStock2(productReceived.getCodBarra());
-                    poferta = productReceived.getP_oferta();
+                    poferta = productReceived.getPoferta();
                     pventa = productReceived.getPventa();
                     costoProm = productReceived.getCosto_prom();
 

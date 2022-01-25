@@ -1,8 +1,8 @@
 package com.ryfsystems.smi.Activities;
 
-import static com.ryfsystems.smi.Constants.GET_USER;
-import static com.ryfsystems.smi.Constants.INFRA_SERVER_ADDRESS;
-import static com.ryfsystems.smi.Constants.LOGIN;
+import static com.ryfsystems.smi.Utils.Constants.GET_USER;
+import static com.ryfsystems.smi.Utils.Constants.INFRA_SERVER_ADDRESS;
+import static com.ryfsystems.smi.Utils.Constants.LOGIN;
 
 import android.content.Context;
 import android.content.Intent;
@@ -13,7 +13,6 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.cardview.widget.CardView;
 
 import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
@@ -24,7 +23,6 @@ import com.android.volley.toolbox.Volley;
 import com.ryfsystems.smi.Models.User;
 import com.ryfsystems.smi.R;
 
-import org.json.JSONArray;
 import org.json.JSONObject;
 
 import java.util.HashMap;

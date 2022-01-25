@@ -1,4 +1,4 @@
-package com.ryfsystems.smi;
+package com.ryfsystems.smi.Utils;
 
 public class Constants {
 

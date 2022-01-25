@@ -12,7 +12,9 @@ import java.io.IOException;
 
 public class ProductViewHolder extends RecyclerView.ViewHolder {
 
-    public TextView tvListProductActivado, tvListProductCode, tvListProductCodLocal, tvListProductDetalle, tvListProductDep, tvListProductEan_13, tvListProductLinea, tvListProductSucursal, tvListProductStock, tvListProductpOferta, tvListProductPventa;
+    public TextView tvListProductActivado, tvListProductCode, tvListProductCodLocal, tvListProductDetalle, tvListProductDep, tvListProductEan_13, tvListProductLinea,
+            tvListProductSucursal, tvListProductStock, tvListProductpOferta, tvListProductPventa, tvListProductAvgProm, tvListProductCostoProm, tvListProductCodBarra,
+            tvListProductPcadena, tvListProductPedido, tvListProductUndDefect;
     View mView;
 
     private ProductViewHolder.ClickListener mClickListener;
@@ -41,6 +43,12 @@ public class ProductViewHolder extends RecyclerView.ViewHolder {
         tvListProductStock = mView.findViewById(R.id.tvListProductStock);
         tvListProductpOferta = mView.findViewById(R.id.tvListProductpOferta);
         tvListProductPventa = mView.findViewById(R.id.tvListProductPventa);
+        tvListProductAvgProm = mView.findViewById(R.id.tvListProductAvgProm);
+        tvListProductCostoProm = mView.findViewById(R.id.tvListProductCostoProm);
+        tvListProductCodBarra = mView.findViewById(R.id.tvListProductCodBarra);
+        tvListProductPcadena = mView.findViewById(R.id.tvListProductPcadena);
+        tvListProductPedido = mView.findViewById(R.id.tvListProductPedido);
+        tvListProductUndDefect = mView.findViewById(R.id.tvListProductUndDefect);
     }
 
     public void setOnClickListener(ProductViewHolder.ClickListener clickListener) {

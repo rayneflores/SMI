@@ -1,8 +1,8 @@
 package com.ryfsystems.smi.Activities;
 
-import static com.ryfsystems.smi.Constants.GET_ALL_PRODUCTS;
-import static com.ryfsystems.smi.Constants.INFRA_SERVER_ADDRESS;
-import static com.ryfsystems.smi.Constants.SEND_DATA;
+import static com.ryfsystems.smi.Utils.Constants.GET_ALL_PRODUCTS;
+import static com.ryfsystems.smi.Utils.Constants.INFRA_SERVER_ADDRESS;
+import static com.ryfsystems.smi.Utils.Constants.SEND_DATA;
 
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
@@ -129,7 +129,9 @@ public class ProductListActivity extends AppCompatActivity {
                             jsonObject.getDouble("avg_pro"),
                             jsonObject.getLong("costo_prom"),
                             jsonObject.getString("codBarra"),
-                            jsonObject.getDouble("pcadena"));
+                            jsonObject.getDouble("pcadena"),
+                            jsonObject.getInt("pedido"),
+                            jsonObject.getInt("und_defect"));
                     productList.add(product);
                 }
                 productAdapter = new ProductAdapter(ProductListActivity.this, productList);

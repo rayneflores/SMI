@@ -1,7 +1,7 @@
 package com.ryfsystems.smi.Activities;
 
-import static com.ryfsystems.smi.Constants.GET_PRODUCT;
-import static com.ryfsystems.smi.Constants.INFRA_SERVER_ADDRESS;
+import static com.ryfsystems.smi.Utils.Constants.GET_PRODUCT;
+import static com.ryfsystems.smi.Utils.Constants.INFRA_SERVER_ADDRESS;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -98,7 +98,7 @@ public class TomaInventarioActivity extends AppCompatActivity implements ZBarSca
                 product.setSucursal(jsonObject.getString("sucursal"));
                 product.setStock_(jsonObject.getLong("stock_"));
                 product.setPventa(jsonObject.getLong("pventa"));
-                product.setP_oferta(jsonObject.getLong("p_oferta"));
+                product.setPoferta(jsonObject.getLong("p_oferta"));
                 product.setAvg_pro(jsonObject.getDouble("avg_pro"));
                 product.setCosto_prom(jsonObject.getLong("costo_prom"));
                 product.setCodBarra(code);

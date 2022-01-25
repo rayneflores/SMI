@@ -1,9 +1,9 @@
 package com.ryfsystems.smi.Activities;
 
-import static com.ryfsystems.smi.Constants.DELETE_USER;
-import static com.ryfsystems.smi.Constants.INFRA_SERVER_ADDRESS;
-import static com.ryfsystems.smi.Constants.SAVE_USER;
-import static com.ryfsystems.smi.Constants.UPDATE_USER;
+import static com.ryfsystems.smi.Utils.Constants.DELETE_USER;
+import static com.ryfsystems.smi.Utils.Constants.INFRA_SERVER_ADDRESS;
+import static com.ryfsystems.smi.Utils.Constants.SAVE_USER;
+import static com.ryfsystems.smi.Utils.Constants.UPDATE_USER;
 
 import androidx.appcompat.app.AppCompatActivity;
 

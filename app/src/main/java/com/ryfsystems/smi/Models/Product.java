@@ -14,11 +14,13 @@ public class Product implements Serializable {
     private String detalle;
     private Long stock_;
     private Long pventa;
-    private Long p_oferta;
+    private Long poferta;
     private Double avg_pro;
     private Long costo_prom;
     private String codBarra;
     private Double pcadena;
+    private int pedido;
+    private int und_defect;
 
     public Product() {
     }
@@ -33,11 +35,13 @@ public class Product implements Serializable {
                    String detalle,
                    Long stock_,
                    Long pventa,
-                   Long p_oferta,
+                   Long poferta,
                    Double avg_pro,
                    Long costo_prom,
                    String codBarra,
-                   Double pcadena) {
+                   Double pcadena,
+                   int pedido,
+                   int und_defect) {
         this.codlocal = codlocal;
         this.sucursal = sucursal;
         this.activado = activado;
@@ -48,11 +52,13 @@ public class Product implements Serializable {
         this.detalle = detalle;
         this.stock_ = stock_;
         this.pventa = pventa;
-        this.p_oferta = p_oferta;
+        this.poferta = poferta;
         this.avg_pro = avg_pro;
         this.costo_prom = costo_prom;
         this.codBarra = codBarra;
         this.pcadena = pcadena;
+        this.pedido = pedido;
+        this.und_defect = und_defect;
     }
 
     public Integer getCodlocal() {
@@ -135,12 +141,12 @@ public class Product implements Serializable {
         this.pventa = pventa;
     }
 
-    public Long getP_oferta() {
-        return p_oferta;
+    public Long getPoferta() {
+        return poferta;
     }
 
-    public void setP_oferta(Long p_oferta) {
-        this.p_oferta = p_oferta;
+    public void setPoferta(Long poferta) {
+        this.poferta = poferta;
     }
 
     public Double getAvg_pro() {
@@ -176,6 +182,22 @@ public class Product implements Serializable {
         this.pcadena = pcadena;
     }
 
+    public int getPedido() {
+        return pedido;
+    }
+
+    public void setPedido(int pedido) {
+        this.pedido = pedido;
+    }
+
+    public int getUnd_defect() {
+        return und_defect;
+    }
+
+    public void setUnd_defect(int und_defect) {
+        this.und_defect = und_defect;
+    }
+
     @Override
     public String toString() {
         return "Product{" +
@@ -189,11 +211,13 @@ public class Product implements Serializable {
                 ", detalle='" + detalle + '\'' +
                 ", stock_=" + stock_ +
                 ", pventa=" + pventa +
-                ", p_oferta=" + p_oferta +
+                ", p_oferta=" + poferta +
                 ", avg_pro=" + avg_pro +
                 ", costo_prom=" + costo_prom +
                 ", codBarra='" + codBarra + '\'' +
                 ", pcadena=" + pcadena +
+                ", pedido=" + pedido +
+                ", und_defect=" + und_defect +
                 '}';
     }
 }

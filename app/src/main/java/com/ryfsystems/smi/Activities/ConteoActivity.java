@@ -1,18 +1,15 @@
 package com.ryfsystems.smi.Activities;
 
-import static com.ryfsystems.smi.Constants.GET_EXISTENCE;
-import static com.ryfsystems.smi.Constants.INFRA_SERVER_ADDRESS;
-import static com.ryfsystems.smi.Constants.SET_PRODUCT;
+import static com.ryfsystems.smi.Utils.Constants.GET_EXISTENCE;
+import static com.ryfsystems.smi.Utils.Constants.INFRA_SERVER_ADDRESS;
+import static com.ryfsystems.smi.Utils.Constants.SET_PRODUCT;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
-import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
-import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
