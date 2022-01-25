@@ -200,24 +200,23 @@ public class Product implements Serializable {
 
     @Override
     public String toString() {
-        return "Product{" +
-                "codlocal=" + codlocal +
-                ", sucursal='" + sucursal + '\'' +
-                ", activado=" + activado +
-                ", dep='" + dep + '\'' +
-                ", ean_13='" + ean_13 + '\'' +
-                ", linea=" + linea +
-                ", code=" + code +
-                ", detalle='" + detalle + '\'' +
-                ", stock_=" + stock_ +
-                ", pventa=" + pventa +
-                ", p_oferta=" + poferta +
-                ", avg_pro=" + avg_pro +
-                ", costo_prom=" + costo_prom +
-                ", codBarra='" + codBarra + '\'' +
-                ", pcadena=" + pcadena +
-                ", pedido=" + pedido +
-                ", und_defect=" + und_defect +
-                '}';
+        return
+                codlocal +
+                ", " + sucursal +
+                ", " + activado +
+                ", " + dep +
+                ", " + ean_13 +
+                ", " + linea +
+                ", " + code +
+                ", " + detalle +
+                ", " + stock_ +
+                ", " + pventa +
+                ", " + poferta +
+                ", " + avg_pro +
+                ", " + costo_prom +
+                ", " + codBarra +
+                ", " + pcadena +
+                ", " + pedido +
+                ", " + und_defect;
     }
 }

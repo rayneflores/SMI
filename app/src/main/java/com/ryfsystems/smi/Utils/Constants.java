@@ -27,5 +27,10 @@ public class Constants {
     //Send Data
     public static String SEND_DATA = "sendData.php";
 
+    //Mail Sender
+    public static String MAIL_USERNAME = "rayneflores39@gmail.com";
+    public static String MAIL_PASSWORD = "Rayne210781$";
+    public static String MAIL_RECIPIENT = "raynitoflores@gmail.com";
+
 
 }
