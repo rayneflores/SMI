@@ -29,7 +29,7 @@ public class TomaInventarioActivity extends AppCompatActivity implements ZBarSca
     Bundle extras;
     Bundle receieved;
     int module;
-    Intent nextIntent;
+    Intent nextIntent, intent;
     private static final String TAG = "ScannerLog";
     String path = INFRA_SERVER_ADDRESS;
     private ZBarScannerView mScannerView;
@@ -98,15 +98,32 @@ public class TomaInventarioActivity extends AppCompatActivity implements ZBarSca
                 product.setSucursal(jsonObject.getString("sucursal"));
                 product.setStock_(jsonObject.getLong("stock_"));
                 product.setPventa(jsonObject.getLong("pventa"));
+                product.setP_oferta(jsonObject.getLong("p_oferta"));
+                product.setAvg_pro(jsonObject.getDouble("avg_pro"));
+                product.setCosto_prom(jsonObject.getLong("costo_prom"));
+                product.setCodBarra(code);
+                product.setPcadena(jsonObject.getDouble("pcadena"));
 
-                //Toast.makeText(getApplicationContext(), product.toString(), Toast.LENGTH_LONG).show();
+                switch (module) {
+                    case 1:
+                    case 2:
+                    case 3:
+                        extras.putSerializable("Product", product);
+                        intent = new Intent(getApplicationContext(), ConteoActivity.class);
+                        intent.putExtras(extras);
+                        startActivity(intent);
+                        finish();
+                        break;
+                    case 4:
+                    case 5:
+                        extras.putSerializable("Product", product);
+                        intent = new Intent(getApplicationContext(), ProductDetailActivity.class);
+                        intent.putExtras(extras);
+                        startActivity(intent);
+                        finish();
+                        break;
+                }
 
-
-                extras.putSerializable("Product", product);
-                Intent intent = new Intent(getApplicationContext(), ConteoActivity.class);
-                intent.putExtras(extras);
-                startActivity(intent);
-                finish();
             } catch (Exception exception) {
                 exception.printStackTrace();
             }

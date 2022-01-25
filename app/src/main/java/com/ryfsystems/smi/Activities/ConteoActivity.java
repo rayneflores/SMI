@@ -41,8 +41,8 @@ public class ConteoActivity extends AppCompatActivity {
     Product productReceived;
     RequestQueue requestQueue;
     String path = INFRA_SERVER_ADDRESS;
-    TextView tvConteoTitle, tvConteoPrevio, tvConteoCode2, tvConteoActivado2, tvConteoCodLocal2, tvConteoDetalle2, tvConteoDep2, tvConteoEan132, tvConteoLinea2, tvConteoSucursal2, tvConteoPrevio2, tvConteoPventa;
     TextInputEditText tvConteoCantidad2, tvConteoPventa2;
+    TextView tvConteoTitle, tvConteoPrevio, tvConteoCode2, tvConteoActivado2, tvConteoCodLocal2, tvConteoDetalle2, tvConteoDep2, tvConteoEan132, tvConteoLinea2, tvConteoSucursal2, tvConteoPrevio2, tvConteoPventa, tvConteoPrecioOferta, tvConteoPrecioOferta2;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -65,6 +65,8 @@ public class ConteoActivity extends AppCompatActivity {
         tvConteoPrevio2 = findViewById(R.id.tvConteoPrevio2);
         tvConteoPventa = findViewById(R.id.tvConteoPventa);
         tvConteoPventa2 = findViewById(R.id.tvConteoPventa2);
+        tvConteoPrecioOferta = findViewById(R.id.tvConteoPrecioOferta);
+        tvConteoPrecioOferta2 = findViewById(R.id.tvConteoPrecioOferta2);
 
         received = getIntent().getExtras();
 
@@ -73,37 +75,59 @@ public class ConteoActivity extends AppCompatActivity {
 
             module = (int) received.get("module");
 
-            if (module == 1) {
-                tvConteoTitle.setText("Conteo de Articulo");
-                getStock(productReceived.getEan_13());
-                tvConteoActivado2.setText(productReceived.getActivado() == 1 ? "Si": "No");
-                tvConteoCode2.setText(productReceived.getCode().toString());
-                tvConteoCodLocal2.setText(productReceived.getCodlocal().toString());
-                tvConteoDetalle2.setText(productReceived.getDetalle());
-                tvConteoDep2.setText(productReceived.getDep());
-                tvConteoEan132.setText(productReceived.getEan_13());
-                tvConteoLinea2.setText(productReceived.getLinea().toString());
-                tvConteoSucursal2.setText(productReceived.getSucursal());
-                tvConteoCantidad2.setText("0");
-                tvConteoPventa.setVisibility(View.INVISIBLE);
-                tvConteoPventa2.setVisibility(View.INVISIBLE);
-                tvConteoPventa2.setText(productReceived.getPventa().toString());
-                btnConteoContar.setText("Guardar Conteo");
-            } else {
-                tvConteoPrevio2.setVisibility(View.INVISIBLE);
-                tvConteoTitle.setText("Generacion de Etiqueta");
-                getStock2(productReceived.getEan_13());
-                tvConteoCode2.setText(productReceived.getCode().toString());
-                tvConteoCodLocal2.setText(productReceived.getCodlocal().toString());
-                tvConteoDetalle2.setText(productReceived.getDetalle());
-                tvConteoDep2.setText(productReceived.getDep());
-                tvConteoEan132.setText(productReceived.getEan_13());
-                tvConteoLinea2.setText(productReceived.getLinea().toString());
-                tvConteoSucursal2.setText(productReceived.getSucursal());
-                tvConteoPventa2.setText(productReceived.getPventa().toString());
-                tvConteoPrevio.setVisibility(View.INVISIBLE);
-                tvConteoCantidad2.setEnabled(false);
-                btnConteoContar.setText("Guardar Etiqueta");
+            switch (module) {
+                case 1:
+                    tvConteoTitle.setText("Conteo de Articulo");
+                    getStock(productReceived.getEan_13());
+                    tvConteoActivado2.setText(productReceived.getActivado() == 1 ? "Si": "No");
+                    tvConteoCode2.setText(productReceived.getCode().toString());
+                    tvConteoCodLocal2.setText(productReceived.getCodlocal().toString());
+                    tvConteoDetalle2.setText(productReceived.getDetalle());
+                    tvConteoDep2.setText(productReceived.getDep());
+                    tvConteoEan132.setText(productReceived.getEan_13());
+                    tvConteoLinea2.setText(productReceived.getLinea().toString());
+                    tvConteoSucursal2.setText(productReceived.getSucursal());
+                    tvConteoCantidad2.setText("0");
+                    tvConteoPventa.setVisibility(View.INVISIBLE);
+                    tvConteoPventa2.setVisibility(View.INVISIBLE);
+                    tvConteoPrecioOferta.setVisibility(View.INVISIBLE);
+                    tvConteoPrecioOferta2.setVisibility(View.INVISIBLE);
+                    tvConteoPventa2.setText(productReceived.getPventa().toString());
+                    btnConteoContar.setText("Guardar Conteo");
+                    break;
+                case 2:
+                    tvConteoPrevio2.setVisibility(View.INVISIBLE);
+                    tvConteoTitle.setText("Generacion de Etiqueta");
+                    getStock2(productReceived.getEan_13());
+                    tvConteoCode2.setText(productReceived.getCode().toString());
+                    tvConteoCodLocal2.setText(productReceived.getCodlocal().toString());
+                    tvConteoDetalle2.setText(productReceived.getDetalle());
+                    tvConteoDep2.setText(productReceived.getDep());
+                    tvConteoEan132.setText(productReceived.getEan_13());
+                    tvConteoLinea2.setText(productReceived.getLinea().toString());
+                    tvConteoSucursal2.setText(productReceived.getSucursal());
+                    tvConteoPventa2.setText(productReceived.getPventa().toString());
+                    tvConteoPrevio.setVisibility(View.INVISIBLE);
+                    tvConteoCantidad2.setEnabled(false);
+                    tvConteoPventa2.setEnabled(false);
+                    btnConteoContar.setText("Guardar Etiqueta");
+                    break;
+                case 3:
+                    tvConteoPrevio2.setVisibility(View.INVISIBLE);
+                    tvConteoTitle.setText("Seguimiento de Productos");
+                    getStock2(productReceived.getEan_13());
+                    tvConteoCode2.setText(productReceived.getCode().toString());
+                    tvConteoCodLocal2.setText(productReceived.getCodlocal().toString());
+                    tvConteoDetalle2.setText(productReceived.getDetalle());
+                    tvConteoDep2.setText(productReceived.getDep());
+                    tvConteoEan132.setText(productReceived.getEan_13());
+                    tvConteoLinea2.setText(productReceived.getLinea().toString());
+                    tvConteoSucursal2.setText(productReceived.getSucursal());
+                    tvConteoPventa2.setText(productReceived.getPventa().toString());
+                    tvConteoPrevio.setVisibility(View.INVISIBLE);
+                    tvConteoCantidad2.setEnabled(false);
+                    btnConteoContar.setText("Guardar Producto");
+                    break;
             }
         }
 

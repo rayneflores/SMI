@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -8,14 +7,14 @@
     android:layout_margin="8dp"
     android:paddingBottom="8dp"
     android:background="@drawable/title_border"
-    tools:context=".Activities.ConteoActivity">
+    tools:context=".Activities.ProductDetailActivity">
 
     <TextView
-        android:id="@+id/tvConteoTitle"
+        android:id="@+id/tvDetailTitle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
-        android:text="@string/conteo_de_articulo"
+        android:text="@string/detalle_de_articulo"
         android:textSize="20sp"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
@@ -23,19 +22,19 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-        android:id="@+id/tvConteoActivado"
+        android:id="@+id/tvDetailCode"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Activado: "
+        android:text="Codigo Interno: "
         android:layout_marginStart="16dp"
         android:layout_marginTop="8dp"
         android:textSize="16sp"
         android:textStyle="bold"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tvConteoTitle" />
+        app:layout_constraintTop_toBottomOf="@+id/tvDetailTitle" />
 
     <TextView
-        android:id="@+id/tvConteoActivado2"
+        android:id="@+id/tvDetailCode2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="0"
@@ -43,22 +42,22 @@
         android:layout_marginTop="8dp"
         android:textSize="14sp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tvConteoTitle" />
+        app:layout_constraintTop_toBottomOf="@+id/tvDetailTitle" />
 
     <TextView
-        android:id="@+id/tvConteoCode"
+        android:id="@+id/tvDetailBarCode"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Code: "
+        android:text="Codigo de Barras: "
         android:layout_marginStart="16dp"
         android:layout_marginTop="8dp"
         android:textSize="16sp"
         android:textStyle="bold"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tvConteoActivado" />
+        app:layout_constraintTop_toBottomOf="@+id/tvDetailCode" />
 
     <TextView
-        android:id="@+id/tvConteoCode2"
+        android:id="@+id/tvDetailBarCode2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="0"
@@ -66,33 +65,10 @@
         android:layout_marginTop="8dp"
         android:textSize="14sp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tvConteoActivado" />
+        app:layout_constraintTop_toBottomOf="@+id/tvDetailCode" />
 
     <TextView
-        android:id="@+id/tvConteoCodLocal"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="CodLocal: "
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="8dp"
-        android:textSize="16sp"
-        android:textStyle="bold"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tvConteoCode" />
-
-    <TextView
-        android:id="@+id/tvConteoCodLocal2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="0"
-        android:layout_marginEnd="18dp"
-        android:layout_marginTop="8dp"
-        android:textSize="14sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tvConteoCode" />
-
-    <TextView
-        android:id="@+id/tvConteoDetalle"
+        android:id="@+id/tvDetailDetalle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Detalle: "
@@ -101,10 +77,10 @@
         android:textSize="16sp"
         android:textStyle="bold"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tvConteoCodLocal" />
+        app:layout_constraintTop_toBottomOf="@+id/tvDetailBarCode" />
 
     <TextView
-        android:id="@+id/tvConteoDetalle2"
+        android:id="@+id/tvDetailDetalle2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="0"
@@ -112,22 +88,22 @@
         android:layout_marginTop="8dp"
         android:textSize="14sp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tvConteoCodLocal" />
+        app:layout_constraintTop_toBottomOf="@+id/tvDetailBarCode" />
 
     <TextView
-        android:id="@+id/tvConteoDep"
+        android:id="@+id/tvDetailMargen"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Departamento: "
+        android:text="% Margen: "
         android:layout_marginStart="16dp"
         android:layout_marginTop="8dp"
         android:textSize="16sp"
         android:textStyle="bold"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tvConteoDetalle" />
+        app:layout_constraintTop_toBottomOf="@+id/tvDetailDetalle" />
 
     <TextView
-        android:id="@+id/tvConteoDep2"
+        android:id="@+id/tvDetailMargen2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="0"
@@ -135,22 +111,22 @@
         android:layout_marginTop="8dp"
         android:textSize="14sp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tvConteoDetalle" />
+        app:layout_constraintTop_toBottomOf="@+id/tvDetailDetalle" />
 
     <TextView
-        android:id="@+id/tvConteoEan13"
+        android:id="@+id/tvDetailStock"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Ean_13: "
+        android:text="Stock: "
         android:layout_marginStart="16dp"
         android:layout_marginTop="8dp"
         android:textSize="16sp"
         android:textStyle="bold"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tvConteoDep" />
+        app:layout_constraintTop_toBottomOf="@+id/tvDetailMargen" />
 
     <TextView
-        android:id="@+id/tvConteoEan132"
+        android:id="@+id/tvDetailStock2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="0"
@@ -158,22 +134,22 @@
         android:layout_marginTop="8dp"
         android:textSize="14sp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tvConteoDep" />
+        app:layout_constraintTop_toBottomOf="@+id/tvDetailMargen" />
 
     <TextView
-        android:id="@+id/tvConteoLinea"
+        android:id="@+id/tvDetailAvgPro"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Linea: "
+        android:text="Avg. Prom.: "
         android:layout_marginStart="16dp"
         android:layout_marginTop="8dp"
         android:textSize="16sp"
         android:textStyle="bold"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tvConteoEan13" />
+        app:layout_constraintTop_toBottomOf="@+id/tvDetailStock" />
 
     <TextView
-        android:id="@+id/tvConteoLinea2"
+        android:id="@+id/tvDetailAvgPro2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="0"
@@ -181,22 +157,22 @@
         android:layout_marginTop="8dp"
         android:textSize="14sp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tvConteoEan13" />
+        app:layout_constraintTop_toBottomOf="@+id/tvDetailStock" />
 
     <TextView
-        android:id="@+id/tvConteoSucursal"
+        android:id="@+id/tvDetailAvgProSem"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Sucursal: "
+        android:text="Prom. Venta Semanal: "
         android:layout_marginStart="16dp"
         android:layout_marginTop="8dp"
         android:textSize="16sp"
         android:textStyle="bold"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tvConteoLinea" />
+        app:layout_constraintTop_toBottomOf="@+id/tvDetailAvgPro" />
 
     <TextView
-        android:id="@+id/tvConteoSucursal2"
+        android:id="@+id/tvDetailAvgProSem2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="0"
@@ -204,61 +180,45 @@
         android:layout_marginTop="8dp"
         android:textSize="14sp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tvConteoLinea" />
+        app:layout_constraintTop_toBottomOf="@+id/tvDetailAvgPro" />
 
     <TextView
-        android:id="@+id/tvConteoCantidad"
+        android:id="@+id/tvDetailPcadena"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:text="Precio Cadena: "
         android:layout_marginStart="16dp"
-        android:layout_marginTop="25dp"
-        android:text="Cantidad: "
+        android:layout_marginTop="8dp"
         android:textSize="16sp"
         android:textStyle="bold"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tvConteoSucursal" />
+        app:layout_constraintTop_toBottomOf="@+id/tvDetailAvgProSem" />
 
     <TextView
-        android:id="@+id/tvConteoPrevio2"
+        android:id="@+id/tvDetailPcadena2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="25dp"
-        android:layout_marginStart="16dp"
         android:text="0"
-        android:textSize="16sp"
-        android:textStyle="bold"
-        app:layout_constraintEnd_toStartOf="@+id/tvConteoCantidad2"
-        app:layout_constraintStart_toEndOf="@+id/tvConteoCantidad"
-        app:layout_constraintTop_toBottomOf="@+id/tvConteoSucursal" />
+        android:layout_marginEnd="18dp"
+        android:layout_marginTop="8dp"
+        android:textSize="14sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tvDetailAvgProSem" />
 
     <TextView
-        android:id="@+id/tvConteoPventa"
+        android:id="@+id/tvDetailCantidad"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:text="Cantidad a Pedir: "
         android:layout_marginStart="16dp"
         android:layout_marginTop="18dp"
-        android:text="Precio de Venta: "
         android:textSize="16sp"
         android:textStyle="bold"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tvConteoPrevio2" />
-
-    <TextView
-        android:id="@+id/tvConteoPrevio"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="97dp"
-        android:layout_marginTop="16dp"
-        android:text="Previo"
-        android:textSize="16sp"
-        android:textStyle="bold"
-        app:layout_constraintEnd_toStartOf="@+id/tvConteoCantidad2"
-        app:layout_constraintStart_toEndOf="@+id/tvConteoCantidad"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tvConteoPrevio2" />
+        app:layout_constraintTop_toBottomOf="@+id/tvDetailPcadena" />
 
     <com.google.android.material.textfield.TextInputEditText
-        android:id="@+id/tvConteoCantidad2"
+        android:id="@+id/tvDetailCantidad2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginEnd="8dp"
@@ -266,55 +226,22 @@
         android:textSize="14sp"
         android:inputType="number"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/tvConteoSucursal2" />
-
-    <com.google.android.material.textfield.TextInputEditText
-        android:id="@+id/tvConteoPventa2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="8dp"
-        android:layout_marginTop="4dp"
-        android:textSize="14sp"
-        android:inputType="number"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/tvConteoCantidad2" />
-
-    <TextView
-        android:id="@+id/tvConteoPrecioOferta"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Precio de Oferta:"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="8dp"
-        android:textSize="16sp"
-        android:textStyle="bold"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tvConteoPventa" />
-
-    <TextView
-        android:id="@+id/tvConteoPrecioOferta2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="0"
-        android:layout_marginEnd="18dp"
-        android:layout_marginTop="8dp"
-        android:textSize="14sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tvConteoPventa" />
+        app:layout_constraintTop_toBottomOf="@id/tvDetailPcadena" />
 
     <Button
-        android:id="@+id/btnConteoContar"
+        android:id="@+id/btnDetailOption"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
         android:layout_marginTop="12dp"
         android:layout_marginBottom="8dp"
-        android:text="Contar"
+        android:text="Pedir Articulo"
         android:textColor="@color/black"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tvConteoPrecioOferta" />
+        app:layout_constraintTop_toBottomOf="@+id/tvDetailCantidad" />
+
 
 
 

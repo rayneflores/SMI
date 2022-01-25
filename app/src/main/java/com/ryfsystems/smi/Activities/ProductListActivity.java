@@ -22,9 +22,7 @@ import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.ryfsystems.smi.Adapters.ProductAdapter;
-import com.ryfsystems.smi.Adapters.UserAdapter;
 import com.ryfsystems.smi.Models.Product;
-import com.ryfsystems.smi.Models.User;
 import com.ryfsystems.smi.R;
 
 import org.json.JSONArray;
@@ -32,8 +30,6 @@ import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.List;
-
-import javax.xml.xpath.XPath;
 
 public class ProductListActivity extends AppCompatActivity {
 
@@ -128,8 +124,12 @@ public class ProductListActivity extends AppCompatActivity {
                             jsonObject.getInt("code"),
                             jsonObject.getString("detalle"),
                             jsonObject.getLong("stock_"),
-                            jsonObject.getLong("pventa")
-                    );
+                            jsonObject.getLong("pventa"),
+                            jsonObject.getLong("p_oferta"),
+                            jsonObject.getDouble("avg_pro"),
+                            jsonObject.getLong("costo_prom"),
+                            jsonObject.getString("codBarra"),
+                            jsonObject.getDouble("pcadena"));
                     productList.add(product);
                 }
                 productAdapter = new ProductAdapter(ProductListActivity.this, productList);

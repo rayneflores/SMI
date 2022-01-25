@@ -10,4 +10,9 @@
     <string name="etiquetas">Generacion de Etiquetas</string>
     <string name="checklist">Checklist</string>
     <string name="productos">LISTA DE PRODUCTOS</string>
+    <string name="seguimiento">Seguimiento</string>
+    <string name="consulta">Consulta Individual</string>
+    <string name="pedido">Pedido</string>
+    <string name="vencimiento">Lista de Vencidos</string>
+    <string name="detalle_de_articulo">Detalle de Articulo</string>
 </resources>

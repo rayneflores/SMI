@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.graphics.Typeface;
 import android.text.SpannableString;
 import android.text.Spanned;
+import android.text.style.StrikethroughSpan;
 import android.text.style.StyleSpan;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -82,8 +83,15 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductViewHolder> {
         stock.setSpan(new StyleSpan(Typeface.BOLD), 0, 5, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
         viewHolder.tvListProductStock.setText(stock);
 
+        SpannableString poferta = new SpannableString("Precio Oferta: " + productList.get(i).getP_oferta());
+        stock.setSpan(new StyleSpan(Typeface.BOLD), 0, 13, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+        viewHolder.tvListProductpOferta.setText(poferta);
+
         SpannableString pventa = new SpannableString("Precio de Venta: " + productList.get(i).getPventa());
         pventa.setSpan(new StyleSpan(Typeface.BOLD), 0, 15, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+        if (productList.get(i).getP_oferta() > 0) {
+            pventa.setSpan(new StrikethroughSpan(), 15, 21, 0);
+        }
         viewHolder.tvListProductPventa.setText(pventa);
     }
 

@@ -26,7 +26,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     Bundle extras;
     Button btnSettings;
-    CardView cvInventario, cvEtiquetas, cvChecklist;
+    CardView cvInventario, cvEtiquetas, cvChecklist, cvSeguimiento, cvConsulta, cvPedido, cvVencimiento;
     Intent nextIntent;
     ProgressDialog progressDialog;
     String rol, usuario;
@@ -51,6 +51,18 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         cvChecklist = findViewById(R.id.cvChecklist);
         cvChecklist.setOnClickListener(this);
+
+        cvSeguimiento = findViewById(R.id.cvSeguimiento);
+        cvSeguimiento.setOnClickListener(this);
+
+        cvConsulta = findViewById(R.id.cvConsulta);
+        cvConsulta.setOnClickListener(this);
+
+        cvPedido = findViewById(R.id.cvPedido);
+        cvPedido.setOnClickListener(this);
+
+        cvVencimiento = findViewById(R.id.cvVencimiento);
+        cvVencimiento.setOnClickListener(this);
 
         tvBienvenida = findViewById(R.id.tvBienvenida);
 
@@ -125,6 +137,27 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 break;
             case R.id.cvChecklist:
                 i = new Intent(getApplicationContext(), ProductListActivity.class);
+                startActivity(i);
+                finish();
+                break;
+            case R.id.cvSeguimiento:
+                extras.putInt("module", 3);
+                i = new Intent(getApplicationContext(), TomaInventarioActivity.class);
+                i.putExtras(extras);
+                startActivity(i);
+                finish();
+                break;
+            case R.id.cvConsulta:
+                extras.putInt("module", 4);
+                i = new Intent(getApplicationContext(), TomaInventarioActivity.class);
+                i.putExtras(extras);
+                startActivity(i);
+                finish();
+                break;
+            case R.id.cvPedido:
+                extras.putInt("module", 5);
+                i = new Intent(getApplicationContext(), TomaInventarioActivity.class);
+                i.putExtras(extras);
                 startActivity(i);
                 finish();
                 break;

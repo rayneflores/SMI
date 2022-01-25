@@ -81,6 +81,13 @@
             android:text="Stock:"
             android:textSize="@dimen/fontMini" />
         <TextView
+            android:id="@+id/tvListProductpOferta"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:text="Precio Oferta: "
+            android:textSize="@dimen/fontMini" />
+        <TextView
             android:id="@+id/tvListProductPventa"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"

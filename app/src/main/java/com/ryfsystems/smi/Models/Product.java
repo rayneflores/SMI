@@ -14,11 +14,30 @@ public class Product implements Serializable {
     private String detalle;
     private Long stock_;
     private Long pventa;
+    private Long p_oferta;
+    private Double avg_pro;
+    private Long costo_prom;
+    private String codBarra;
+    private Double pcadena;
 
     public Product() {
     }
 
-    public Product(Integer codlocal, String sucursal, Integer activado, String dep, String ean_13, Integer linea, Integer code, String detalle, Long stock_, Long pventa) {
+    public Product(Integer codlocal,
+                   String sucursal,
+                   Integer activado,
+                   String dep,
+                   String ean_13,
+                   Integer linea,
+                   Integer code,
+                   String detalle,
+                   Long stock_,
+                   Long pventa,
+                   Long p_oferta,
+                   Double avg_pro,
+                   Long costo_prom,
+                   String codBarra,
+                   Double pcadena) {
         this.codlocal = codlocal;
         this.sucursal = sucursal;
         this.activado = activado;
@@ -29,6 +48,11 @@ public class Product implements Serializable {
         this.detalle = detalle;
         this.stock_ = stock_;
         this.pventa = pventa;
+        this.p_oferta = p_oferta;
+        this.avg_pro = avg_pro;
+        this.costo_prom = costo_prom;
+        this.codBarra = codBarra;
+        this.pcadena = pcadena;
     }
 
     public Integer getCodlocal() {
@@ -111,6 +135,47 @@ public class Product implements Serializable {
         this.pventa = pventa;
     }
 
+    public Long getP_oferta() {
+        return p_oferta;
+    }
+
+    public void setP_oferta(Long p_oferta) {
+        this.p_oferta = p_oferta;
+    }
+
+    public Double getAvg_pro() {
+        return avg_pro;
+    }
+
+    public void setAvg_pro(Double avg_pro) {
+        this.avg_pro = avg_pro;
+    }
+
+    public Long getCosto_prom() {
+        return costo_prom;
+    }
+
+    public void setCosto_prom(Long costo_prom) {
+        this.costo_prom = costo_prom;
+    }
+
+    public String getCodBarra() {
+        return codBarra;
+    }
+
+    public void setCodBarra(String codBarra) {
+        this.codBarra = codBarra;
+    }
+
+
+    public Double getPcadena() {
+        return pcadena;
+    }
+
+    public void setPcadena(Double pcadena) {
+        this.pcadena = pcadena;
+    }
+
     @Override
     public String toString() {
         return "Product{" +
@@ -124,6 +189,11 @@ public class Product implements Serializable {
                 ", detalle='" + detalle + '\'' +
                 ", stock_=" + stock_ +
                 ", pventa=" + pventa +
+                ", p_oferta=" + p_oferta +
+                ", avg_pro=" + avg_pro +
+                ", costo_prom=" + costo_prom +
+                ", codBarra='" + codBarra + '\'' +
+                ", pcadena=" + pcadena +
                 '}';
     }
 }

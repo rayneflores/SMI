@@ -12,7 +12,7 @@ import java.io.IOException;
 
 public class ProductViewHolder extends RecyclerView.ViewHolder {
 
-    public TextView tvListProductActivado, tvListProductCode, tvListProductCodLocal, tvListProductDetalle, tvListProductDep, tvListProductEan_13, tvListProductLinea, tvListProductSucursal, tvListProductStock, tvListProductPventa;
+    public TextView tvListProductActivado, tvListProductCode, tvListProductCodLocal, tvListProductDetalle, tvListProductDep, tvListProductEan_13, tvListProductLinea, tvListProductSucursal, tvListProductStock, tvListProductpOferta, tvListProductPventa;
     View mView;
 
     private ProductViewHolder.ClickListener mClickListener;
@@ -39,6 +39,7 @@ public class ProductViewHolder extends RecyclerView.ViewHolder {
         tvListProductLinea = mView.findViewById(R.id.tvListProductLinea);
         tvListProductSucursal = mView.findViewById(R.id.tvListProductSucursal);
         tvListProductStock = mView.findViewById(R.id.tvListProductStock);
+        tvListProductpOferta = mView.findViewById(R.id.tvListProductpOferta);
         tvListProductPventa = mView.findViewById(R.id.tvListProductPventa);
     }
 
