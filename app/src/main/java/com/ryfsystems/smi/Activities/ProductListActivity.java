@@ -27,6 +27,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.toolbox.JsonObjectRequest;
+import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.ryfsystems.smi.Adapters.ProductAdapter;
 import com.ryfsystems.smi.Models.Product;
@@ -74,13 +75,12 @@ public class ProductListActivity extends AppCompatActivity {
                     .setPositiveButton("Si", (d, which) -> {
                         d.dismiss();
                         processCSV(view);
-                        enviarDatos(INFRA_SERVER_ADDRESS + SEND_DATA);
                         btnEnviar.setEnabled(false);
                     })
                     .setNegativeButton("No", (d, which) -> {
                         d.dismiss();
                     })
-                    .setIcon(R.drawable.inventario)
+                    .setIcon(R.drawable.magallean)
                     .setTitle(" ");
             dialog.show();
         });
@@ -89,8 +89,7 @@ public class ProductListActivity extends AppCompatActivity {
     }
 
     private void enviarDatos(String path) {
-
-        /*StringRequest stringRequest =
+        StringRequest stringRequest =
                 new StringRequest(
                         Request.Method.POST,
                         path,
@@ -108,7 +107,7 @@ public class ProductListActivity extends AppCompatActivity {
                     btnEnviar.setEnabled(true);
                 });
         RequestQueue queue = Volley.newRequestQueue(this);
-        queue.add(stringRequest);*/
+        queue.add(stringRequest);
     }
 
     private void listProducts(String path) {
@@ -140,7 +139,8 @@ public class ProductListActivity extends AppCompatActivity {
                             jsonObject.getString("codBarra"),
                             jsonObject.getDouble("pcadena"),
                             jsonObject.getInt("pedido"),
-                            jsonObject.getInt("und_defect"));
+                            jsonObject.getInt("und_defect"),
+                            jsonObject.getString("responsable"));
                     productList.add(product);
                 }
                 productAdapter = new ProductAdapter(ProductListActivity.this, productList);
@@ -188,13 +188,14 @@ public class ProductListActivity extends AppCompatActivity {
             csvData += toCSV(data) + "\n";
         }
         File directory = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS);
-        String uniqueFileName = "Data.csv";
+        String uniqueFileName = "reporte_magallEAN.csv";
         File file = new File(directory, uniqueFileName);
         FileWriter fileWriter = new FileWriter(file);
         fileWriter.write(csvData);
         fileWriter.flush();
         fileWriter.close();
         Toast.makeText(ProductListActivity.this, "Archivo Exportado Satisfactoriamente", Toast.LENGTH_SHORT).show();
+        enviarDatos(INFRA_SERVER_ADDRESS + SEND_DATA);
     }
 
     public static String toCSV(String[] array) {

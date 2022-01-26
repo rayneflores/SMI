@@ -21,6 +21,7 @@ public class Product implements Serializable {
     private Double pcadena;
     private int pedido;
     private int und_defect;
+    private String responsable;
 
     public Product() {
     }
@@ -41,7 +42,8 @@ public class Product implements Serializable {
                    String codBarra,
                    Double pcadena,
                    int pedido,
-                   int und_defect) {
+                   int und_defect,
+                   String responsable) {
         this.codlocal = codlocal;
         this.sucursal = sucursal;
         this.activado = activado;
@@ -59,6 +61,7 @@ public class Product implements Serializable {
         this.pcadena = pcadena;
         this.pedido = pedido;
         this.und_defect = und_defect;
+        this.responsable = responsable;
     }
 
     public Integer getCodlocal() {
@@ -198,6 +201,14 @@ public class Product implements Serializable {
         this.und_defect = und_defect;
     }
 
+    public String getResponsable() {
+        return responsable;
+    }
+
+    public void setResponsable(String responsable) {
+        this.responsable = responsable;
+    }
+
     @Override
     public String toString() {
         return
@@ -217,6 +228,7 @@ public class Product implements Serializable {
                 ", " + codBarra +
                 ", " + pcadena +
                 ", " + pedido +
-                ", " + und_defect;
+                ", " + und_defect +
+                ", " + responsable;
     }
 }

@@ -20,6 +20,7 @@ public class Constants {
     public static String GET_EXISTENCE = "getExistence.php?ean_13=";
     public static String GET_REAL_EXISTENCE = "getRealExistence.php?cbarra=";
     public static String SET_PRODUCT_FULL = "setProductFull.php";
+    public static String SET_EXPIRED_PRODUCT = "setExpiredProduct.php";
 
     //Login
     public static String LOGIN = "login.php";

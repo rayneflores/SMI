@@ -122,6 +122,13 @@ public class TomaInventarioActivity extends AppCompatActivity implements ZBarSca
                         startActivity(intent);
                         finish();
                         break;
+                    case 6:
+                        extras.putSerializable("Product", product);
+                        intent = new Intent(getApplicationContext(), VencimientoActivity.class);
+                        intent.putExtras(extras);
+                        startActivity(intent);
+                        finish();
+                        break;
                 }
 
             } catch (Exception exception) {

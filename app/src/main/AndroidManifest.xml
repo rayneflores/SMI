@@ -16,6 +16,9 @@
         android:theme="@style/Theme.SMI"
         android:usesCleartextTraffic="true">
         <activity
+            android:name=".Activities.VencimientoActivity"
+            android:exported="true" />
+        <activity
             android:name=".Activities.ProductDetailActivity"
             android:exported="true" />
         <activity

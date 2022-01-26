@@ -96,7 +96,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 .setNegativeButton("No", (d, which) -> {
                     d.dismiss();
                 })
-                .setIcon(R.drawable.inventario)
+                .setIcon(R.drawable.magallean)
                 .setTitle(" ");
         dialog.show();
     }
@@ -156,6 +156,13 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 break;
             case R.id.cvPedido:
                 extras.putInt("module", 5);
+                i = new Intent(getApplicationContext(), TomaInventarioActivity.class);
+                i.putExtras(extras);
+                startActivity(i);
+                finish();
+                break;
+            case R.id.cvVencimiento:
+                extras.putInt("module", 6);
                 i = new Intent(getApplicationContext(), TomaInventarioActivity.class);
                 i.putExtras(extras);
                 startActivity(i);

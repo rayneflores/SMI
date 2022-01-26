@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">SMI</string>
+    <string name="app_name">magallEAN</string>
     <string name="usuarios">LISTA DE USUARIOS</string>
     <string name="smi_logo">Sistema de Manejo de Inventario</string>
     <string name="usuario">Usuario</string>
@@ -15,4 +15,5 @@
     <string name="pedido">Pedido</string>
     <string name="vencimiento">Lista de Vencidos</string>
     <string name="detalle_de_articulo">Detalle de Articulo</string>
+    <string name="reporte_de_articulos_vencidos">Reporte de Articulos Vencidos</string>
 </resources>

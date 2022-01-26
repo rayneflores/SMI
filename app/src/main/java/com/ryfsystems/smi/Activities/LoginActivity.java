@@ -51,9 +51,11 @@ public class LoginActivity extends AppCompatActivity {
         recuperarPreferencias();
 
         btnLogin.setOnClickListener(view -> {
+            btnLogin.setEnabled(false);
             if (!tvUsuario.getText().toString().trim().isEmpty() && !tvPassword.getText().toString().trim().isEmpty()) {
                 login(tvUsuario.getText().toString().trim(), tvPassword.getText().toString().trim());
             } else {
+                btnLogin.setEnabled(true);
                 Toast.makeText(getApplicationContext(), "Debe llenar todos los campos", Toast.LENGTH_SHORT).show();
             }
         });
@@ -71,6 +73,7 @@ public class LoginActivity extends AppCompatActivity {
                                 startActivity(nextIntent);
                                 finish();
                             } else {
+                                btnLogin.setEnabled(true);
                                 Toast.makeText(getApplicationContext(), "Combinacion Usuario/Password Incorrecta", Toast.LENGTH_SHORT).show();
                             }
                         }, error -> {

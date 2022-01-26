@@ -41,7 +41,7 @@ public class ProductDetailActivity extends AppCompatActivity {
     RequestQueue requestQueue;
     String path = INFRA_SERVER_ADDRESS;
     TextInputEditText tvDetailCantidad2;
-    TextView tvDetailCode2, tvDetailBarCode2, tvDetailDetalle2, tvDetailMargen2, tvDetailStock2, tvDetailAvgPro2, tvDetailAvgProSem2, tvDetailPcadena2, tvDetailCantidad;
+    TextView tvDetailCode2, tvDetailBarCode2, tvDetailDetalle2, tvDetailMargen2, tvDetailStock2, tvDetailAvgPro2, tvDetailAvgProSem2, tvDetailPcadena2, tvDetailCantidad, tvDetailPVenta2, tvDetailPOferta2;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -51,6 +51,8 @@ public class ProductDetailActivity extends AppCompatActivity {
         tvDetailCode2 = findViewById(R.id.tvDetailCode2);
         tvDetailBarCode2 = findViewById(R.id.tvDetailBarCode2);
         tvDetailDetalle2 = findViewById(R.id.tvDetailDetalle2);
+        tvDetailPVenta2 = findViewById(R.id.tvDetailPVenta2);
+        tvDetailPOferta2 = findViewById(R.id.tvDetailPOferta2);
         tvDetailMargen2 = findViewById(R.id.tvDetailMargen2);
         tvDetailStock2 = findViewById(R.id.tvDetailStock2);
         tvDetailAvgPro2 = findViewById(R.id.tvDetailAvgPro2);
@@ -121,6 +123,8 @@ public class ProductDetailActivity extends AppCompatActivity {
                     tvDetailCode2.setText(productReceived.getCode().toString());
                     tvDetailBarCode2.setText(productReceived.getEan_13());
                     tvDetailDetalle2.setText(productReceived.getDetalle());
+                    tvDetailPVenta2.setText(pventa.toString());
+                    tvDetailPOferta2.setText(poferta.toString());
                     tvDetailMargen2.setText(fMargin);
                     tvDetailAvgPro2.setText(productReceived.getAvg_pro().toString());
                     tvDetailAvgProSem2.setText(fVtaSem);
