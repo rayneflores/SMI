@@ -65,23 +65,19 @@ public class ProductDetailActivity extends AppCompatActivity {
         btnDetailOption = findViewById(R.id.btnDetailOption);
 
         btnDetailOption.setOnClickListener(view -> {
-            if (Integer.parseInt(tvDetailCantidad2.getText().toString()) > 1) {
+            if (Integer.parseInt(tvDetailCantidad2.getText().toString()) > 0) {
                 requestQueue = Volley.newRequestQueue(this);
                 int pedido = Integer.parseInt(tvDetailCantidad2.getText().toString());
-                updateProduct(
-                        productReceived.getCodlocal(),
-                        productReceived.getSucursal(),
-                        productReceived.getActivado(),
-                        productReceived.getDep(),
-                        productReceived.getEan_13(),
-                        productReceived.getLinea(),
+                updateReqProduct(
                         productReceived.getCode(),
+                        productReceived.getCodlocal(),
                         productReceived.getDetalle(),
+                        productReceived.getEan_13(),
+                        productReceived.getSucursal(),
                         productReceived.getStock_(),
                         productReceived.getPventa(),
                         productReceived.getPoferta(),
                         productReceived.getAvg_pro(),
-                        productReceived.getCosto_prom(),
                         productReceived.getCodBarra(),
                         productReceived.getPcadena(),
                         pedido
@@ -157,6 +153,7 @@ public class ProductDetailActivity extends AppCompatActivity {
                     vtaSem = (productReceived.getAvg_pro() / 4);
                     fVtaSem = df2.format(vtaSem);
 
+                    tvDetailPOferta2.setText(productReceived.getPoferta().toString());
                     tvDetailCode2.setText(productReceived.getCode().toString());
                     tvDetailBarCode2.setText(productReceived.getEan_13());
                     tvDetailDetalle2.setText(productReceived.getDetalle());
@@ -170,20 +167,16 @@ public class ProductDetailActivity extends AppCompatActivity {
         }
     }
 
-    private void updateProduct(
-            Integer codLocal,
-            String sucursal,
-            Integer activado,
-            String dep,
-            String ean_13,
-            Integer linea,
+    private void updateReqProduct(
             Integer code,
+            Integer codLocal,
             String detalle,
+            String ean_13,
+            String sucursal,
             Long stock_,
             Long pventa,
             Long p_oferta,
             Double avg_pro,
-            Long costo_prom,
             String codBarra,
             Double pcadena,
             int pedido) {
@@ -198,19 +191,15 @@ public class ProductDetailActivity extends AppCompatActivity {
                     @Override
                     protected Map<String, String> getParams() throws AuthFailureError {
                         Map<String, String> params = new HashMap<>();
-                        params.put("activado", String.valueOf(activado));
                         params.put("code", String.valueOf(code));
                         params.put("codlocal", String.valueOf(codLocal));
                         params.put("detalle", detalle);
-                        params.put("dep", dep);
                         params.put("ean_13", ean_13);
-                        params.put("linea", String.valueOf(linea));
                         params.put("sucursal", sucursal);
                         params.put("stock_", String.valueOf(stock_));
                         params.put("pventa", String.valueOf(pventa));
                         params.put("p_oferta", String.valueOf(p_oferta));
                         params.put("avg_pro", String.valueOf(avg_pro));
-                        params.put("costo_prom", String.valueOf(costo_prom));
                         params.put("codBarra", codBarra);
                         params.put("pcadena", String.valueOf(pcadena));
                         params.put("pedido", String.valueOf(pedido));

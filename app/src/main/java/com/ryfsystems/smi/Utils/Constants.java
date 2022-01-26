@@ -16,22 +16,18 @@ public class Constants {
     //Products Querys
     public static String GET_ALL_PRODUCTS = "getProducts.php";
     public static String GET_PRODUCT = "getProduct.php?cbarra=";
-    public static String SET_PRODUCT = "setProduct.php";
-    public static String GET_EXISTENCE = "getExistence.php?ean_13=";
     public static String GET_REAL_EXISTENCE = "getRealExistence.php?cbarra=";
     public static String SET_PRODUCT_FULL = "setProductFull.php";
     public static String SET_EXPIRED_PRODUCT = "setExpiredProduct.php";
+    public static String SET_COUNT_PRODUCT = "setCountProduct.php";
+    public static String GET_COUNT_EXISTENCE = "getCountExistence.php?ean_13=";
+    public static String SET_LABEL_PRODUCT = "setLabelProduct.php";
+    public static String SET_SEGUI_PRODUCT = "setSeguiProduct.php";
 
     //Login
     public static String LOGIN = "login.php";
 
     //Send Data
     public static String SEND_DATA = "sendData.php";
-
-    //Mail Sender
-    public static String MAIL_USERNAME = "rayneflores39@gmail.com";
-    public static String MAIL_PASSWORD = "Rayne210781$";
-    public static String MAIL_RECIPIENT = "raynitoflores@gmail.com";
-
 
 }

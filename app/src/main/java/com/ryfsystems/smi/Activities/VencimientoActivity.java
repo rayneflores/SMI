@@ -9,7 +9,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -56,11 +55,11 @@ public class VencimientoActivity extends AppCompatActivity {
             if (Integer.parseInt(tvVencimientoCantidad2.getText().toString()) > 1) {
                 requestQueue = Volley.newRequestQueue(this);
                 int und_defect = Integer.parseInt(tvVencimientoCantidad2.getText().toString());
-                updateProduct(
+                updateVencProduct(
                         productReceived.getCode(),
                         productReceived.getDetalle(),
                         und_defect,
-                        tvVencimientoResponsable.getText().toString()
+                        usuario
                 );
                 nextIntent = new Intent(getApplicationContext(), MainActivity.class);
                 startActivity(nextIntent);
@@ -83,7 +82,7 @@ public class VencimientoActivity extends AppCompatActivity {
         }
     }
 
-    private void updateProduct(Integer code, String detalle, int und_defect, String responsable) {
+    private void updateVencProduct(Integer code, String detalle, int und_defect, String responsable) {
         StringRequest stringRequest =
                 new StringRequest(Request.Method.POST,
                         path + SET_EXPIRED_PRODUCT,

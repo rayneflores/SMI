@@ -10,6 +10,7 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -20,6 +21,7 @@ import com.android.volley.RequestQueue;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
+import com.ryfsystems.smi.BuildConfig;
 import com.ryfsystems.smi.Models.User;
 import com.ryfsystems.smi.R;
 
@@ -34,13 +36,19 @@ public class LoginActivity extends AppCompatActivity {
     EditText tvUsuario, tvPassword;
     Intent nextIntent;
     RequestQueue queue;
-    String path = INFRA_SERVER_ADDRESS;
+    String path = INFRA_SERVER_ADDRESS, programVersion;
+    TextView tvVersion;
     User user;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
+
+        programVersion = "V." + BuildConfig.VERSION_NAME;
+
+        tvVersion = findViewById(R.id.tvVersion);
+        tvVersion.setText(programVersion);
 
         btnLogin = findViewById(R.id.btnLogin);
         tvUsuario = findViewById(R.id.tvUsuario);

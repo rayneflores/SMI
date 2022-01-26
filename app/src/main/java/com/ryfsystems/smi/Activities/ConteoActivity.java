@@ -1,10 +1,11 @@
 package com.ryfsystems.smi.Activities;
 
-import static com.ryfsystems.smi.Utils.Constants.GET_EXISTENCE;
+import static com.ryfsystems.smi.Utils.Constants.GET_COUNT_EXISTENCE;
+import static com.ryfsystems.smi.Utils.Constants.GET_REAL_EXISTENCE;
 import static com.ryfsystems.smi.Utils.Constants.INFRA_SERVER_ADDRESS;
-import static com.ryfsystems.smi.Utils.Constants.SET_PRODUCT;
-
-import androidx.appcompat.app.AppCompatActivity;
+import static com.ryfsystems.smi.Utils.Constants.SET_COUNT_PRODUCT;
+import static com.ryfsystems.smi.Utils.Constants.SET_LABEL_PRODUCT;
+import static com.ryfsystems.smi.Utils.Constants.SET_SEGUI_PRODUCT;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -14,6 +15,8 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import androidx.appcompat.app.AppCompatActivity;
 
 import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
@@ -78,7 +81,7 @@ public class ConteoActivity extends AppCompatActivity {
                 case 1:
                     tvConteoTitle.setText("Conteo de Articulo");
                     getStock(productReceived.getEan_13());
-                    tvConteoActivado2.setText(productReceived.getActivado() == 1 ? "Si": "No");
+                    tvConteoActivado2.setText(productReceived.getActivado() == 1 ? "Si" : "No");
                     tvConteoCode2.setText(productReceived.getCode().toString());
                     tvConteoCodLocal2.setText(productReceived.getCodlocal().toString());
                     tvConteoDetalle2.setText(productReceived.getDetalle());
@@ -107,7 +110,7 @@ public class ConteoActivity extends AppCompatActivity {
                     tvConteoSucursal2.setText(productReceived.getSucursal());
                     if (productReceived.getPoferta() > 0) {
                         SpannableString pventa = new SpannableString(productReceived.getPventa().toString());
-                        pventa.setSpan(new StrikethroughSpan(), 0,4,0);
+                        pventa.setSpan(new StrikethroughSpan(), 0, 4, 0);
                         tvConteoPventa2.setText(pventa);
                     }
                     tvConteoPrecioOferta2.setText(productReceived.getPoferta().toString());
@@ -129,11 +132,10 @@ public class ConteoActivity extends AppCompatActivity {
                     tvConteoSucursal2.setText(productReceived.getSucursal());
                     if (productReceived.getPoferta() > 0) {
                         SpannableString pventa = new SpannableString(productReceived.getPventa().toString());
-                        pventa.setSpan(new StrikethroughSpan(), 0,4,0);
+                        pventa.setSpan(new StrikethroughSpan(), 0, 4, 0);
                         tvConteoPventa2.setText(pventa);
                     }
                     tvConteoPrecioOferta2.setText(productReceived.getPoferta().toString());
-                    //tvConteoPventa2.setText(productReceived.getPventa().toString());
                     tvConteoPrevio.setVisibility(View.INVISIBLE);
                     tvConteoCantidad2.setEnabled(false);
                     btnConteoContar.setText("Guardar Producto");
@@ -142,25 +144,61 @@ public class ConteoActivity extends AppCompatActivity {
         }
 
         btnConteoContar.setOnClickListener(view -> {
+
             if (Integer.parseInt(tvConteoCantidad2.getText().toString()) <= 20000) {
                 requestQueue = Volley.newRequestQueue(this);
                 Long total = Long.parseLong(tvConteoCantidad2.getText().toString()) + Long.parseLong(tvConteoPrevio2.getText().toString());
                 Double pventa = Double.parseDouble(tvConteoPventa2.getText().toString());
+                Double poferta = Double.parseDouble(tvConteoPventa2.getText().toString());
+
                 if (total < 0) {
                     Toast.makeText(getApplicationContext(), "No puede Actualizar un Producto con Existencia Negativa", Toast.LENGTH_LONG).show();
                 } else {
-                    updateProduct(
-                            productReceived.getActivado(),
-                            productReceived.getCode(),
-                            productReceived.getCodlocal(),
-                            productReceived.getDetalle(),
-                            productReceived.getDep(),
-                            String.valueOf(productReceived.getEan_13()),
-                            productReceived.getLinea(),
-                            productReceived.getSucursal(),
-                            total,
-                            pventa
-                    );
+                    switch (module) {
+                        case 1:
+                            updateCountProduct(
+                                    productReceived.getActivado(),
+                                    productReceived.getCode(),
+                                    productReceived.getCodlocal(),
+                                    productReceived.getDetalle(),
+                                    productReceived.getDep(),
+                                    String.valueOf(productReceived.getEan_13()),
+                                    productReceived.getLinea(),
+                                    productReceived.getSucursal(),
+                                    total
+                            );
+                            break;
+                        case 2:
+                            updateLabelProduct(
+                                    productReceived.getActivado(),
+                                    productReceived.getCode(),
+                                    productReceived.getCodlocal(),
+                                    productReceived.getDetalle(),
+                                    productReceived.getDep(),
+                                    String.valueOf(productReceived.getEan_13()),
+                                    productReceived.getLinea(),
+                                    productReceived.getSucursal(),
+                                    total,
+                                    productReceived.getPventa(),
+                                    productReceived.getPoferta()
+                            );
+                            break;
+                        case 3:
+                            updateFollowProduct(
+                                    productReceived.getActivado(),
+                                    productReceived.getCode(),
+                                    productReceived.getCodlocal(),
+                                    productReceived.getDetalle(),
+                                    productReceived.getDep(),
+                                    String.valueOf(productReceived.getEan_13()),
+                                    productReceived.getLinea(),
+                                    productReceived.getSucursal(),
+                                    total,
+                                    pventa,
+                                    poferta
+                            );
+                            break;
+                    }
                     nextIntent = new Intent(getApplicationContext(), MainActivity.class);
                     startActivity(nextIntent);
                     finish();
@@ -172,11 +210,27 @@ public class ConteoActivity extends AppCompatActivity {
         });
     }
 
+    public void getStock(String ean_13) {
+        requestQueue = Volley.newRequestQueue(this);
+        JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.GET, path + GET_COUNT_EXISTENCE + ean_13, null, response -> {
+            try {
+                JSONObject jsonObject = response.getJSONObject("Stock");
+                prevStock = jsonObject.getLong("stock_");
+                tvConteoPrevio2.setText(prevStock != 0 ? prevStock.toString() : "0");
+            } catch (Exception exception) {
+                Toast.makeText(getApplicationContext(), "2", Toast.LENGTH_SHORT).show();
+            }
+        }, error -> {
+            Toast.makeText(getApplicationContext(), "4", Toast.LENGTH_LONG).show();
+        });
+        requestQueue.add(jsonObjectRequest);
+    }
+
     private void getStock2(String ean_13) {
         requestQueue = Volley.newRequestQueue(this);
-        JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.GET, path + GET_EXISTENCE + ean_13, null, response -> {
+        JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.GET, path + GET_REAL_EXISTENCE + ean_13, null, response -> {
             try {
-                JSONObject jsonObject =  response.getJSONObject("Stock");
+                JSONObject jsonObject = response.getJSONObject("Stock");
                 prevStock = jsonObject.getLong("stock_");
                 tvConteoCantidad2.setText(prevStock.toString());
             } catch (Exception exception) {
@@ -188,31 +242,15 @@ public class ConteoActivity extends AppCompatActivity {
         requestQueue.add(jsonObjectRequest);
     }
 
-    public void getStock(String ean_13) {
-        requestQueue = Volley.newRequestQueue(this);
-        JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.GET, path + GET_EXISTENCE + ean_13, null, response -> {
-            try {
-                JSONObject jsonObject =  response.getJSONObject("Stock");
-                prevStock = jsonObject.getLong("stock_");
-                tvConteoPrevio2.setText(prevStock != 0 ? prevStock.toString() : "0");
-            } catch (Exception exception) {
-                Toast.makeText(getApplicationContext(), "2" , Toast.LENGTH_SHORT).show();
-            }
-        }, error -> {
-            Toast.makeText(getApplicationContext(), "4", Toast.LENGTH_LONG).show();
-        });
-        requestQueue.add(jsonObjectRequest);
-    }
-
-    private void updateProduct(int activado, int code, int codLocal, String detalle, String dep, String ean_13, int linea, String sucursal , Long stock, Double pventa) {
+    private void updateCountProduct(int activado, int code, int codLocal, String detalle, String dep, String ean_13, int linea, String sucursal, Long stock) {
         StringRequest stringRequest =
                 new StringRequest(Request.Method.POST,
-                        path + SET_PRODUCT,
+                        path + SET_COUNT_PRODUCT,
                         response -> {
                             Toast.makeText(getApplicationContext(), response, Toast.LENGTH_SHORT).show();
                         }, error -> {
                     Toast.makeText(getApplicationContext(), "Error_Det: " + error.getMessage(), Toast.LENGTH_LONG).show();
-                }){
+                }) {
                     @Override
                     protected Map<String, String> getParams() throws AuthFailureError {
                         Map<String, String> params = new HashMap<>();
@@ -225,7 +263,64 @@ public class ConteoActivity extends AppCompatActivity {
                         params.put("linea", String.valueOf(linea));
                         params.put("sucursal", sucursal);
                         params.put("stock_", String.valueOf(stock));
-                        params.put("pventa", String.valueOf(pventa));
+                        return params;
+                    }
+                };
+        requestQueue.add(stringRequest);
+    }
+
+    private void updateLabelProduct(int activado, int code, int codLocal, String detalle, String dep, String ean_13, int linea, String sucursal, Long stock, Long pventa, Long poferta) {
+        StringRequest stringRequest =
+                new StringRequest(Request.Method.POST,
+                        path + SET_LABEL_PRODUCT,
+                        response -> {
+                            Toast.makeText(getApplicationContext(), response, Toast.LENGTH_SHORT).show();
+                        }, error -> {
+                    Toast.makeText(getApplicationContext(), "Error_Det: " + error.getMessage(), Toast.LENGTH_LONG).show();
+                }) {
+                    @Override
+                    protected Map<String, String> getParams() throws AuthFailureError {
+                        Map<String, String> params = new HashMap<>();
+                        params.put("activado", String.valueOf(activado));
+                        params.put("code", String.valueOf(code));
+                        params.put("codlocal", String.valueOf(codLocal));
+                        params.put("detalle", detalle);
+                        params.put("dep", dep);
+                        params.put("ean_13", ean_13);
+                        params.put("linea", String.valueOf(linea));
+                        params.put("sucursal", sucursal);
+                        params.put("stock_", String.valueOf(stock));
+                        params.put("pventa", pventa.toString());
+                        params.put("poferta", poferta.toString());
+                        return params;
+                    }
+                };
+        requestQueue.add(stringRequest);
+    }
+
+    private void updateFollowProduct(Integer activado, Integer code, Integer codLocal, String detalle, String dep, String ean_13, Integer linea, String sucursal, Long total, Double pventa, Double poferta) {
+        StringRequest stringRequest =
+                new StringRequest(Request.Method.POST,
+                        path + SET_SEGUI_PRODUCT,
+                        response -> {
+                            Toast.makeText(getApplicationContext(), response, Toast.LENGTH_SHORT).show();
+                        }, error -> {
+                    Toast.makeText(getApplicationContext(), "Error_Det: " + error.getMessage(), Toast.LENGTH_LONG).show();
+                }) {
+                    @Override
+                    protected Map<String, String> getParams() throws AuthFailureError {
+                        Map<String, String> params = new HashMap<>();
+                        params.put("activado", String.valueOf(activado));
+                        params.put("code", String.valueOf(code));
+                        params.put("codlocal", String.valueOf(codLocal));
+                        params.put("detalle", detalle);
+                        params.put("dep", dep);
+                        params.put("ean_13", ean_13);
+                        params.put("linea", String.valueOf(linea));
+                        params.put("sucursal", sucursal);
+                        params.put("stock_", String.valueOf(total));
+                        params.put("pventa", pventa.toString());
+                        params.put("poferta", poferta.toString());
                         return params;
                     }
                 };
