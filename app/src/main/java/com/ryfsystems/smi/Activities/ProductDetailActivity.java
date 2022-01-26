@@ -6,6 +6,8 @@ import static com.ryfsystems.smi.Utils.Constants.SET_PRODUCT_FULL;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.SpannableString;
+import android.text.style.StrikethroughSpan;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
@@ -111,7 +113,10 @@ public class ProductDetailActivity extends AppCompatActivity {
                     costoProm = productReceived.getCosto_prom();
 
                     if (poferta > 0) {
-                        margen = ((poferta / 1.19) - costoProm)/(poferta / 1.19) ;
+                        margen = ((poferta / 1.19) - costoProm)/(poferta / 1.19);
+                        SpannableString pventa = new SpannableString(productReceived.getPventa().toString());
+                        pventa.setSpan(new StrikethroughSpan(), 0,4,0);
+                        tvDetailPVenta2.setText(pventa);
                     } else {
                         margen = ((pventa / 1.19) - costoProm)/(pventa / 1.19);
                     }
@@ -123,7 +128,6 @@ public class ProductDetailActivity extends AppCompatActivity {
                     tvDetailCode2.setText(productReceived.getCode().toString());
                     tvDetailBarCode2.setText(productReceived.getEan_13());
                     tvDetailDetalle2.setText(productReceived.getDetalle());
-                    tvDetailPVenta2.setText(pventa.toString());
                     tvDetailPOferta2.setText(poferta.toString());
                     tvDetailMargen2.setText(fMargin);
                     tvDetailAvgPro2.setText(productReceived.getAvg_pro().toString());
@@ -142,6 +146,9 @@ public class ProductDetailActivity extends AppCompatActivity {
 
                     if (poferta > 0) {
                         margen = ((poferta / 1.19) - costoProm)/(poferta / 1.19) ;
+                        SpannableString pventa = new SpannableString(productReceived.getPventa().toString());
+                        pventa.setSpan(new StrikethroughSpan(), 0,4,0);
+                        tvDetailPVenta2.setText(pventa);
                     } else {
                         margen = ((pventa / 1.19) - costoProm)/(pventa / 1.19);
                     }

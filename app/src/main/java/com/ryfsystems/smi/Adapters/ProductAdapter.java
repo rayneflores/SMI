@@ -84,7 +84,7 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductViewHolder> {
         viewHolder.tvListProductStock.setText(stock);
 
         SpannableString pventa = new SpannableString("Precio de Venta: " + productList.get(i).getPventa());
-        pventa.setSpan(new StyleSpan(Typeface.BOLD), 0, 15, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+        pventa.setSpan(new StyleSpan(Typeface.BOLD), 0, 15, 0);
         if (productList.get(i).getPoferta() > 0) {
             pventa.setSpan(new StrikethroughSpan(), 15, 21, 0);
         }

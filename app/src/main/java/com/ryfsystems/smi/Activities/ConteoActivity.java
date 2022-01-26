@@ -8,6 +8,8 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.SpannableString;
+import android.text.style.StrikethroughSpan;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
@@ -103,7 +105,12 @@ public class ConteoActivity extends AppCompatActivity {
                     tvConteoEan132.setText(productReceived.getEan_13());
                     tvConteoLinea2.setText(productReceived.getLinea().toString());
                     tvConteoSucursal2.setText(productReceived.getSucursal());
-                    tvConteoPventa2.setText(productReceived.getPventa().toString());
+                    if (productReceived.getPoferta() > 0) {
+                        SpannableString pventa = new SpannableString(productReceived.getPventa().toString());
+                        pventa.setSpan(new StrikethroughSpan(), 0,4,0);
+                        tvConteoPventa2.setText(pventa);
+                    }
+                    tvConteoPrecioOferta2.setText(productReceived.getPoferta().toString());
                     tvConteoPrevio.setVisibility(View.INVISIBLE);
                     tvConteoCantidad2.setEnabled(false);
                     tvConteoPventa2.setEnabled(false);
@@ -120,7 +127,13 @@ public class ConteoActivity extends AppCompatActivity {
                     tvConteoEan132.setText(productReceived.getEan_13());
                     tvConteoLinea2.setText(productReceived.getLinea().toString());
                     tvConteoSucursal2.setText(productReceived.getSucursal());
-                    tvConteoPventa2.setText(productReceived.getPventa().toString());
+                    if (productReceived.getPoferta() > 0) {
+                        SpannableString pventa = new SpannableString(productReceived.getPventa().toString());
+                        pventa.setSpan(new StrikethroughSpan(), 0,4,0);
+                        tvConteoPventa2.setText(pventa);
+                    }
+                    tvConteoPrecioOferta2.setText(productReceived.getPoferta().toString());
+                    //tvConteoPventa2.setText(productReceived.getPventa().toString());
                     tvConteoPrevio.setVisibility(View.INVISIBLE);
                     tvConteoCantidad2.setEnabled(false);
                     btnConteoContar.setText("Guardar Producto");

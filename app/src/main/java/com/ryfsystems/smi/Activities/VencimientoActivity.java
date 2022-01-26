@@ -104,4 +104,12 @@ public class VencimientoActivity extends AppCompatActivity {
                 };
         requestQueue.add(stringRequest);
     }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        nextIntent = new Intent(getApplicationContext(), MainActivity.class);
+        startActivity(nextIntent);
+        finish();
+    }
 }
