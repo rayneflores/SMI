@@ -19,12 +19,12 @@ import com.ryfsystems.smi.ViewHolders.ProductViewHolder;
 
 import java.util.List;
 
-public class ProductAdapter extends RecyclerView.Adapter<ProductViewHolder> {
+public class ProductAdapterDefect extends RecyclerView.Adapter<ProductViewHolder> {
 
     Activity activity;
     List<Product> productList;
 
-    public ProductAdapter(Activity activity, List<Product> productList) {
+    public ProductAdapterDefect(Activity activity, List<Product> productList) {
         this.activity = activity;
         this.productList = productList;
     }
@@ -33,7 +33,7 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductViewHolder> {
     @Override
     public ProductViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View itemView = LayoutInflater.from(parent.getContext())
-                .inflate(R.layout.product_layout, parent, false);
+                .inflate(R.layout.product_defect_layout, parent, false);
         ProductViewHolder viewHolder = new ProductViewHolder(itemView);
         return viewHolder;
     }

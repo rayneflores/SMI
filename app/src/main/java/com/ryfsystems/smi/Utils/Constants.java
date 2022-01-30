@@ -14,7 +14,11 @@ public class Constants {
     //End User Querys
 
     //Products Querys
-    public static String GET_ALL_PRODUCTS = "getProducts.php";
+    public static String GET_PRODUCTS_COUNT = "getProductsCount.php";
+    public static String GET_PRODUCTS_LABEL = "getProductsLabel.php";
+    public static String GET_PRODUCTS_FOLLOW = "getProductsFollow.php";
+    public static String GET_PRODUCTS_REQUEST = "getProductsRequest.php";
+    public static String GET_PRODUCTS_DEFECT = "getProductsDefect.php";
     public static String GET_PRODUCT = "getProduct.php?cbarra=";
     public static String GET_REAL_EXISTENCE = "getRealExistence.php?cbarra=";
     public static String SET_PRODUCT_FULL = "setProductFull.php";

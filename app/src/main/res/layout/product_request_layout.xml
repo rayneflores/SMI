@@ -17,17 +17,10 @@
         android:orientation="vertical">
 
         <TextView
-            android:id="@+id/tvListProductActivado"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:layout_marginStart="8dp"
-            android:text="Activado:"
-            android:textSize="@dimen/fontMini" />
-        <TextView
             android:id="@+id/tvListProductCode"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
             android:layout_marginStart="8dp"
             android:text="Code:"
             android:textSize="@dimen/fontMini" />
@@ -46,25 +39,11 @@
             android:text="Detalle:"
             android:textSize="@dimen/fontMini" />
         <TextView
-            android:id="@+id/tvListProductDep"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
-            android:text="Dep:"
-            android:textSize="@dimen/fontMini" />
-        <TextView
             android:id="@+id/tvListProductEan_13"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
             android:text="Ean_13:"
-            android:textSize="@dimen/fontMini" />
-        <TextView
-            android:id="@+id/tvListProductLinea"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
-            android:text="Linea:"
             android:textSize="@dimen/fontMini" />
         <TextView
             android:id="@+id/tvListProductSucursal"
@@ -127,15 +106,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
-            android:text="Pedido:"
-            android:textSize="@dimen/fontMini" />
-        <TextView
-            android:id="@+id/tvListProductUndDefect"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
             android:layout_marginBottom="8dp"
-            android:text="Unidades Defectuosas:"
+            android:text="Pedido:"
             android:textSize="@dimen/fontMini" />
     </LinearLayout>
 </androidx.cardview.widget.CardView>

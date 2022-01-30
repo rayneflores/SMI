@@ -1,12 +1,15 @@
 package com.ryfsystems.smi.Activities;
 
-import static com.ryfsystems.smi.Utils.Constants.GET_ALL_PRODUCTS;
+import static com.ryfsystems.smi.Utils.Constants.GET_PRODUCTS_COUNT;
+import static com.ryfsystems.smi.Utils.Constants.GET_PRODUCTS_DEFECT;
+import static com.ryfsystems.smi.Utils.Constants.GET_PRODUCTS_FOLLOW;
+import static com.ryfsystems.smi.Utils.Constants.GET_PRODUCTS_LABEL;
+import static com.ryfsystems.smi.Utils.Constants.GET_PRODUCTS_REQUEST;
 import static com.ryfsystems.smi.Utils.Constants.INFRA_SERVER_ADDRESS;
 import static com.ryfsystems.smi.Utils.Constants.SEND_DATA;
 
 import android.Manifest;
 import android.app.ProgressDialog;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.net.Uri;
@@ -16,6 +19,9 @@ import android.os.Environment;
 import android.provider.Settings;
 import android.view.View;
 import android.widget.Button;
+import android.widget.CheckBox;
+import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AlertDialog;
@@ -29,7 +35,9 @@ import com.android.volley.RequestQueue;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
-import com.ryfsystems.smi.Adapters.ProductAdapter;
+import com.ryfsystems.smi.Adapters.ProductAdapterCount;
+import com.ryfsystems.smi.Adapters.ProductAdapterLabel;
+import com.ryfsystems.smi.Adapters.ProductAdapterRequest;
 import com.ryfsystems.smi.Models.Product;
 import com.ryfsystems.smi.R;
 
@@ -45,13 +53,17 @@ import java.util.List;
 public class ProductListActivity extends AppCompatActivity {
 
     Button btnEnviar;
+    CheckBox cbConteo, cbEtiquetas, cbSeguimiento, cbPedido, cbVencimiento;
+    int module;
     Intent nextIntent;
     JsonObjectRequest jsonObjectRequest;
     List<Product> productList = new ArrayList<>();
     ProgressDialog progressDialog;
     RecyclerView rvProducts;
     RecyclerView.LayoutManager layoutManager;
-    ProductAdapter productAdapter;
+    ProductAdapterCount productAdapterCount;
+    ProductAdapterLabel productAdapterLabel;
+    ProductAdapterRequest productAdapterRequest;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -62,6 +74,93 @@ public class ProductListActivity extends AppCompatActivity {
         progressDialog.setTitle("Espere...");
         progressDialog.setMessage("Listando Productos...");
         progressDialog.setCanceledOnTouchOutside(false);
+
+        cbConteo = findViewById(R.id.cbConteo);
+        cbEtiquetas = findViewById(R.id.cbEtiquetas);
+        cbSeguimiento = findViewById(R.id.cbSeguimiento);
+        cbPedido = findViewById(R.id.cbPedido);
+        cbVencimiento = findViewById(R.id.cbVencimiento);
+
+        module = 1;
+
+        listProducts(INFRA_SERVER_ADDRESS + GET_PRODUCTS_COUNT, module);
+
+        cbConteo.setChecked(true);
+
+        cbConteo.setOnCheckedChangeListener((compoundButton, b) -> {
+            if (cbConteo.isChecked()){
+                module = 1;
+                cbEtiquetas.setChecked(false);
+                cbSeguimiento.setChecked(false);
+                cbPedido.setChecked(false);
+                cbVencimiento.setChecked(false);
+                listProducts(INFRA_SERVER_ADDRESS + GET_PRODUCTS_COUNT, module);
+            } else {
+                if (!cbEtiquetas.isChecked() && !cbSeguimiento.isChecked() && !cbPedido.isChecked() && !cbVencimiento.isChecked()){
+                    cbConteo.setChecked(true);
+                }
+            }
+        });
+
+        cbEtiquetas.setOnCheckedChangeListener((compoundButton, b) -> {
+            if (cbEtiquetas.isChecked()){
+                module = 2;
+                cbConteo.setChecked(false);
+                cbSeguimiento.setChecked(false);
+                cbPedido.setChecked(false);
+                cbVencimiento.setChecked(false);
+                listProducts(INFRA_SERVER_ADDRESS + GET_PRODUCTS_LABEL, module);
+            } else {
+                if (!cbConteo.isChecked() && !cbSeguimiento.isChecked() && !cbPedido.isChecked() && !cbVencimiento.isChecked()){
+                    cbEtiquetas.setChecked(true);
+                }
+            }
+        });
+
+        cbSeguimiento.setOnCheckedChangeListener((compoundButton, b) -> {
+            if (cbSeguimiento.isChecked()){
+                module = 3;
+                cbConteo.setChecked(false);
+                cbEtiquetas.setChecked(false);
+                cbPedido.setChecked(false);
+                cbVencimiento.setChecked(false);
+                listProducts(INFRA_SERVER_ADDRESS + GET_PRODUCTS_FOLLOW, module);
+            } else {
+                if (!cbConteo.isChecked() && !cbEtiquetas.isChecked() && !cbPedido.isChecked() && !cbVencimiento.isChecked()){
+                    cbSeguimiento.setChecked(true);
+                }
+            }
+        });
+
+        cbPedido.setOnCheckedChangeListener((compoundButton, b) -> {
+            if (cbPedido.isChecked()){
+                module = 4;
+                cbConteo.setChecked(false);
+                cbEtiquetas.setChecked(false);
+                cbSeguimiento.setChecked(false);
+                cbVencimiento.setChecked(false);
+                listProducts(INFRA_SERVER_ADDRESS + GET_PRODUCTS_REQUEST, module);
+            } else {
+                if (!cbConteo.isChecked() && !cbEtiquetas.isChecked() && !cbSeguimiento.isChecked() && !cbVencimiento.isChecked()){
+                    cbPedido.setChecked(true);
+                }
+            }
+        });
+
+        cbVencimiento.setOnCheckedChangeListener((compoundButton, b) -> {
+            if (cbVencimiento.isChecked()){
+                module = 5;
+                cbConteo.setChecked(false);
+                cbEtiquetas.setChecked(false);
+                cbSeguimiento.setChecked(false);
+                cbPedido.setChecked(false);
+                listProducts(INFRA_SERVER_ADDRESS + GET_PRODUCTS_DEFECT, module);
+            } else {
+                if (!cbConteo.isChecked() && !cbEtiquetas.isChecked() && !cbSeguimiento.isChecked() && !cbPedido.isChecked()){
+                    cbVencimiento.setChecked(true);
+                }
+            }
+        });
 
         rvProducts = findViewById(R.id.rvProducts);
         rvProducts.setHasFixedSize(true);
@@ -84,8 +183,6 @@ public class ProductListActivity extends AppCompatActivity {
                     .setTitle(" ");
             dialog.show();
         });
-
-        listProducts(INFRA_SERVER_ADDRESS + GET_ALL_PRODUCTS);
     }
 
     private void enviarDatos(String path) {
@@ -110,7 +207,7 @@ public class ProductListActivity extends AppCompatActivity {
         queue.add(stringRequest);
     }
 
-    private void listProducts(String path) {
+    private void listProducts(String path, int mod) {
 
         progressDialog.setMessage("Listando Productos...");
         progressDialog.show();
@@ -118,33 +215,86 @@ public class ProductListActivity extends AppCompatActivity {
         jsonObjectRequest = new JsonObjectRequest(Request.Method.GET, path, null, response -> {
 
             try {
-                productList.clear();
                 JSONArray jsonArray = response.getJSONArray("Products");
-                for (int i = 0; i < jsonArray.length(); i++) {
-                    JSONObject jsonObject = jsonArray.getJSONObject(i);
-                    Product product = new Product(
-                            jsonObject.getInt("codlocal"),
-                            jsonObject.getString("sucursal"),
-                            jsonObject.getInt("activado"),
-                            jsonObject.getString("dep"),
-                            jsonObject.getString("ean_13"),
-                            jsonObject.getInt("linea"),
-                            jsonObject.getInt("code"),
-                            jsonObject.getString("detalle"),
-                            jsonObject.getLong("stock_"),
-                            jsonObject.getLong("pventa"),
-                            jsonObject.getLong("p_oferta"),
-                            jsonObject.getDouble("avg_pro"),
-                            jsonObject.getLong("costo_prom"),
-                            jsonObject.getString("codBarra"),
-                            jsonObject.getDouble("pcadena"),
-                            jsonObject.getInt("pedido"),
-                            jsonObject.getInt("und_defect"),
-                            jsonObject.getString("responsable"));
-                    productList.add(product);
+                switch (mod) {
+                    case 1:
+                        productList.clear();
+                        for (int i = 0; i < jsonArray.length(); i++) {
+                            JSONObject jsonObject = jsonArray.getJSONObject(i);
+                            Product product = new Product();
+                            product.setCode(jsonObject.getInt("code"));
+                            product.setCodlocal(jsonObject.getInt("codlocal"));
+                            product.setActivado(jsonObject.getInt("activado"));
+                            product.setDep(jsonObject.getString("dep"));
+                            product.setEan_13(jsonObject.getString("ean_13"));
+                            product.setLinea(jsonObject.getInt("linea"));
+                            product.setDetalle(jsonObject.getString("detalle"));
+                            product.setSucursal(jsonObject.getString("sucursal"));
+                            product.setStock_(jsonObject.getLong("stock_"));
+                            productList.add(product);
+                        }
+                        productAdapterCount = new ProductAdapterCount(ProductListActivity.this, productList);
+                        rvProducts.setAdapter(productAdapterCount);
+                        break;
+                    case 2:
+                    case 3:
+                        productList.clear();
+                        for (int i = 0; i < jsonArray.length(); i++) {
+                            JSONObject jsonObject = jsonArray.getJSONObject(i);
+                            Product product = new Product();
+                            product.setCode(jsonObject.getInt("code"));
+                            product.setCodlocal(jsonObject.getInt("codlocal"));
+                            product.setActivado(jsonObject.getInt("activado"));
+                            product.setDep(jsonObject.getString("dep"));
+                            product.setEan_13(jsonObject.getString("ean_13"));
+                            product.setLinea(jsonObject.getInt("linea"));
+                            product.setDetalle(jsonObject.getString("detalle"));
+                            product.setSucursal(jsonObject.getString("sucursal"));
+                            product.setStock_(jsonObject.getLong("stock_"));
+                            product.setPventa(jsonObject.getLong("pventa"));
+                            product.setPoferta(jsonObject.getLong("p_oferta"));
+                            productList.add(product);
+                        }
+                        productAdapterLabel = new ProductAdapterLabel(ProductListActivity.this, productList);
+                        rvProducts.setAdapter(productAdapterLabel);
+                        break;
+                    case 4:
+                        productList.clear();
+                        for (int i = 0; i < jsonArray.length(); i++) {
+                            JSONObject jsonObject = jsonArray.getJSONObject(i);
+                            Product product = new Product();
+                            product.setCode(jsonObject.getInt("code"));
+                            product.setCodlocal(jsonObject.getInt("codlocal"));
+                            product.setDetalle(jsonObject.getString("detalle"));
+                            product.setEan_13(jsonObject.getString("ean_13"));
+                            product.setSucursal(jsonObject.getString("sucursal"));
+                            product.setStock_(jsonObject.getLong("stock_"));
+                            product.setPventa(jsonObject.getLong("pventa"));
+                            product.setPoferta(jsonObject.getLong("p_oferta"));
+                            product.setAvg_pro(jsonObject.getDouble("avg_pro"));
+                            product.setCodBarra(jsonObject.getString("codBarra"));
+                            product.setPcadena(jsonObject.getDouble("pcadena"));
+                            product.setPedido(jsonObject.getInt("pedido"));
+                            productList.add(product);
+                        }
+                        productAdapterRequest = new ProductAdapterRequest(ProductListActivity.this, productList);
+                        rvProducts.setAdapter(productAdapterRequest);
+                        break;
+                    case 5:
+                        productList.clear();
+                        for (int i = 0; i < jsonArray.length(); i++) {
+                            JSONObject jsonObject = jsonArray.getJSONObject(i);
+                            Product product = new Product();
+                            product.setCode(jsonObject.getInt("code"));
+                            product.setDetalle(jsonObject.getString("detalle"));
+                            product.setUnd_defect(jsonObject.getInt("und_defect"));
+                            product.setResponsable(jsonObject.getString("responsable"));
+                            productList.add(product);
+                        }
+                        productAdapterRequest = new ProductAdapterRequest(ProductListActivity.this, productList);
+                        rvProducts.setAdapter(productAdapterRequest);
+                        break;
                 }
-                productAdapter = new ProductAdapter(ProductListActivity.this, productList);
-                rvProducts.setAdapter(productAdapter);
                 progressDialog.dismiss();
             } catch (Exception exception) {
                 Toast.makeText(getApplicationContext(), "Sql: " + exception.getMessage(), Toast.LENGTH_SHORT).show();
