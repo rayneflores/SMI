@@ -231,4 +231,58 @@ public class Product implements Serializable {
                 ", " + und_defect +
                 ", " + responsable;
     }
+
+    public String toStringCount() {
+        return
+                codlocal +
+                        ", " + sucursal +
+                        ", " + activado +
+                        ", " + dep +
+                        ", " + ean_13 +
+                        ", " + linea +
+                        ", " + code +
+                        ", " + detalle +
+                        ", " + stock_;
+    }
+
+    public String toStringLabel() {
+        return
+                codlocal +
+                        ", " + sucursal +
+                        ", " + activado +
+                        ", " + dep +
+                        ", " + ean_13 +
+                        ", " + linea +
+                        ", " + code +
+                        ", " + detalle +
+                        ", " + stock_ +
+                        ", " + pventa +
+                        ", " + poferta;
+    }
+
+    public String toStringRequest() {
+        return
+                codlocal +
+                        ", " + sucursal +
+                        ", " + dep +
+                        ", " + ean_13 +
+                        ", " + linea +
+                        ", " + code +
+                        ", " + detalle +
+                        ", " + stock_ +
+                        ", " + pventa +
+                        ", " + poferta +
+                        ", " + avg_pro +
+                        ", " + codBarra +
+                        ", " + pcadena +
+                        ", " + pedido;
+    }
+
+    public String toStringVence() {
+        return
+                code +
+                        ", " + detalle +
+                        ", " + und_defect +
+                        ", " + responsable;
+    }
 }

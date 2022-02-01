@@ -6,7 +6,11 @@ import static com.ryfsystems.smi.Utils.Constants.GET_PRODUCTS_FOLLOW;
 import static com.ryfsystems.smi.Utils.Constants.GET_PRODUCTS_LABEL;
 import static com.ryfsystems.smi.Utils.Constants.GET_PRODUCTS_REQUEST;
 import static com.ryfsystems.smi.Utils.Constants.INFRA_SERVER_ADDRESS;
-import static com.ryfsystems.smi.Utils.Constants.SEND_DATA;
+import static com.ryfsystems.smi.Utils.Constants.SEND_COUNT_DATA;
+import static com.ryfsystems.smi.Utils.Constants.SEND_DEFECT_DATA;
+import static com.ryfsystems.smi.Utils.Constants.SEND_FOLLOW_DATA;
+import static com.ryfsystems.smi.Utils.Constants.SEND_LABEL_DATA;
+import static com.ryfsystems.smi.Utils.Constants.SEND_REQUEST_DATA;
 
 import android.Manifest;
 import android.app.ProgressDialog;
@@ -20,8 +24,6 @@ import android.provider.Settings;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
-import android.widget.LinearLayout;
-import android.widget.RelativeLayout;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AlertDialog;
@@ -36,6 +38,7 @@ import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.ryfsystems.smi.Adapters.ProductAdapterCount;
+import com.ryfsystems.smi.Adapters.ProductAdapterDefect;
 import com.ryfsystems.smi.Adapters.ProductAdapterLabel;
 import com.ryfsystems.smi.Adapters.ProductAdapterRequest;
 import com.ryfsystems.smi.Models.Product;
@@ -64,6 +67,7 @@ public class ProductListActivity extends AppCompatActivity {
     ProductAdapterCount productAdapterCount;
     ProductAdapterLabel productAdapterLabel;
     ProductAdapterRequest productAdapterRequest;
+    ProductAdapterDefect productAdapterDefect;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -88,15 +92,16 @@ public class ProductListActivity extends AppCompatActivity {
         cbConteo.setChecked(true);
 
         cbConteo.setOnCheckedChangeListener((compoundButton, b) -> {
-            if (cbConteo.isChecked()){
+            if (cbConteo.isChecked()) {
+                btnEnviar.setEnabled(true);
                 module = 1;
                 cbEtiquetas.setChecked(false);
                 cbSeguimiento.setChecked(false);
                 cbPedido.setChecked(false);
                 cbVencimiento.setChecked(false);
-                listProducts(INFRA_SERVER_ADDRESS + GET_PRODUCTS_COUNT, module);
+                ProductListActivity.this.listProducts(INFRA_SERVER_ADDRESS + GET_PRODUCTS_COUNT, module);
             } else {
-                if (!cbEtiquetas.isChecked() && !cbSeguimiento.isChecked() && !cbPedido.isChecked() && !cbVencimiento.isChecked()){
+                if (!cbEtiquetas.isChecked() && !cbSeguimiento.isChecked() && !cbPedido.isChecked() && !cbVencimiento.isChecked()) {
                     cbConteo.setChecked(true);
                 }
             }
@@ -104,6 +109,7 @@ public class ProductListActivity extends AppCompatActivity {
 
         cbEtiquetas.setOnCheckedChangeListener((compoundButton, b) -> {
             if (cbEtiquetas.isChecked()){
+                btnEnviar.setEnabled(true);
                 module = 2;
                 cbConteo.setChecked(false);
                 cbSeguimiento.setChecked(false);
@@ -119,6 +125,7 @@ public class ProductListActivity extends AppCompatActivity {
 
         cbSeguimiento.setOnCheckedChangeListener((compoundButton, b) -> {
             if (cbSeguimiento.isChecked()){
+                btnEnviar.setEnabled(true);
                 module = 3;
                 cbConteo.setChecked(false);
                 cbEtiquetas.setChecked(false);
@@ -134,6 +141,7 @@ public class ProductListActivity extends AppCompatActivity {
 
         cbPedido.setOnCheckedChangeListener((compoundButton, b) -> {
             if (cbPedido.isChecked()){
+                btnEnviar.setEnabled(true);
                 module = 4;
                 cbConteo.setChecked(false);
                 cbEtiquetas.setChecked(false);
@@ -149,6 +157,7 @@ public class ProductListActivity extends AppCompatActivity {
 
         cbVencimiento.setOnCheckedChangeListener((compoundButton, b) -> {
             if (cbVencimiento.isChecked()){
+                btnEnviar.setEnabled(true);
                 module = 5;
                 cbConteo.setChecked(false);
                 cbEtiquetas.setChecked(false);
@@ -170,10 +179,10 @@ public class ProductListActivity extends AppCompatActivity {
         btnEnviar = findViewById(R.id.btnEnviar);
         btnEnviar.setOnClickListener(view -> {
             AlertDialog.Builder dialog = new AlertDialog.Builder(ProductListActivity.this);
-            dialog.setMessage("Esta seguro que desea eniviar los Datos? ESTA ACCION NO SE PUEDE DESHACER")
+            dialog.setMessage("Esta seguro que desea enviar los Datos? ESTA ACCION NO SE PUEDE DESHACER")
                     .setPositiveButton("Si", (d, which) -> {
                         d.dismiss();
-                        processCSV(view);
+                        processCSV(view, module);
                         btnEnviar.setEnabled(false);
                     })
                     .setNegativeButton("No", (d, which) -> {
@@ -185,26 +194,116 @@ public class ProductListActivity extends AppCompatActivity {
         });
     }
 
-    private void enviarDatos(String path) {
-        StringRequest stringRequest =
-                new StringRequest(
-                        Request.Method.POST,
-                        path,
-                        response -> {
-                            if (response.equals("200")){
-                                Toast.makeText(getApplicationContext(), "Datos Enviados!!!", Toast.LENGTH_SHORT).show();
-                                productList.clear();
-                                onBackPressed();
-                            } else {
-                                Toast.makeText(getApplicationContext(), "Ocurrio un Error al Enviar!!!", Toast.LENGTH_SHORT).show();
-                                btnEnviar.setEnabled(true);
-                            }
-                        }, error -> {
-                    Toast.makeText(getApplicationContext(), error.toString(), Toast.LENGTH_SHORT).show();
-                    btnEnviar.setEnabled(true);
-                });
-        RequestQueue queue = Volley.newRequestQueue(this);
-        queue.add(stringRequest);
+    private void enviarDatos(String path, int module) {
+        StringRequest stringRequest;
+        RequestQueue queue;
+        switch (module) {
+            case 1:
+                stringRequest =
+                        new StringRequest(
+                                Request.Method.POST,
+                                path + SEND_COUNT_DATA,
+                                response -> {
+                                    if (response.equals("200")){
+                                        Toast.makeText(getApplicationContext(), "Datos Enviados!!!", Toast.LENGTH_SHORT).show();
+                                        productList.clear();
+                                        onBackPressed();
+                                    } else {
+                                        Toast.makeText(getApplicationContext(), "Ocurrio un Error al Enviar!!!", Toast.LENGTH_SHORT).show();
+                                        btnEnviar.setEnabled(true);
+                                    }
+                                }, error -> {
+                            Toast.makeText(getApplicationContext(), error.toString(), Toast.LENGTH_SHORT).show();
+                            btnEnviar.setEnabled(true);
+                        });
+                queue = Volley.newRequestQueue(this);
+                queue.add(stringRequest);
+                break;
+            case 2:
+                stringRequest =
+                        new StringRequest(
+                                Request.Method.POST,
+                                path + SEND_LABEL_DATA,
+                                response -> {
+                                    if (response.equals("200")){
+                                        Toast.makeText(getApplicationContext(), "Datos Enviados!!!", Toast.LENGTH_SHORT).show();
+                                        productList.clear();
+                                        onBackPressed();
+                                    } else {
+                                        Toast.makeText(getApplicationContext(), "Ocurrio un Error al Enviar!!!", Toast.LENGTH_SHORT).show();
+                                        btnEnviar.setEnabled(true);
+                                    }
+                                }, error -> {
+                            Toast.makeText(getApplicationContext(), error.toString(), Toast.LENGTH_SHORT).show();
+                            btnEnviar.setEnabled(true);
+                        });
+                queue = Volley.newRequestQueue(this);
+                queue.add(stringRequest);
+                break;
+            case 3:
+                stringRequest =
+                        new StringRequest(
+                                Request.Method.POST,
+                                path + SEND_FOLLOW_DATA,
+                                response -> {
+                                    if (response.equals("200")){
+                                        Toast.makeText(getApplicationContext(), "Datos Enviados!!!", Toast.LENGTH_SHORT).show();
+                                        productList.clear();
+                                        onBackPressed();
+                                    } else {
+                                        Toast.makeText(getApplicationContext(), "Ocurrio un Error al Enviar!!!", Toast.LENGTH_SHORT).show();
+                                        btnEnviar.setEnabled(true);
+                                    }
+                                }, error -> {
+                            Toast.makeText(getApplicationContext(), error.toString(), Toast.LENGTH_SHORT).show();
+                            btnEnviar.setEnabled(true);
+                        });
+                queue = Volley.newRequestQueue(this);
+                queue.add(stringRequest);
+                break;
+            case 4:
+                stringRequest =
+                        new StringRequest(
+                                Request.Method.POST,
+                                path + SEND_REQUEST_DATA,
+                                response -> {
+                                    if (response.equals("200")){
+                                        Toast.makeText(getApplicationContext(), "Datos Enviados!!!", Toast.LENGTH_SHORT).show();
+                                        productList.clear();
+                                        onBackPressed();
+                                    } else {
+                                        Toast.makeText(getApplicationContext(), "Ocurrio un Error al Enviar!!!", Toast.LENGTH_SHORT).show();
+                                        btnEnviar.setEnabled(true);
+                                    }
+                                }, error -> {
+                            Toast.makeText(getApplicationContext(), error.toString(), Toast.LENGTH_SHORT).show();
+                            btnEnviar.setEnabled(true);
+                        });
+                queue = Volley.newRequestQueue(this);
+                queue.add(stringRequest);
+                break;
+            case 5:
+                stringRequest =
+                        new StringRequest(
+                                Request.Method.POST,
+                                path + SEND_DEFECT_DATA,
+                                response -> {
+                                    if (response.equals("200")){
+                                        Toast.makeText(getApplicationContext(), "Datos Enviados!!!", Toast.LENGTH_SHORT).show();
+                                        productList.clear();
+                                        onBackPressed();
+                                    } else {
+                                        Toast.makeText(getApplicationContext(), "Ocurrio un Error al Enviar!!!", Toast.LENGTH_SHORT).show();
+                                        btnEnviar.setEnabled(true);
+                                    }
+                                }, error -> {
+                            Toast.makeText(getApplicationContext(), error.toString(), Toast.LENGTH_SHORT).show();
+                            btnEnviar.setEnabled(true);
+                        });
+                queue = Volley.newRequestQueue(this);
+                queue.add(stringRequest);
+                break;
+        }
     }
 
     private void listProducts(String path, int mod) {
@@ -291,8 +390,8 @@ public class ProductListActivity extends AppCompatActivity {
                             product.setResponsable(jsonObject.getString("responsable"));
                             productList.add(product);
                         }
-                        productAdapterRequest = new ProductAdapterRequest(ProductListActivity.this, productList);
-                        rvProducts.setAdapter(productAdapterRequest);
+                        productAdapterDefect = new ProductAdapterDefect(ProductListActivity.this, productList);
+                        rvProducts.setAdapter(productAdapterDefect);
                         break;
                 }
                 progressDialog.dismiss();
@@ -302,13 +401,13 @@ public class ProductListActivity extends AppCompatActivity {
         }, error -> {
             Toast.makeText(getApplicationContext(), "No Hay datos!!!", Toast.LENGTH_LONG).show();
             progressDialog.dismiss();
-            onBackPressed();
+            btnEnviar.setEnabled(false);
         });
         RequestQueue requestQueue = Volley.newRequestQueue(this);
         requestQueue.add(jsonObjectRequest);
     }
 
-    public void processCSV(View view) {
+    public void processCSV(View view, int module) {
         try {
             boolean writePermissionStatus = checkStoragePermission(false);
             //Check for permission
@@ -322,7 +421,7 @@ public class ProductListActivity extends AppCompatActivity {
                     return;
                 } else {
                     //Permission Granted. Export
-                    exportDataToCSV();
+                    exportDataToCSV(module);
                 }
             }
         } catch (Exception e) {
@@ -330,29 +429,154 @@ public class ProductListActivity extends AppCompatActivity {
         }
     }
 
-    private void exportDataToCSV() throws IOException {
+    private void exportDataToCSV(int module) throws IOException {
+        File directory;
+        File file;
+        FileWriter fileWriter;
         String csvData = "";
-        for (int i = 0; i < productList.size(); i++) {
-            Product product = productList.get(i);
-            String[] data = product.toString().split(",");
-            csvData += toCSV(data) + "\n";
+        String uniqueFileName;
+
+        switch (module) {
+            case 1:
+                csvData = "codlocal, sucursal, activado, dep, ean_13, linea, code, detalle, stock \n";
+                for (int i = 0; i < productList.size(); i++) {
+                    Product product = new Product();
+                    product.setActivado(productList.get(i).getActivado());
+                    product.setCode(productList.get(i).getCode());
+                    product.setCodlocal(productList.get(i).getCodlocal());
+                    product.setDetalle(productList.get(i).getDetalle());
+                    product.setDep(productList.get(i).getDep());
+                    product.setEan_13(productList.get(i).getEan_13());
+                    product.setLinea(productList.get(i).getLinea());
+                    product.setSucursal(productList.get(i).getSucursal());
+                    product.setStock_(productList.get(i).getStock_());
+                    String[] data = product.toStringCount().split(",");
+                    csvData += toCSV(data, module) + "\n";
+                }
+                directory = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS);
+                uniqueFileName = "reporte_conteo_magallEAN.csv";
+                file = new File(directory, uniqueFileName);
+                fileWriter = new FileWriter(file);
+                fileWriter.write(csvData);
+                fileWriter.flush();
+                fileWriter.close();
+                Toast.makeText(ProductListActivity.this, "Archivo Exportado Satisfactoriamente", Toast.LENGTH_SHORT).show();
+                enviarDatos(INFRA_SERVER_ADDRESS, module);
+                break;
+            case 2:
+                csvData = "codlocal, sucursal, activado, dep, ean_13, linea, code, detalle, stock, pventa, poferta \n";
+                for (int i = 0; i < productList.size(); i++) {
+                    Product product = new Product();
+                    product.setActivado(productList.get(i).getActivado());
+                    product.setCode(productList.get(i).getCode());
+                    product.setCodlocal(productList.get(i).getCodlocal());
+                    product.setDetalle(productList.get(i).getDetalle());
+                    product.setDep(productList.get(i).getDep());
+                    product.setEan_13(productList.get(i).getEan_13());
+                    product.setLinea(productList.get(i).getLinea());
+                    product.setSucursal(productList.get(i).getSucursal());
+                    product.setStock_(productList.get(i).getStock_());
+                    product.setPventa(productList.get(i).getPventa());
+                    product.setPoferta(productList.get(i).getPoferta());
+                    String[] data = product.toStringLabel().split(",");
+                    csvData += toCSV(data, module) + "\n";
+                }
+                directory = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS);
+                uniqueFileName = "reporte_etiquetas_magallEAN.csv";
+                file = new File(directory, uniqueFileName);
+                fileWriter = new FileWriter(file);
+                fileWriter.write(csvData);
+                fileWriter.flush();
+                fileWriter.close();
+                Toast.makeText(ProductListActivity.this, "Archivo Exportado Satisfactoriamente", Toast.LENGTH_SHORT).show();
+                enviarDatos(INFRA_SERVER_ADDRESS, module);
+                break;
+            case 3:
+                csvData = "codlocal, sucursal, activado, dep, ean_13, linea, code, detalle, stock, pventa, poferta \n";
+                for (int i = 0; i < productList.size(); i++) {
+                    Product product = new Product();
+                    product.setActivado(productList.get(i).getActivado());
+                    product.setCode(productList.get(i).getCode());
+                    product.setCodlocal(productList.get(i).getCodlocal());
+                    product.setDetalle(productList.get(i).getDetalle());
+                    product.setDep(productList.get(i).getDep());
+                    product.setEan_13(productList.get(i).getEan_13());
+                    product.setLinea(productList.get(i).getLinea());
+                    product.setSucursal(productList.get(i).getSucursal());
+                    product.setStock_(productList.get(i).getStock_());
+                    product.setPventa(productList.get(i).getPventa());
+                    product.setPoferta(productList.get(i).getPoferta());
+                    String[] data = product.toStringLabel().split(",");
+                    csvData += toCSV(data, module) + "\n";
+                }
+                directory = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS);
+                uniqueFileName = "reporte_seguimiento_magallEAN.csv";
+                file = new File(directory, uniqueFileName);
+                fileWriter = new FileWriter(file);
+                fileWriter.write(csvData);
+                fileWriter.flush();
+                fileWriter.close();
+                Toast.makeText(ProductListActivity.this, "Archivo Exportado Satisfactoriamente", Toast.LENGTH_SHORT).show();
+                enviarDatos(INFRA_SERVER_ADDRESS, module);
+                break;
+            case 4:
+                csvData = "codlocal, sucursal, ean_13, linea, code, detalle, stock, pventa, poferta, avg_pro, codBarra, pcadena, pedido \n";
+                for (int i = 0; i < productList.size(); i++) {
+                    Product product = new Product();
+                    product.setCode(productList.get(i).getCode());
+                    product.setCodlocal(productList.get(i).getCodlocal());
+                    product.setDetalle(productList.get(i).getDetalle());
+                    product.setEan_13(productList.get(i).getEan_13());
+                    product.setLinea(productList.get(i).getLinea());
+                    product.setSucursal(productList.get(i).getSucursal());
+                    product.setStock_(productList.get(i).getStock_());
+                    product.setPventa(productList.get(i).getPventa());
+                    product.setPoferta(productList.get(i).getPoferta());
+                    product.setAvg_pro(productList.get(i).getAvg_pro());
+                    product.setCodBarra(productList.get(i).getCodBarra());
+                    product.setPcadena(productList.get(i).getPcadena());
+                    product.setPedido(productList.get(i).getPedido());
+                    String[] data = product.toStringRequest().split(",");
+                    csvData += toCSV(data, module) + "\n";
+                }
+                directory = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS);
+                uniqueFileName = "reporte_pedido_magallEAN.csv";
+                file = new File(directory, uniqueFileName);
+                fileWriter = new FileWriter(file);
+                fileWriter.write(csvData);
+                fileWriter.flush();
+                fileWriter.close();
+                Toast.makeText(ProductListActivity.this, "Archivo Exportado Satisfactoriamente", Toast.LENGTH_SHORT).show();
+                enviarDatos(INFRA_SERVER_ADDRESS, module);
+                break;
+            case 5:
+                csvData = "code, detalle, und_defect, responsable \n";
+                for (int i = 0; i < productList.size(); i++) {
+                    Product product = new Product();
+                    product.setCode(productList.get(i).getCode());
+                    product.setDetalle(productList.get(i).getDetalle());
+                    product.setUnd_defect(productList.get(i).getUnd_defect());
+                    product.setResponsable(productList.get(i).getResponsable());
+                    String[] data = product.toStringVence().split(",");
+                    csvData += toCSV(data, module) + "\n";
+                }
+                directory = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS);
+                uniqueFileName = "reporte_vencimiento_magallEAN.csv";
+                file = new File(directory, uniqueFileName);
+                fileWriter = new FileWriter(file);
+                fileWriter.write(csvData);
+                fileWriter.flush();
+                fileWriter.close();
+                Toast.makeText(ProductListActivity.this, "Archivo Exportado Satisfactoriamente", Toast.LENGTH_SHORT).show();
+                enviarDatos(INFRA_SERVER_ADDRESS, module);
+                break;
         }
-        File directory = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS);
-        String uniqueFileName = "reporte_magallEAN.csv";
-        File file = new File(directory, uniqueFileName);
-        FileWriter fileWriter = new FileWriter(file);
-        fileWriter.write(csvData);
-        fileWriter.flush();
-        fileWriter.close();
-        Toast.makeText(ProductListActivity.this, "Archivo Exportado Satisfactoriamente", Toast.LENGTH_SHORT).show();
-        enviarDatos(INFRA_SERVER_ADDRESS + SEND_DATA);
     }
 
-    public static String toCSV(String[] array) {
+    public static String toCSV(String[] array, int module) {
         String result = "";
         if (array.length > 0) {
             StringBuilder sb = new StringBuilder();
-            sb.append("codlocal, sucursal, activado, dep, ean_13, linea, code, detalle, stock, pventa, poferta, avg_pro, costo_prom, codBarra, pcadena, pedido, und_defect \n");
             for (String s : array) {
                 sb.append(s.trim()).append(",");
             }

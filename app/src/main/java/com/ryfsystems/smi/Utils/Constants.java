@@ -32,6 +32,10 @@ public class Constants {
     public static String LOGIN = "login.php";
 
     //Send Data
-    public static String SEND_DATA = "sendData.php";
+    public static String SEND_COUNT_DATA = "sendCountData.php";
+    public static String SEND_LABEL_DATA = "sendLabelData.php";
+    public static String SEND_FOLLOW_DATA = "sendFollowData.php";
+    public static String SEND_REQUEST_DATA = "sendRequestData.php";
+    public static String SEND_DEFECT_DATA = "sendDefectData.php";
 
 }

@@ -14,7 +14,7 @@ public class ProductViewHolder extends RecyclerView.ViewHolder {
 
     public TextView tvListProductActivado, tvListProductCode, tvListProductCodLocal, tvListProductDetalle, tvListProductDep, tvListProductEan_13, tvListProductLinea,
             tvListProductSucursal, tvListProductStock, tvListProductpOferta, tvListProductPventa, tvListProductAvgProm, tvListProductCostoProm, tvListProductCodBarra,
-            tvListProductPcadena, tvListProductPedido, tvListProductUndDefect;
+            tvListProductPcadena, tvListProductPedido, tvListProductUndDefect, tvListProductResponsable;
     View mView;
 
     private ProductViewHolder.ClickListener mClickListener;
@@ -49,6 +49,7 @@ public class ProductViewHolder extends RecyclerView.ViewHolder {
         tvListProductPcadena = mView.findViewById(R.id.tvListProductPcadena);
         tvListProductPedido = mView.findViewById(R.id.tvListProductPedido);
         tvListProductUndDefect = mView.findViewById(R.id.tvListProductUndDefect);
+        tvListProductResponsable = mView.findViewById(R.id.tvListProductResponsable);
     }
 
     public void setOnClickListener(ProductViewHolder.ClickListener clickListener) {
