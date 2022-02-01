@@ -5,8 +5,6 @@ import static com.ryfsystems.smi.Utils.Constants.INFRA_SERVER_ADDRESS;
 import static com.ryfsystems.smi.Utils.Constants.SAVE_USER;
 import static com.ryfsystems.smi.Utils.Constants.UPDATE_USER;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -16,6 +14,8 @@ import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import androidx.appcompat.app.AppCompatActivity;
 
 import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
@@ -145,11 +145,11 @@ public class UserActivity extends AppCompatActivity implements View.OnClickListe
                     if (tvPassword1.getText().toString().trim().equals(tvPassword2.getText().toString().trim())) {
                         createUser(tvName.getText().toString().trim(), tvUserName.getText().toString().trim(), tvPassword1.getText().toString().trim(), userRole);
                     } else {
-                        Toast.makeText(getApplicationContext(), "Los Passwords no coinciden", Toast.LENGTH_LONG).show();
+                        Toast.makeText(getApplicationContext(), "Los Passwords no coinciden", Toast.LENGTH_SHORT).show();
                         btnGuardar.setEnabled(true);
                     }
                 } else {
-                    Toast.makeText(getApplicationContext(), "Debe completar todos los campos", Toast.LENGTH_LONG).show();
+                    Toast.makeText(getApplicationContext(), "Debe completar todos los campos", Toast.LENGTH_SHORT).show();
                     btnGuardar.setEnabled(true);
                 }
                 break;
@@ -182,7 +182,7 @@ public class UserActivity extends AppCompatActivity implements View.OnClickListe
                             Toast.makeText(getApplicationContext(), response, Toast.LENGTH_SHORT).show();
                             clearTextViews();
                         }, error -> {
-                    Toast.makeText(getApplicationContext(), "Error_Det: " + error.getMessage(), Toast.LENGTH_LONG).show();
+                    Toast.makeText(getApplicationContext(), "Error_Det: " + error.getMessage(), Toast.LENGTH_SHORT).show();
                 }) {
                     @Override
                     protected Map<String, String> getParams() throws AuthFailureError {
@@ -206,7 +206,7 @@ public class UserActivity extends AppCompatActivity implements View.OnClickListe
                             Toast.makeText(getApplicationContext(), response, Toast.LENGTH_SHORT).show();
                             clearTextViews();
                         }, error -> {
-                    Toast.makeText(getApplicationContext(), "Error_Det: " + error.getMessage(), Toast.LENGTH_LONG).show();
+                    Toast.makeText(getApplicationContext(), "Error_Det: " + error.getMessage(), Toast.LENGTH_SHORT).show();
                 }) {
                     @Override
                     protected Map<String, String> getParams() throws AuthFailureError {
@@ -231,7 +231,7 @@ public class UserActivity extends AppCompatActivity implements View.OnClickListe
                             Toast.makeText(getApplicationContext(), response, Toast.LENGTH_SHORT).show();
                             clearTextViews();
                         }, error -> {
-                    Toast.makeText(getApplicationContext(), "Error_Det: " + error.getMessage(), Toast.LENGTH_LONG).show();
+                    Toast.makeText(getApplicationContext(), "Error_Det: " + error.getMessage(), Toast.LENGTH_SHORT).show();
                 }) {
                     @Override
                     protected Map<String, String> getParams() throws AuthFailureError {

@@ -186,7 +186,7 @@ public class ProductDetailActivity extends AppCompatActivity {
                         response -> {
                             Toast.makeText(getApplicationContext(), response, Toast.LENGTH_SHORT).show();
                         }, error -> {
-                    Toast.makeText(getApplicationContext(), "Error_Det: " + error.getMessage(), Toast.LENGTH_LONG).show();
+                    Toast.makeText(getApplicationContext(), "Error_Det: " + error.getMessage(), Toast.LENGTH_SHORT).show();
                 }){
                     @Override
                     protected Map<String, String> getParams() throws AuthFailureError {
@@ -221,7 +221,7 @@ public class ProductDetailActivity extends AppCompatActivity {
                 Toast.makeText(getApplicationContext(), exception.getMessage(), Toast.LENGTH_SHORT).show();
             }
         }, error -> {
-            Toast.makeText(getApplicationContext(), "3", Toast.LENGTH_LONG).show();
+            Toast.makeText(getApplicationContext(), "3", Toast.LENGTH_SHORT).show();
         });
         requestQueue.add(jsonObjectRequest);
     }

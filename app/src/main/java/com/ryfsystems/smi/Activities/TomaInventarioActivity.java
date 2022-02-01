@@ -3,8 +3,6 @@ package com.ryfsystems.smi.Activities;
 import static com.ryfsystems.smi.Utils.Constants.GET_PRODUCT;
 import static com.ryfsystems.smi.Utils.Constants.INFRA_SERVER_ADDRESS;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Intent;
 import android.media.Ringtone;
 import android.media.RingtoneManager;
@@ -12,6 +10,8 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
 import android.widget.Toast;
+
+import androidx.appcompat.app.AppCompatActivity;
 
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
@@ -135,8 +135,7 @@ public class TomaInventarioActivity extends AppCompatActivity implements ZBarSca
                 exception.printStackTrace();
             }
         }, error -> {
-            Toast.makeText(getApplicationContext(), "Fallo en la Lectura, Reintente!!!", Toast.LENGTH_LONG).show();
-            //Toast.makeText(getApplicationContext(), error.getMessage(), Toast.LENGTH_LONG).show();
+            Toast.makeText(getApplicationContext(), "Fallo en la Lectura, Reintente!!!", Toast.LENGTH_SHORT).show();
             onResume();
         });
         RequestQueue requestQueue = Volley.newRequestQueue(this);

@@ -3,8 +3,6 @@ package com.ryfsystems.smi.Activities;
 import static com.ryfsystems.smi.Utils.Constants.INFRA_SERVER_ADDRESS;
 import static com.ryfsystems.smi.Utils.Constants.SET_EXPIRED_PRODUCT;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -12,6 +10,8 @@ import android.os.Bundle;
 import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import androidx.appcompat.app.AppCompatActivity;
 
 import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
@@ -89,7 +89,7 @@ public class VencimientoActivity extends AppCompatActivity {
                         response -> {
                             Toast.makeText(getApplicationContext(), response, Toast.LENGTH_SHORT).show();
                         }, error -> {
-                    Toast.makeText(getApplicationContext(), "Error_Det: " + error.getMessage(), Toast.LENGTH_LONG).show();
+                    Toast.makeText(getApplicationContext(), "Error_Det: " + error.getMessage(), Toast.LENGTH_SHORT).show();
                 }){
                     @Override
                     protected Map<String, String> getParams() throws AuthFailureError {

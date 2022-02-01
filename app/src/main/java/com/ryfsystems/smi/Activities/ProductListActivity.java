@@ -99,7 +99,7 @@ public class ProductListActivity extends AppCompatActivity {
                 cbSeguimiento.setChecked(false);
                 cbPedido.setChecked(false);
                 cbVencimiento.setChecked(false);
-                ProductListActivity.this.listProducts(INFRA_SERVER_ADDRESS + GET_PRODUCTS_COUNT, module);
+                listProducts(INFRA_SERVER_ADDRESS + GET_PRODUCTS_COUNT, module);
             } else {
                 if (!cbEtiquetas.isChecked() && !cbSeguimiento.isChecked() && !cbPedido.isChecked() && !cbVencimiento.isChecked()) {
                     cbConteo.setChecked(true);
@@ -394,12 +394,14 @@ public class ProductListActivity extends AppCompatActivity {
                         rvProducts.setAdapter(productAdapterDefect);
                         break;
                 }
+                rvProducts.setVisibility(View.VISIBLE);
                 progressDialog.dismiss();
             } catch (Exception exception) {
                 Toast.makeText(getApplicationContext(), "Sql: " + exception.getMessage(), Toast.LENGTH_SHORT).show();
             }
         }, error -> {
-            Toast.makeText(getApplicationContext(), "No Hay datos!!!", Toast.LENGTH_LONG).show();
+            Toast.makeText(getApplicationContext(), "No Hay datos!!!", Toast.LENGTH_SHORT).show();
+            rvProducts.setVisibility(View.INVISIBLE);
             progressDialog.dismiss();
             btnEnviar.setEnabled(false);
         });
@@ -417,7 +419,7 @@ public class ProductListActivity extends AppCompatActivity {
             } else {
                 boolean writePermissionStatusAgain = checkStoragePermission(true);
                 if (!writePermissionStatusAgain) {
-                    Toast.makeText(this, "No ha otorgado el Permiso", Toast.LENGTH_LONG).show();
+                    Toast.makeText(this, "No ha otorgado el Permiso", Toast.LENGTH_SHORT).show();
                     return;
                 } else {
                     //Permission Granted. Export
