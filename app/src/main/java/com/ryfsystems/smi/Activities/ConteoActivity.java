@@ -27,6 +27,7 @@ import com.android.volley.toolbox.Volley;
 import com.google.android.material.textfield.TextInputEditText;
 import com.ryfsystems.smi.Models.Product;
 import com.ryfsystems.smi.R;
+import com.ryfsystems.smi.Utils.HttpsTrustManager;
 
 import org.json.JSONObject;
 
@@ -211,6 +212,7 @@ public class ConteoActivity extends AppCompatActivity {
     }
 
     public void getStock(String ean_13) {
+        HttpsTrustManager.allowAllSSL();
         requestQueue = Volley.newRequestQueue(this);
         JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.GET, path + GET_COUNT_EXISTENCE + ean_13, null, response -> {
             try {
@@ -218,15 +220,16 @@ public class ConteoActivity extends AppCompatActivity {
                 prevStock = jsonObject.getLong("stock_");
                 tvConteoPrevio2.setText(prevStock != 0 ? prevStock.toString() : "0");
             } catch (Exception exception) {
-                Toast.makeText(getApplicationContext(), "2", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getApplicationContext(), exception.getMessage(), Toast.LENGTH_SHORT).show();
             }
         }, error -> {
-            Toast.makeText(getApplicationContext(), "4", Toast.LENGTH_SHORT).show();
+            Toast.makeText(getApplicationContext(), error.getMessage(), Toast.LENGTH_SHORT).show();
         });
         requestQueue.add(jsonObjectRequest);
     }
 
     private void getStock2(String ean_13) {
+        HttpsTrustManager.allowAllSSL();
         requestQueue = Volley.newRequestQueue(this);
         JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.GET, path + GET_REAL_EXISTENCE + ean_13, null, response -> {
             try {
@@ -234,15 +237,16 @@ public class ConteoActivity extends AppCompatActivity {
                 prevStock = jsonObject.getLong("stock_");
                 tvConteoCantidad2.setText(prevStock.toString());
             } catch (Exception exception) {
-                Toast.makeText(getApplicationContext(), "1", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getApplicationContext(), exception.getMessage(), Toast.LENGTH_SHORT).show();
             }
         }, error -> {
-            Toast.makeText(getApplicationContext(), "3", Toast.LENGTH_SHORT).show();
+            Toast.makeText(getApplicationContext(), error.getMessage(), Toast.LENGTH_SHORT).show();
         });
         requestQueue.add(jsonObjectRequest);
     }
 
     private void updateCountProduct(int activado, int code, int codLocal, String detalle, String dep, String ean_13, int linea, String sucursal, Long stock) {
+        HttpsTrustManager.allowAllSSL();
         StringRequest stringRequest =
                 new StringRequest(Request.Method.POST,
                         path + SET_COUNT_PRODUCT,
@@ -270,6 +274,8 @@ public class ConteoActivity extends AppCompatActivity {
     }
 
     private void updateLabelProduct(int activado, int code, int codLocal, String detalle, String dep, String ean_13, int linea, String sucursal, Long stock, Long pventa, Long poferta) {
+
+        HttpsTrustManager.allowAllSSL();
         StringRequest stringRequest =
                 new StringRequest(Request.Method.POST,
                         path + SET_LABEL_PRODUCT,
@@ -299,6 +305,7 @@ public class ConteoActivity extends AppCompatActivity {
     }
 
     private void updateFollowProduct(Integer activado, Integer code, Integer codLocal, String detalle, String dep, String ean_13, Integer linea, String sucursal, Long total, Double pventa, Double poferta) {
+        HttpsTrustManager.allowAllSSL();
         StringRequest stringRequest =
                 new StringRequest(Request.Method.POST,
                         path + SET_SEGUI_PRODUCT,

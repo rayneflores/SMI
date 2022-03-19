@@ -24,6 +24,7 @@ import com.android.volley.toolbox.Volley;
 import com.google.android.material.textfield.TextInputEditText;
 import com.ryfsystems.smi.Models.Product;
 import com.ryfsystems.smi.R;
+import com.ryfsystems.smi.Utils.HttpsTrustManager;
 
 import org.json.JSONObject;
 
@@ -180,6 +181,7 @@ public class ProductDetailActivity extends AppCompatActivity {
             String codBarra,
             Double pcadena,
             int pedido) {
+        HttpsTrustManager.allowAllSSL();
         StringRequest stringRequest =
                 new StringRequest(Request.Method.POST,
                         path + SET_PRODUCT_FULL,

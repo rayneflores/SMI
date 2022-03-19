@@ -21,6 +21,7 @@ import com.android.volley.toolbox.Volley;
 import com.google.android.material.textfield.TextInputEditText;
 import com.ryfsystems.smi.Models.Product;
 import com.ryfsystems.smi.R;
+import com.ryfsystems.smi.Utils.HttpsTrustManager;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -83,6 +84,7 @@ public class VencimientoActivity extends AppCompatActivity {
     }
 
     private void updateVencProduct(Integer code, String detalle, int und_defect, String responsable) {
+        HttpsTrustManager.allowAllSSL();
         StringRequest stringRequest =
                 new StringRequest(Request.Method.POST,
                         path + SET_EXPIRED_PRODUCT,

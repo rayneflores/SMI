@@ -18,6 +18,7 @@ import com.android.volley.RequestQueue;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
 import com.ryfsystems.smi.Models.Product;
+import com.ryfsystems.smi.Utils.HttpsTrustManager;
 
 import org.json.JSONObject;
 
@@ -84,6 +85,7 @@ public class TomaInventarioActivity extends AppCompatActivity implements ZBarSca
     }
 
     public void buscarDatosProducto(String code) {
+        HttpsTrustManager.allowAllSSL();
         JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.GET, path + GET_PRODUCT + code, null, response -> {
             try {
                 JSONObject jsonObject = response.getJSONObject("Product");

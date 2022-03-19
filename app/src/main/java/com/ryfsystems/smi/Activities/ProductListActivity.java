@@ -43,6 +43,7 @@ import com.ryfsystems.smi.Adapters.ProductAdapterLabel;
 import com.ryfsystems.smi.Adapters.ProductAdapterRequest;
 import com.ryfsystems.smi.Models.Product;
 import com.ryfsystems.smi.R;
+import com.ryfsystems.smi.Utils.HttpsTrustManager;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -195,6 +196,7 @@ public class ProductListActivity extends AppCompatActivity {
     }
 
     private void enviarDatos(String path, int module) {
+        HttpsTrustManager.allowAllSSL();
         StringRequest stringRequest;
         RequestQueue queue;
         switch (module) {
@@ -308,6 +310,7 @@ public class ProductListActivity extends AppCompatActivity {
 
     private void listProducts(String path, int mod) {
 
+        HttpsTrustManager.allowAllSSL();
         progressDialog.setMessage("Listando Productos...");
         progressDialog.show();
 

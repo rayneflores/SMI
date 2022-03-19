@@ -20,6 +20,7 @@ import com.android.volley.toolbox.Volley;
 import com.ryfsystems.smi.Adapters.UserAdapter;
 import com.ryfsystems.smi.Models.User;
 import com.ryfsystems.smi.R;
+import com.ryfsystems.smi.Utils.HttpsTrustManager;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -66,6 +67,7 @@ public class UsersListActivity extends AppCompatActivity {
 
     private void listUsers(String path) {
 
+        HttpsTrustManager.allowAllSSL();
         progressDialog.setMessage("Listando Usuarios...");
         progressDialog.show();
 

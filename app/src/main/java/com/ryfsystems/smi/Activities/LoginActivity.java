@@ -24,6 +24,7 @@ import com.android.volley.toolbox.Volley;
 import com.ryfsystems.smi.BuildConfig;
 import com.ryfsystems.smi.Models.User;
 import com.ryfsystems.smi.R;
+import com.ryfsystems.smi.Utils.HttpsTrustManager;
 
 import org.json.JSONObject;
 
@@ -39,6 +40,7 @@ public class LoginActivity extends AppCompatActivity {
     String path = INFRA_SERVER_ADDRESS, programVersion;
     TextView tvVersion;
     User user;
+    SharedPreferences preferences;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -70,6 +72,8 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     private void login(String userName, String password) {
+        HttpsTrustManager.allowAllSSL();
+
         StringRequest stringRequest =
                 new StringRequest(
                         Request.Method.POST,
@@ -77,28 +81,31 @@ public class LoginActivity extends AppCompatActivity {
                         response -> {
                             if (!response.equals("401")) {
                                 buscarDatosUsuario(response);
-                                nextIntent = new Intent(getApplicationContext(), MainActivity.class);
+                                /*nextIntent = new Intent(getApplicationContext(), MainActivity.class);
                                 startActivity(nextIntent);
-                                finish();
+                                finish();*/
                             } else {
                                 btnLogin.setEnabled(true);
                                 Toast.makeText(getApplicationContext(), "Combinacion Usuario/Password Incorrecta", Toast.LENGTH_SHORT).show();
                             }
                         }, error -> {
-                    Toast.makeText(getApplicationContext(), error.getMessage(), Toast.LENGTH_SHORT).show();
-                }) {
-                    @Override
-                    protected Map<String, String> getParams() throws AuthFailureError {
-                        Map<String, String> params = new HashMap<>();
-                        params.put("username", userName);
-                        params.put("password", password);
-                        return params;
-                    }
-                };
+                            btnLogin.setEnabled(true);
+                            System.out.println(error.getMessage());
+                            Toast.makeText(getApplicationContext(), error.getMessage(), Toast.LENGTH_SHORT).show();
+                        }) {
+            @Override
+            protected Map<String, String> getParams() throws AuthFailureError {
+                Map<String, String> params = new HashMap<>();
+                params.put("username", userName);
+                params.put("password", password);
+                return params;
+            }
+        };
         queue.add(stringRequest);
     }
 
     private void buscarDatosUsuario(String userId) {
+        HttpsTrustManager.allowAllSSL();
         JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.GET, path + GET_USER + userId, null, response -> {
 
             try {
@@ -108,6 +115,9 @@ public class LoginActivity extends AppCompatActivity {
                         object.getString("rol")
                 );
                 guardarPreferencias();
+                nextIntent = new Intent(getApplicationContext(), MainActivity.class);
+                startActivity(nextIntent);
+                finish();
             } catch (Exception exception) {
                 exception.printStackTrace();
             }
@@ -119,13 +129,15 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     private void recuperarPreferencias(){
-        SharedPreferences preferences = getSharedPreferences("smiPreferences", Context.MODE_PRIVATE);
+        System.out.println("Entro RP Login");
+        preferences = getSharedPreferences("smiPreferences", Context.MODE_PRIVATE);
         tvUsuario.setText(preferences.getString("usuario", ""));
         tvPassword.setText(preferences.getString("password", ""));
     }
 
     private void guardarPreferencias() {
-        SharedPreferences preferences = getSharedPreferences("smiPreferences", Context.MODE_PRIVATE);
+        System.out.println("Entro GP Login");
+        preferences = getSharedPreferences("smiPreferences", Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = preferences.edit();
         editor.putString("name", user.getName());
         editor.putString("role", user.getRol());

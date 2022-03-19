@@ -3,7 +3,8 @@ package com.ryfsystems.smi.Utils;
 public class Constants {
 
     //General Address of BackEnd Server
-    public static String INFRA_SERVER_ADDRESS = "http://192.168.18.2/smi/";
+    //public static String INFRA_SERVER_ADDRESS = "http://192.168.18.2/smi/";
+    public static String INFRA_SERVER_ADDRESS = "https://civaweb.com/smi/";
 
     //Users Querys
     public static String GET_ALL_USERS = "getUsers.php";
@@ -37,5 +38,4 @@ public class Constants {
     public static String SEND_FOLLOW_DATA = "sendFollowData.php";
     public static String SEND_REQUEST_DATA = "sendRequestData.php";
     public static String SEND_DEFECT_DATA = "sendDefectData.php";
-
 }

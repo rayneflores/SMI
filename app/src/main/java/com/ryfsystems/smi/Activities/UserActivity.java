@@ -24,6 +24,7 @@ import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.ryfsystems.smi.Models.User;
 import com.ryfsystems.smi.R;
+import com.ryfsystems.smi.Utils.HttpsTrustManager;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -174,6 +175,7 @@ public class UserActivity extends AppCompatActivity implements View.OnClickListe
     }
 
     private void createUser(String name, String userName, String password, String userRole) {
+        HttpsTrustManager.allowAllSSL();
         StringRequest stringRequest =
                 new StringRequest(
                         Request.Method.POST,
@@ -198,6 +200,7 @@ public class UserActivity extends AppCompatActivity implements View.OnClickListe
     }
 
     private void updateUser(int userId, String name, String userName, String password, String rol) {
+        HttpsTrustManager.allowAllSSL();
         StringRequest stringRequest =
                 new StringRequest(
                         Request.Method.POST,
@@ -223,6 +226,7 @@ public class UserActivity extends AppCompatActivity implements View.OnClickListe
     }
 
     private void deleteUser(int userId) {
+        HttpsTrustManager.allowAllSSL();
         StringRequest stringRequest =
                 new StringRequest(
                         Request.Method.POST,
