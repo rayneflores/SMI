@@ -147,10 +147,21 @@ public class ConteoActivity extends AppCompatActivity {
         btnConteoContar.setOnClickListener(view -> {
 
             if (Integer.parseInt(tvConteoCantidad2.getText().toString()) <= 20000) {
+                Double pventa;
+                Double poferta;
                 requestQueue = Volley.newRequestQueue(this);
                 Long total = Long.parseLong(tvConteoCantidad2.getText().toString()) + Long.parseLong(tvConteoPrevio2.getText().toString());
-                Double pventa = Double.parseDouble(tvConteoPventa2.getText().toString());
-                Double poferta = Double.parseDouble(tvConteoPventa2.getText().toString());
+                if (!tvConteoPventa2.getText().toString().equals("") && !tvConteoPventa2.getText().toString().isEmpty()) {
+                    pventa = Double.parseDouble(tvConteoPventa2.getText().toString());
+                } else {
+                    pventa = 0.00;
+                }
+                if (!tvConteoPventa2.getText().toString().equals("") && !tvConteoPventa2.getText().toString().isEmpty()) {
+                    poferta = Double.parseDouble(tvConteoPventa2.getText().toString());
+                } else {
+                    poferta = 0.00;
+                }
+
 
                 if (total < 0) {
                     Toast.makeText(getApplicationContext(), "No puede Actualizar un Producto con Existencia Negativa", Toast.LENGTH_SHORT).show();
