@@ -80,7 +80,7 @@ public class ConteoActivity extends AppCompatActivity {
 
             switch (module) {
                 case 1:
-                    tvConteoTitle.setText("Conteo de Articulo");
+                    tvConteoTitle.setText(R.string.conteo_articulo);
                     getStock(productReceived.getEan_13());
                     tvConteoActivado2.setText(productReceived.getActivado() == 1 ? "Si" : "No");
                     tvConteoCode2.setText(productReceived.getCode().toString());
@@ -100,7 +100,7 @@ public class ConteoActivity extends AppCompatActivity {
                     break;
                 case 2:
                     tvConteoPrevio2.setVisibility(View.INVISIBLE);
-                    tvConteoTitle.setText("Generacion de Etiqueta");
+                    tvConteoTitle.setText(R.string.generacion_etiqueta);
                     getStock2(productReceived.getEan_13());
                     tvConteoCode2.setText(productReceived.getCode().toString());
                     tvConteoCodLocal2.setText(productReceived.getCodlocal().toString());
@@ -118,11 +118,11 @@ public class ConteoActivity extends AppCompatActivity {
                     tvConteoPrevio.setVisibility(View.INVISIBLE);
                     tvConteoCantidad2.setEnabled(false);
                     tvConteoPventa2.setEnabled(false);
-                    btnConteoContar.setText("Guardar Etiqueta");
+                    btnConteoContar.setText(R.string.guardar_etiqueta);
                     break;
                 case 3:
                     tvConteoPrevio2.setVisibility(View.INVISIBLE);
-                    tvConteoTitle.setText("Seguimiento de Productos");
+                    tvConteoTitle.setText(R.string.seguimiento_productos);
                     getStock2(productReceived.getEan_13());
                     tvConteoCode2.setText(productReceived.getCode().toString());
                     tvConteoCodLocal2.setText(productReceived.getCodlocal().toString());
@@ -139,7 +139,7 @@ public class ConteoActivity extends AppCompatActivity {
                     tvConteoPrecioOferta2.setText(productReceived.getPoferta().toString());
                     tvConteoPrevio.setVisibility(View.INVISIBLE);
                     tvConteoCantidad2.setEnabled(false);
-                    btnConteoContar.setText("Guardar Producto");
+                    btnConteoContar.setText(R.string.guardar_producto);
                     break;
             }
         }
@@ -147,8 +147,8 @@ public class ConteoActivity extends AppCompatActivity {
         btnConteoContar.setOnClickListener(view -> {
 
             if (Integer.parseInt(tvConteoCantidad2.getText().toString()) <= 20000) {
-                Double pventa;
-                Double poferta;
+                double pventa;
+                double poferta;
                 requestQueue = Volley.newRequestQueue(this);
                 Long total = Long.parseLong(tvConteoCantidad2.getText().toString()) + Long.parseLong(tvConteoPrevio2.getText().toString());
                 if (!tvConteoPventa2.getText().toString().equals("") && !tvConteoPventa2.getText().toString().isEmpty()) {

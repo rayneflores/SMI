@@ -16,4 +16,9 @@
     <string name="vencimiento">Lista de Vencidos</string>
     <string name="detalle_de_articulo">Detalle de Articulo</string>
     <string name="reporte_de_articulos_vencidos">Reporte de Articulos Vencidos</string>
+    <string name="guardar_producto">Guardar Producto</string>
+    <string name="conteo_articulo">Conteo de Articulo</string>
+    <string name="generacion_etiqueta">Generacion de Etiqueta</string>
+    <string name="guardar_etiqueta">Guardar Etiqueta</string>
+    <string name="seguimiento_productos">Seguimiento de Productos</string>
 </resources>
