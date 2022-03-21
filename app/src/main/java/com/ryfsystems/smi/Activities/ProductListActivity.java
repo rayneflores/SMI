@@ -17,7 +17,6 @@ import android.app.ProgressDialog;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.net.Uri;
-import android.os.Build;
 import android.os.Bundle;
 import android.os.Environment;
 import android.provider.Settings;
@@ -591,27 +590,23 @@ public class ProductListActivity extends AppCompatActivity {
     }
 
     private boolean checkStoragePermission(boolean showNotification) {
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-            if (checkSelfPermission(android.Manifest.permission.WRITE_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED) {
-                return true;
-            } else {
-                if (showNotification) showNotificationAlertToAllowPermission();
-                return false;
-            }
-        } else {
+        if (checkSelfPermission(Manifest.permission.WRITE_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED) {
             return true;
+        } else {
+            if (showNotification) showNotificationAlertToAllowPermission();
+            return false;
         }
     }
 
     private void showNotificationAlertToAllowPermission() {
         new AlertDialog.Builder(this)
-                .setMessage("Please allow Storage Read/Write permission for this app to function properly.")
-                .setPositiveButton("Open Settings", (paramDialogInterface, paramInt) -> {
+                .setMessage("Otorgue Permisos de lectura/escritura a la aplicacion, para que funcione apropiadamente.")
+                .setPositiveButton("Configuracion", (paramDialogInterface, paramInt) -> {
                     Intent intent = new Intent(Settings.ACTION_APPLICATION_DETAILS_SETTINGS);
                     Uri uri = Uri.fromParts("package", getPackageName(), null);
                     intent.setData(uri);
                     startActivity(intent);
-                }).setNegativeButton("Cancel", null).show();
+                }).setNegativeButton("Cancelar", null).show();
 
     }
 
