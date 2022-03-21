@@ -81,9 +81,6 @@ public class LoginActivity extends AppCompatActivity {
                         response -> {
                             if (!response.equals("401")) {
                                 buscarDatosUsuario(response);
-                                /*nextIntent = new Intent(getApplicationContext(), MainActivity.class);
-                                startActivity(nextIntent);
-                                finish();*/
                             } else {
                                 btnLogin.setEnabled(true);
                                 Toast.makeText(getApplicationContext(), "Combinacion Usuario/Password Incorrecta", Toast.LENGTH_SHORT).show();

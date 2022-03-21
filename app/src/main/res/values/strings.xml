@@ -21,4 +21,6 @@
     <string name="generacion_etiqueta">Generacion de Etiqueta</string>
     <string name="guardar_etiqueta">Guardar Etiqueta</string>
     <string name="seguimiento_productos">Seguimiento de Productos</string>
+    <string name="editar_borrar">Editar / Borrar</string>
+    <string name="nuevo_usuario">Nuevo Usuario</string>
 </resources>

@@ -91,7 +91,7 @@ public class UserActivity extends AppCompatActivity implements View.OnClickListe
             btnModificar.setEnabled(true);
             btnEliminar.setEnabled(true);
             btnGuardar.setEnabled(false);
-            tvUsersTitle.setText("Editar / Borrar");
+            tvUsersTitle.setText(R.string.editar_borrar);
         } else{
             cbAdmin.setEnabled(false);
             cbUser.setEnabled(true);
@@ -99,7 +99,7 @@ public class UserActivity extends AppCompatActivity implements View.OnClickListe
             btnModificar.setEnabled(false);
             btnEliminar.setEnabled(false);
             btnGuardar.setEnabled(true);
-            tvUsersTitle.setText("Nuevo Usuario");
+            tvUsersTitle.setText(R.string.nuevo_usuario);
         }
 
         cbAdmin.setOnCheckedChangeListener((compoundButton, b) -> {
@@ -248,7 +248,7 @@ public class UserActivity extends AppCompatActivity implements View.OnClickListe
     }
 
     private void clearTextViews() {
-        tvUsersTitle.setText("Nuevo Usuario");
+        tvUsersTitle.setText(R.string.nuevo_usuario);
         tvName.setText(null);
         tvUserName.setText(null);
         tvPassword1.setText(null);
