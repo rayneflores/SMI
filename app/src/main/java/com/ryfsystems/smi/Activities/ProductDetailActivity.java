@@ -116,6 +116,7 @@ public class ProductDetailActivity extends AppCompatActivity {
                         tvDetailPVenta2.setText(pventa);
                     } else {
                         margen = ((pventa / 1.19) - costoProm)/(pventa / 1.19);
+                        tvDetailPVenta2.setText(productReceived.getPventa().toString());
                     }
 
                     fMargin = df.format(margen);
@@ -148,6 +149,7 @@ public class ProductDetailActivity extends AppCompatActivity {
                         tvDetailPVenta2.setText(pventa);
                     } else {
                         margen = ((pventa / 1.19) - costoProm)/(pventa / 1.19);
+                        tvDetailPVenta2.setText(pventa.toString());
                     }
 
                     fMargin = df.format(margen);

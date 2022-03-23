@@ -101,7 +101,8 @@ public class ConteoActivity extends AppCompatActivity {
                 case 2:
                     tvConteoPrevio2.setVisibility(View.INVISIBLE);
                     tvConteoTitle.setText(R.string.generacion_etiqueta);
-                    getStock2(productReceived.getEan_13());
+                    tvConteoActivado2.setText(productReceived.getActivado() == 1 ? "Si" : "No");
+                    getStock2(productReceived.getCodBarra());
                     tvConteoCode2.setText(productReceived.getCode().toString());
                     tvConteoCodLocal2.setText(productReceived.getCodlocal().toString());
                     tvConteoDetalle2.setText(productReceived.getDetalle());
@@ -113,6 +114,8 @@ public class ConteoActivity extends AppCompatActivity {
                         SpannableString pventa = new SpannableString(productReceived.getPventa().toString());
                         pventa.setSpan(new StrikethroughSpan(), 0, 4, 0);
                         tvConteoPventa2.setText(pventa);
+                    } else {
+                        tvConteoPventa2.setText(productReceived.getPventa().toString());
                     }
                     tvConteoPrecioOferta2.setText(productReceived.getPoferta().toString());
                     tvConteoPrevio.setVisibility(View.INVISIBLE);
@@ -245,7 +248,7 @@ public class ConteoActivity extends AppCompatActivity {
         JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.GET, path + GET_REAL_EXISTENCE + ean_13, null, response -> {
             try {
                 JSONObject jsonObject = response.getJSONObject("Stock");
-                prevStock = jsonObject.getLong("stock_");
+                prevStock = jsonObject.getLong("st_actual");
                 tvConteoCantidad2.setText(prevStock.toString());
             } catch (Exception exception) {
                 Toast.makeText(getApplicationContext(), exception.getMessage(), Toast.LENGTH_SHORT).show();
