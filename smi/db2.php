@@ -1,5 +1,5 @@
 <?php
-    $mysql = new mysqli("192.168.18.2", "smiadmin", "123456", "ki341951_rexistenc");
+    $mysql = new mysqli("localhost", "civaweb_smiadm", "ALEycj8spCI6", "civaweb_ki341951_rexistenc");
 
     if ($mysql -> connect_error) {
         die("Error de Conexion " . $mysql->connect_error);

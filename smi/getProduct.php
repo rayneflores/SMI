@@ -20,7 +20,21 @@ if($_SERVER['REQUEST_METHOD'] == 'GET'){
         }
         echo json_encode(['Product'=>$array]);
     } else {
-        echo "No se Encontraron Registros";
+        $query = "SELECT M1.*, RE.pventa FROM rexistenc AS RE 
+        LEFT JOIN mae_0001 AS M1
+        ON M1.ean_13 = RE.codbarra
+        WHERE RE.codbarra = $cbarra";
+
+        $result = $mysql->query($query);
+
+        if ($mysql->affected_rows > 0) {
+            while($row = $result->fetch_assoc()) {
+                $array = $row;
+            }
+            echo json_encode(['Product'=>$array]);
+        } else{
+            echo "No se Encontraron Registros";
+        }
     }
     $result->close();
     $mysql->close();

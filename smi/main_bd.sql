@@ -148,7 +148,7 @@ CREATE TABLE `tblusers` (
 --
 
 INSERT INTO `tblusers` (`id`, `username`, `password`, `name`, `rol`) VALUES
-(1, 'raynito', '$2y$10$4YsKnbsPJzeaDmwnLq7wXudohwWTNqpAde42CPHcX1yndq70ELbOW', 'Rayne Flores', '1');
+(1, 'raynito', '$2y$10$8Czxrc4Eni6kjTB3YKB3GeRdzZvsNJqxnuHRJTiVEv.VQnjZ9v/Gi', 'Rayne Flores', '1');
 
 -- --------------------------------------------------------
 

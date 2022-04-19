@@ -18,9 +18,20 @@ if($_SERVER['REQUEST_METHOD'] == 'GET'){
         }
         echo json_encode(['Stock'=>$array]);
     } else {
-        echo "{\"Stock\": {\"stock_\": 0}}";
-    }
+        $query = "SELECT RE.st_actual FROM rexistenc AS RE
+        WHERE RE.codbarra = $cbarra";
 
+        $result = $mysql->query($query);
+
+        if ($mysql->affected_rows > 0) {
+            while($row = $result->fetch_assoc()) {
+                $array = $row;
+            }
+            echo json_encode(['Stock'=>$array]);
+        } else {
+            echo "{\"Stock\": {\"stock_\": 0}}";
+        }
+    }
     $result->close();
     $mysql->close();
 }

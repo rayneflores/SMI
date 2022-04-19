@@ -3,40 +3,34 @@
         require_once("db.php");
 
         $code = $_POST['code'];
+        $activado = $_POST['activado'];
         $codlocal = $_POST['codlocal'];
         $detalle = $_POST['detalle'];
+        $dep = $_POST['dep'];
         $ean_13 = $_POST['ean_13'];
+        $linea = $_POST['linea'];
         $sucursal = $_POST['sucursal'];
         $stock_ = $_POST['stock_'];
         $pventa = $_POST['pventa'];
-        $p_oferta = $_POST['p_oferta'];
-        $avg_pro = $_POST['avg_pro'];
-        $costo_prom = $_POST['costo_prom'];
-        $codBarra = $_POST['codBarra'];
-        $pcadena = $_POST['pcadena'];
-        $pedido = $_POST['pedido'];
 
         $query = 
-        "REPLACE INTO tblreqproducts 
+        "REPLACE INTO tblproducts 
         SET code = $code, 
+            activado = $activado, 
             codlocal = $codlocal, 
             detalle = '$detalle',
+            dep = '$dep',
             ean_13 = $ean_13,
+            linea = $linea,
             sucursal = '$sucursal',
             stock_ = $stock_,
-            pventa = $pventa,
-            p_oferta = $p_oferta,
-            avg_pro = $avg_pro,
-            costo_prom = $costo_prom,
-            codBarra = $codBarra,
-            pcadena = $pcadena,
-            pedido = $pedido";
+            pventa = $pventa";
 
         $res = $mysql->query($query);
 
         if ($mysql->affected_rows > 0) {
             if($res === true) {
-                echo "Pedido Actualizado!!!";
+                echo "Producto Actualizado!!!";
             } else {
                 echo "No se pudo Actualizar";
             }
