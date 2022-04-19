@@ -22,16 +22,17 @@
     <LinearLayout
         android:id="@+id/llRvProducts"
         android:layout_width="match_parent"
-        android:layout_height="360dp"
+        android:layout_height="0dp"
         android:layout_below="@+id/tvProductListTitle"
         app:layout_constraintTop_toBottomOf="@id/tvProductListTitle"
+        app:layout_constraintBottom_toTopOf="@+id/rlModules"
         android:layout_margin="8dp"
         android:orientation="horizontal">
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/rvProducts"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
+            android:layout_height="match_parent" />
     </LinearLayout>
 
     <androidx.constraintlayout.widget.ConstraintLayout

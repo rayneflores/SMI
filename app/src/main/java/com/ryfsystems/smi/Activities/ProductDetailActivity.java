@@ -79,6 +79,7 @@ public class ProductDetailActivity extends AppCompatActivity {
                         productReceived.getPventa(),
                         productReceived.getPoferta(),
                         productReceived.getAvg_pro(),
+                        productReceived.getCosto_prom(),
                         productReceived.getCodBarra(),
                         productReceived.getPcadena(),
                         pedido
@@ -180,6 +181,7 @@ public class ProductDetailActivity extends AppCompatActivity {
             Long pventa,
             Long p_oferta,
             Double avg_pro,
+            Long costo_prom,
             String codBarra,
             Double pcadena,
             int pedido) {
@@ -204,6 +206,7 @@ public class ProductDetailActivity extends AppCompatActivity {
                         params.put("pventa", String.valueOf(pventa));
                         params.put("p_oferta", String.valueOf(p_oferta));
                         params.put("avg_pro", String.valueOf(avg_pro));
+                        params.put("costo_prom", String.valueOf(costo_prom));
                         params.put("codBarra", codBarra);
                         params.put("pcadena", String.valueOf(pcadena));
                         params.put("pedido", String.valueOf(pedido));

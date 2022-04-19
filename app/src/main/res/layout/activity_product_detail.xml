@@ -288,7 +288,4 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tvDetailCantidad" />
 
-
-
-
 </androidx.constraintlayout.widget.ConstraintLayout>

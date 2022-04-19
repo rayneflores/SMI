@@ -73,7 +73,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     }
 
     private void recuperarPreferencias() {
-        System.out.println("Entro RP Main");
         preferences = getSharedPreferences("smiPreferences", Context.MODE_PRIVATE);
         rol = preferences.getString("role", "");
         usuario = preferences.getString("name", "");

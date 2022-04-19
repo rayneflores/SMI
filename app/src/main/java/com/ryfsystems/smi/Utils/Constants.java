@@ -3,7 +3,6 @@ package com.ryfsystems.smi.Utils;
 public class Constants {
 
     //General Address of BackEnd Server
-    //public static String INFRA_SERVER_ADDRESS = "http://192.168.18.2/smi/";
     public static String INFRA_SERVER_ADDRESS = "https://civaweb.com/smi/";
 
     //Users Querys

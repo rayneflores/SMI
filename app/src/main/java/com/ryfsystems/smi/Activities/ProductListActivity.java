@@ -373,6 +373,7 @@ public class ProductListActivity extends AppCompatActivity {
                             product.setPventa(jsonObject.getLong("pventa"));
                             product.setPoferta(jsonObject.getLong("p_oferta"));
                             product.setAvg_pro(jsonObject.getDouble("avg_pro"));
+                            product.setCosto_prom(jsonObject.getLong("costo_prom"));
                             product.setCodBarra(jsonObject.getString("codBarra"));
                             product.setPcadena(jsonObject.getDouble("pcadena"));
                             product.setPedido(jsonObject.getInt("pedido"));
