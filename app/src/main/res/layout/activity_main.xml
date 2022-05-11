@@ -22,7 +22,7 @@
         android:id="@+id/cvInventario"
         android:layout_width="260dp"
         android:layout_height="50dp"
-        android:layout_marginTop="32dp"
+        android:layout_marginTop="@dimen/upperMargin"
         android:background="@color/white"
         app:cardBackgroundColor="@color/white"
         app:cardCornerRadius="10sp"
@@ -55,7 +55,7 @@
         android:id="@+id/cvEtiquetas"
         android:layout_width="260dp"
         android:layout_height="50dp"
-        android:layout_marginTop="32dp"
+        android:layout_marginTop="@dimen/upperMargin"
         android:background="@color/white"
         app:cardBackgroundColor="@color/white"
         app:cardCornerRadius="10sp"
@@ -88,7 +88,7 @@
         android:id="@+id/cvChecklist"
         android:layout_width="260dp"
         android:layout_height="50dp"
-        android:layout_marginTop="32dp"
+        android:layout_marginTop="@dimen/upperMargin"
         android:background="@color/white"
         app:cardBackgroundColor="@color/white"
         app:cardCornerRadius="10sp"
@@ -121,7 +121,7 @@
         android:id="@+id/cvSeguimiento"
         android:layout_width="260dp"
         android:layout_height="50dp"
-        android:layout_marginTop="32dp"
+        android:layout_marginTop="@dimen/upperMargin"
         android:background="@color/white"
         app:cardBackgroundColor="@color/white"
         app:cardCornerRadius="10sp"
@@ -154,7 +154,7 @@
         android:id="@+id/cvConsulta"
         android:layout_width="260dp"
         android:layout_height="50dp"
-        android:layout_marginTop="32dp"
+        android:layout_marginTop="@dimen/upperMargin"
         android:background="@color/white"
         app:cardBackgroundColor="@color/white"
         app:cardCornerRadius="10sp"
@@ -187,7 +187,7 @@
         android:id="@+id/cvPedido"
         android:layout_width="260dp"
         android:layout_height="50dp"
-        android:layout_marginTop="32dp"
+        android:layout_marginTop="@dimen/upperMargin"
         android:background="@color/white"
         app:cardBackgroundColor="@color/white"
         app:cardCornerRadius="10sp"
@@ -220,7 +220,7 @@
         android:id="@+id/cvVencimiento"
         android:layout_width="260dp"
         android:layout_height="50dp"
-        android:layout_marginTop="32dp"
+        android:layout_marginTop="@dimen/upperMargin"
         android:background="@color/white"
         app:cardBackgroundColor="@color/white"
         app:cardCornerRadius="10sp"
@@ -243,6 +243,39 @@
             android:layout_marginStart="24dp"
             android:layout_gravity="center_horizontal|center_vertical"
             android:text="@string/vencimiento"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            android:textColor="@color/design_default_color_primary"/>
+
+    </androidx.cardview.widget.CardView>
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/cvManualSearch"
+        android:layout_width="260dp"
+        android:layout_height="50dp"
+        android:layout_marginTop="@dimen/upperMargin"
+        android:background="@color/white"
+        app:cardBackgroundColor="@color/white"
+        app:cardCornerRadius="10sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/cvVencimiento">
+
+        <ImageView
+            android:id="@+id/ivManualSearch"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_gravity="center_vertical"
+            android:layout_marginStart="4dp"
+            android:src="@drawable/ic_manual" />
+
+        <TextView
+            android:id="@+id/tvManualSearch"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="24dp"
+            android:layout_gravity="center_horizontal|center_vertical"
+            android:text="@string/busqueda_manual"
             android:textSize="18sp"
             android:textStyle="bold"
             android:textColor="@color/design_default_color_primary"/>

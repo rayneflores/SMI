@@ -126,14 +126,12 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     private void recuperarPreferencias(){
-        System.out.println("Entro RP Login");
         preferences = getSharedPreferences("smiPreferences", Context.MODE_PRIVATE);
         tvUsuario.setText(preferences.getString("usuario", ""));
         tvPassword.setText(preferences.getString("password", ""));
     }
 
     private void guardarPreferencias() {
-        System.out.println("Entro GP Login");
         preferences = getSharedPreferences("smiPreferences", Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = preferences.edit();
         editor.putString("name", user.getName());

@@ -23,7 +23,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     Bundle extras;
     Button btnSettings;
-    CardView cvInventario, cvEtiquetas, cvChecklist, cvSeguimiento, cvConsulta, cvPedido, cvVencimiento;
+    CardView cvInventario, cvEtiquetas, cvChecklist, cvSeguimiento, cvConsulta, cvPedido, cvVencimiento, cvManualSearch;
     Intent nextIntent;
     ProgressDialog progressDialog;
     String rol, usuario;
@@ -60,6 +60,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         cvVencimiento = findViewById(R.id.cvVencimiento);
         cvVencimiento.setOnClickListener(this);
+
+        cvManualSearch = findViewById(R.id.cvManualSearch);
+        cvManualSearch.setOnClickListener(this);
 
         btnSettings = findViewById(R.id.btnSettings);
         btnSettings.setOnClickListener(this);
@@ -167,6 +170,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 extras.putInt("module", 6);
                 i = new Intent(getApplicationContext(), TomaInventarioActivity.class);
                 i.putExtras(extras);
+                startActivity(i);
+                finish();
+                break;
+            case R.id.cvManualSearch:
+                i = new Intent(getApplicationContext(), BusquedaManualActivity.class);
                 startActivity(i);
                 finish();
                 break;

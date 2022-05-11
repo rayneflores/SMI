@@ -3,4 +3,5 @@
     <dimen name="fontMini">12sp</dimen>
     <dimen name="fontRegular">14sp</dimen>
     <dimen name="fontLarge">16sp</dimen>
+    <dimen name="upperMargin">16dp</dimen>
 </resources>

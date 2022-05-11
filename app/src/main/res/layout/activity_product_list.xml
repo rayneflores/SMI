@@ -58,7 +58,7 @@
 
         <LinearLayout
             android:id="@+id/llCheck1"
-            android:layout_width="295dp"
+            android:layout_width="305dp"
             android:layout_height="48dp"
             android:layout_marginTop="8dp"
             android:orientation="horizontal"
@@ -71,19 +71,19 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="8dp"
-                android:text="Conteo" />
+                android:text="@string/conteo" />
             <CheckBox
                 android:id="@+id/cbEtiquetas"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="8dp"
-                android:text="Etiqueta" />
+                android:text="@string/etiquetas2" />
             <CheckBox
                 android:id="@+id/cbSeguimiento"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="8dp"
-                android:text="Seguimiento" />
+                android:text="@string/seguimiento" />
         </LinearLayout>
 
         <LinearLayout
@@ -100,13 +100,13 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="8dp"
-                android:text="Pedido" />
+                android:text="@string/pedido" />
             <CheckBox
                 android:id="@+id/cbVencimiento"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="8dp"
-                android:text="Vencimiento" />
+                android:text="@string/vencimiento2" />
         </LinearLayout>
 
         <Button

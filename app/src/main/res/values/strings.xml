@@ -10,9 +10,7 @@
     <string name="etiquetas">Generacion de Etiquetas</string>
     <string name="checklist">Checklist</string>
     <string name="productos">LISTA DE PRODUCTOS</string>
-    <string name="seguimiento">Seguimiento</string>
     <string name="consulta">Consulta Individual</string>
-    <string name="pedido">Pedido</string>
     <string name="vencimiento">Lista de Vencidos</string>
     <string name="detalle_de_articulo">Detalle de Articulo</string>
     <string name="reporte_de_articulos_vencidos">Reporte de Articulos Vencidos</string>
@@ -23,4 +21,15 @@
     <string name="seguimiento_productos">Seguimiento de Productos</string>
     <string name="editar_borrar">Editar / Borrar</string>
     <string name="nuevo_usuario">Nuevo Usuario</string>
+    <string name="busqueda_manual">Busqueda Manual</string>
+    <string name="busqueda_manual_2">BUSQUEDA MANUAL</string>
+    <string name="modulos_de_consulta">Modulos de Consulta</string>
+    <string name="conteo">Conteo</string>
+    <string name="etiquetas2">Etiquetas</string>
+    <string name="seguimiento">Seguimiento</string>
+    <string name="pedido">Pedido</string>
+    <string name="vencimiento2">Vencimiento</string>
+    <string name="buscar">Buscar</string>
+    <string name="ingrese_su_codigo_aqui">Codigo</string>
+    <string name="consulta2">Consulta</string>
 </resources>
