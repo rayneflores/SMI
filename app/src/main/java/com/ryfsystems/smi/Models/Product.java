@@ -22,6 +22,7 @@ public class Product implements Serializable {
     private int pedido;
     private int und_defect;
     private String responsable;
+    private String codSucursal;
 
     public Product() {
     }
@@ -43,7 +44,8 @@ public class Product implements Serializable {
                    Double pcadena,
                    int pedido,
                    int und_defect,
-                   String responsable) {
+                   String responsable,
+                   String codSucursal) {
         this.codlocal = codlocal;
         this.sucursal = sucursal;
         this.activado = activado;
@@ -62,6 +64,7 @@ public class Product implements Serializable {
         this.pedido = pedido;
         this.und_defect = und_defect;
         this.responsable = responsable;
+        this.codSucursal = codSucursal;
     }
 
     public Integer getCodlocal() {
@@ -176,7 +179,6 @@ public class Product implements Serializable {
         this.codBarra = codBarra;
     }
 
-
     public Double getPcadena() {
         return pcadena;
     }
@@ -207,6 +209,14 @@ public class Product implements Serializable {
 
     public void setResponsable(String responsable) {
         this.responsable = responsable;
+    }
+
+    public String getCodSucursal() {
+        return codSucursal;
+    }
+
+    public void setCodSucursal(String codSucursal) {
+        this.codSucursal = codSucursal;
     }
 
     @Override
@@ -258,6 +268,22 @@ public class Product implements Serializable {
                         ", " + stock_ +
                         ", " + pventa +
                         ", " + poferta;
+    }
+
+    public String toStringFollow() {
+        return
+                codlocal +
+                        ", " + sucursal +
+                        ", " + activado +
+                        ", " + dep +
+                        ", " + ean_13 +
+                        ", " + linea +
+                        ", " + code +
+                        ", " + detalle +
+                        ", " + stock_ +
+                        ", " + pventa +
+                        ", " + poferta +
+                        ", " + codSucursal;
     }
 
     public String toStringRequest() {

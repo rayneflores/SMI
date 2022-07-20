@@ -1,9 +1,12 @@
 package com.ryfsystems.smi.Activities;
 
 import static com.ryfsystems.smi.Utils.Constants.GET_PRODUCT;
+import static com.ryfsystems.smi.Utils.Constants.GET_PRODUCT2;
 import static com.ryfsystems.smi.Utils.Constants.INFRA_SERVER_ADDRESS;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.media.Ringtone;
 import android.media.RingtoneManager;
 import android.net.Uri;
@@ -29,10 +32,12 @@ public class TomaInventarioActivity extends AppCompatActivity implements ZBarSca
 
     Bundle extras;
     Bundle receieved;
-    int module;
+    int module, serverId;
     Intent nextIntent, intent;
     private static final String TAG = "ScannerLog";
     String path = INFRA_SERVER_ADDRESS;
+    String rol, usuario, query;
+    SharedPreferences preferences;
     private ZBarScannerView mScannerView;
 
     @Override
@@ -46,6 +51,16 @@ public class TomaInventarioActivity extends AppCompatActivity implements ZBarSca
         }
         extras = new Bundle();
         extras.putInt("module", module);
+
+        recuperarPreferencias();
+
+    }
+
+    private void recuperarPreferencias() {
+        preferences = getSharedPreferences("smiPreferences", Context.MODE_PRIVATE);
+        rol = preferences.getString("role", "");
+        usuario = preferences.getString("name", "");
+        serverId = preferences.getInt("serverId", 1);
     }
 
     @Override
@@ -86,7 +101,17 @@ public class TomaInventarioActivity extends AppCompatActivity implements ZBarSca
 
     public void buscarDatosProducto(String code) {
         HttpsTrustManager.allowAllSSL();
-        JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.GET, path + GET_PRODUCT + code, null, response -> {
+
+        switch (serverId) {
+            case 1:
+                query = GET_PRODUCT;
+                break;
+            case 2:
+                query = GET_PRODUCT2;
+                break;
+        }
+
+        JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.GET, path + query + code, null, response -> {
             try {
                 JSONObject jsonObject = response.getJSONObject("Product");
                 Product product = new Product();

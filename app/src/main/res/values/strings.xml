@@ -32,4 +32,5 @@
     <string name="buscar">Buscar</string>
     <string name="ingrese_su_codigo_aqui">Codigo</string>
     <string name="consulta2">Consulta</string>
+    <string name="server">Server</string>
 </resources>

@@ -5,9 +5,12 @@ import static com.ryfsystems.smi.Utils.Constants.GET_REAL_EXISTENCE;
 import static com.ryfsystems.smi.Utils.Constants.INFRA_SERVER_ADDRESS;
 import static com.ryfsystems.smi.Utils.Constants.SET_COUNT_PRODUCT;
 import static com.ryfsystems.smi.Utils.Constants.SET_LABEL_PRODUCT;
+import static com.ryfsystems.smi.Utils.Constants.SET_LABEL_PRODUCT2;
 import static com.ryfsystems.smi.Utils.Constants.SET_SEGUI_PRODUCT;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.text.SpannableString;
 import android.text.style.StrikethroughSpan;
@@ -38,11 +41,13 @@ public class ConteoActivity extends AppCompatActivity {
 
     Bundle received;
     Button btnConteoContar;
-    int module;
+    int module, serverId;
     Intent nextIntent;
     Long prevStock;
     Product productReceived;
     RequestQueue requestQueue;
+    String rol, usuario, serverAddress, query;
+    SharedPreferences preferences;
     String path = INFRA_SERVER_ADDRESS;
     TextInputEditText tvConteoCantidad2, tvConteoPventa2;
     TextView tvConteoTitle, tvConteoPrevio, tvConteoCode2, tvConteoActivado2, tvConteoCodLocal2, tvConteoDetalle2, tvConteoDep2, tvConteoEan132, tvConteoLinea2, tvConteoSucursal2, tvConteoPrevio2, tvConteoPventa, tvConteoPrecioOferta, tvConteoPrecioOferta2;
@@ -53,6 +58,8 @@ public class ConteoActivity extends AppCompatActivity {
         setContentView(R.layout.activity_conteo);
 
         btnConteoContar = findViewById(R.id.btnConteoContar);
+
+        recuperarPreferencias();
 
         tvConteoTitle = findViewById(R.id.tvConteoTitle);
         tvConteoPrevio = findViewById(R.id.tvConteoPrevio);
@@ -225,10 +232,18 @@ public class ConteoActivity extends AppCompatActivity {
         });
     }
 
+    private void recuperarPreferencias() {
+        preferences = getSharedPreferences("smiPreferences", Context.MODE_PRIVATE);
+        rol = preferences.getString("role", "");
+        usuario = preferences.getString("name", "");
+        serverAddress = preferences.getString("serverAddress", "");
+        serverId = preferences.getInt("serverId", 1);
+    }
+
     public void getStock(String ean_13) {
         HttpsTrustManager.allowAllSSL();
         requestQueue = Volley.newRequestQueue(this);
-        JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.GET, path + GET_COUNT_EXISTENCE + ean_13, null, response -> {
+        JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.GET, path + GET_COUNT_EXISTENCE + ean_13 + "&codSucursal=" + serverId, null, response -> {
             try {
                 JSONObject jsonObject = response.getJSONObject("Stock");
                 prevStock = jsonObject.getLong("stock_");
@@ -245,7 +260,7 @@ public class ConteoActivity extends AppCompatActivity {
     private void getStock2(String ean_13) {
         HttpsTrustManager.allowAllSSL();
         requestQueue = Volley.newRequestQueue(this);
-        JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.GET, path + GET_REAL_EXISTENCE + ean_13, null, response -> {
+        JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.GET, path + GET_REAL_EXISTENCE + ean_13 + "&codSucursal=" + serverId, null, response -> {
             try {
                 JSONObject jsonObject = response.getJSONObject("Stock");
                 prevStock = jsonObject.getLong("st_actual");
@@ -281,6 +296,7 @@ public class ConteoActivity extends AppCompatActivity {
                         params.put("linea", String.valueOf(linea));
                         params.put("sucursal", sucursal);
                         params.put("stock_", String.valueOf(stock));
+                        params.put("codSucursal", String.valueOf(serverId));
                         return params;
                     }
                 };
@@ -290,9 +306,19 @@ public class ConteoActivity extends AppCompatActivity {
     private void updateLabelProduct(int activado, int code, int codLocal, String detalle, String dep, String ean_13, int linea, String sucursal, Long stock, Long pventa, Long poferta) {
 
         HttpsTrustManager.allowAllSSL();
+
+        switch (serverId) {
+            case 1:
+                query = SET_LABEL_PRODUCT;
+                break;
+            case 2:
+                query = SET_LABEL_PRODUCT2;
+                break;
+        }
+
         StringRequest stringRequest =
                 new StringRequest(Request.Method.POST,
-                        path + SET_LABEL_PRODUCT,
+                        path + query,
                         response -> {
                             Toast.makeText(getApplicationContext(), response, Toast.LENGTH_SHORT).show();
                         }, error -> {
@@ -342,6 +368,7 @@ public class ConteoActivity extends AppCompatActivity {
                         params.put("stock_", String.valueOf(total));
                         params.put("pventa", pventa.toString());
                         params.put("poferta", poferta.toString());
+                        params.put("codSucursal", String.valueOf(serverId));
                         return params;
                     }
                 };

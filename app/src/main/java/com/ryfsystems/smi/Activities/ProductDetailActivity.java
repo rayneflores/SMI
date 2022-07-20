@@ -4,7 +4,9 @@ import static com.ryfsystems.smi.Utils.Constants.GET_REAL_EXISTENCE;
 import static com.ryfsystems.smi.Utils.Constants.INFRA_SERVER_ADDRESS;
 import static com.ryfsystems.smi.Utils.Constants.SET_PRODUCT_FULL;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.text.SpannableString;
 import android.text.style.StrikethroughSpan;
@@ -37,12 +39,14 @@ public class ProductDetailActivity extends AppCompatActivity {
     Bundle received;
     Button btnDetailOption;
     Double margen, stock, vtaSem;
-    int module;
+    int module, serverId;
     Intent nextIntent;
     Long poferta, pventa, costoProm;
     Product productReceived;
     RequestQueue requestQueue;
     String path = INFRA_SERVER_ADDRESS;
+    String rol, usuario, serverAddress, query;
+    SharedPreferences preferences;
     TextInputEditText tvDetailCantidad2;
     TextView tvDetailCode2, tvDetailBarCode2, tvDetailDetalle2, tvDetailMargen2, tvDetailStock2, tvDetailAvgPro2, tvDetailAvgProSem2, tvDetailPcadena2, tvDetailCantidad, tvDetailPVenta2, tvDetailPOferta2;
 
@@ -50,6 +54,8 @@ public class ProductDetailActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_product_detail);
+
+        recuperarPreferencias();
 
         tvDetailCode2 = findViewById(R.id.tvDetailCode2);
         tvDetailBarCode2 = findViewById(R.id.tvDetailBarCode2);
@@ -111,12 +117,12 @@ public class ProductDetailActivity extends AppCompatActivity {
                     costoProm = productReceived.getCosto_prom();
 
                     if (poferta > 0) {
-                        margen = ((poferta / 1.19) - costoProm)/(poferta / 1.19);
+                        margen = ((poferta / 1.19) - costoProm) / (poferta / 1.19);
                         SpannableString pventa = new SpannableString(productReceived.getPventa().toString());
-                        pventa.setSpan(new StrikethroughSpan(), 0,4,0);
+                        pventa.setSpan(new StrikethroughSpan(), 0, 4, 0);
                         tvDetailPVenta2.setText(pventa);
                     } else {
-                        margen = ((pventa / 1.19) - costoProm)/(pventa / 1.19);
+                        margen = ((pventa / 1.19) - costoProm) / (pventa / 1.19);
                         tvDetailPVenta2.setText(productReceived.getPventa().toString());
                     }
 
@@ -144,12 +150,12 @@ public class ProductDetailActivity extends AppCompatActivity {
                     costoProm = productReceived.getCosto_prom();
 
                     if (poferta > 0) {
-                        margen = ((poferta / 1.19) - costoProm)/(poferta / 1.19) ;
+                        margen = ((poferta / 1.19) - costoProm) / (poferta / 1.19);
                         SpannableString pventa = new SpannableString(productReceived.getPventa().toString());
-                        pventa.setSpan(new StrikethroughSpan(), 0,4,0);
+                        pventa.setSpan(new StrikethroughSpan(), 0, 4, 0);
                         tvDetailPVenta2.setText(pventa);
                     } else {
-                        margen = ((pventa / 1.19) - costoProm)/(pventa / 1.19);
+                        margen = ((pventa / 1.19) - costoProm) / (pventa / 1.19);
                         tvDetailPVenta2.setText(pventa.toString());
                     }
 
@@ -169,6 +175,14 @@ public class ProductDetailActivity extends AppCompatActivity {
                     break;
             }
         }
+    }
+
+    private void recuperarPreferencias() {
+        preferences = getSharedPreferences("smiPreferences", Context.MODE_PRIVATE);
+        rol = preferences.getString("role", "");
+        usuario = preferences.getString("name", "");
+        serverAddress = preferences.getString("serverAddress", "");
+        serverId = preferences.getInt("serverId", 1);
     }
 
     private void updateReqProduct(
@@ -193,7 +207,7 @@ public class ProductDetailActivity extends AppCompatActivity {
                             Toast.makeText(getApplicationContext(), response, Toast.LENGTH_SHORT).show();
                         }, error -> {
                     Toast.makeText(getApplicationContext(), "Error_Det: " + error.getMessage(), Toast.LENGTH_SHORT).show();
-                }){
+                }) {
                     @Override
                     protected Map<String, String> getParams() throws AuthFailureError {
                         Map<String, String> params = new HashMap<>();
@@ -210,6 +224,7 @@ public class ProductDetailActivity extends AppCompatActivity {
                         params.put("codBarra", codBarra);
                         params.put("pcadena", String.valueOf(pcadena));
                         params.put("pedido", String.valueOf(pedido));
+                        params.put("codSucursal", String.valueOf(serverId));
                         return params;
                     }
                 };
@@ -221,7 +236,7 @@ public class ProductDetailActivity extends AppCompatActivity {
         JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.GET, path + GET_REAL_EXISTENCE + codBarra, null, response -> {
             try {
 
-                JSONObject jsonObject =  response.getJSONObject("Stock");
+                JSONObject jsonObject = response.getJSONObject("Stock");
                 stock = jsonObject.getDouble("st_actual");
                 tvDetailStock2.setText(stock.toString());
             } catch (Exception exception) {

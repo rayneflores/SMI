@@ -30,6 +30,7 @@ public class VencimientoActivity extends AppCompatActivity {
 
     Bundle received;
     Button btnVencimientoOption;
+    int serverId;
     Intent nextIntent;
     Product productReceived;
     RequestQueue requestQueue;
@@ -44,6 +45,7 @@ public class VencimientoActivity extends AppCompatActivity {
 
         SharedPreferences preferences = getSharedPreferences("smiPreferences", Context.MODE_PRIVATE);
         usuario = preferences.getString("name", "");
+        serverId = preferences.getInt("serverId", 1);
 
         tvVencimientoCantidad2 = findViewById(R.id.tvVencimientoCantidad2);
         tvVencimientoCode2 = findViewById(R.id.tvVencimientoCode2);
@@ -100,6 +102,7 @@ public class VencimientoActivity extends AppCompatActivity {
                         params.put("detalle", detalle);
                         params.put("und_defect", String.valueOf(und_defect));
                         params.put("responsable", responsable);
+                        params.put("codSucursal", String.valueOf(serverId));
                         return params;
                     }
                 };

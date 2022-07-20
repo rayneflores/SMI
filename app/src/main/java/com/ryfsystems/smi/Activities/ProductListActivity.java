@@ -4,17 +4,21 @@ import static com.ryfsystems.smi.Utils.Constants.GET_PRODUCTS_COUNT;
 import static com.ryfsystems.smi.Utils.Constants.GET_PRODUCTS_DEFECT;
 import static com.ryfsystems.smi.Utils.Constants.GET_PRODUCTS_FOLLOW;
 import static com.ryfsystems.smi.Utils.Constants.GET_PRODUCTS_LABEL;
+import static com.ryfsystems.smi.Utils.Constants.GET_PRODUCTS_LABEL2;
 import static com.ryfsystems.smi.Utils.Constants.GET_PRODUCTS_REQUEST;
 import static com.ryfsystems.smi.Utils.Constants.INFRA_SERVER_ADDRESS;
 import static com.ryfsystems.smi.Utils.Constants.SEND_COUNT_DATA;
 import static com.ryfsystems.smi.Utils.Constants.SEND_DEFECT_DATA;
 import static com.ryfsystems.smi.Utils.Constants.SEND_FOLLOW_DATA;
 import static com.ryfsystems.smi.Utils.Constants.SEND_LABEL_DATA;
+import static com.ryfsystems.smi.Utils.Constants.SEND_LABEL_DATA2;
 import static com.ryfsystems.smi.Utils.Constants.SEND_REQUEST_DATA;
 
 import android.Manifest;
 import android.app.ProgressDialog;
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.os.Bundle;
@@ -38,6 +42,7 @@ import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.ryfsystems.smi.Adapters.ProductAdapterCount;
 import com.ryfsystems.smi.Adapters.ProductAdapterDefect;
+import com.ryfsystems.smi.Adapters.ProductAdapterFollow;
 import com.ryfsystems.smi.Adapters.ProductAdapterLabel;
 import com.ryfsystems.smi.Adapters.ProductAdapterRequest;
 import com.ryfsystems.smi.Models.Product;
@@ -57,17 +62,20 @@ public class ProductListActivity extends AppCompatActivity {
 
     Button btnEnviar;
     CheckBox cbConteo, cbEtiquetas, cbSeguimiento, cbPedido, cbVencimiento;
-    int module;
+    int module, serverId;
     Intent nextIntent;
     JsonObjectRequest jsonObjectRequest;
     List<Product> productList = new ArrayList<>();
     ProgressDialog progressDialog;
     RecyclerView rvProducts;
     RecyclerView.LayoutManager layoutManager;
+    SharedPreferences preferences;
+    String rol, usuario, query;
     ProductAdapterCount productAdapterCount;
     ProductAdapterLabel productAdapterLabel;
     ProductAdapterRequest productAdapterRequest;
     ProductAdapterDefect productAdapterDefect;
+    ProductAdapterFollow productAdapterFollow;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -87,7 +95,9 @@ public class ProductListActivity extends AppCompatActivity {
 
         module = 1;
 
-        listProducts(INFRA_SERVER_ADDRESS + GET_PRODUCTS_COUNT, module);
+        recuperarPreferencias();
+
+        listProducts(INFRA_SERVER_ADDRESS + GET_PRODUCTS_COUNT + serverId, module);
 
         cbConteo.setChecked(true);
 
@@ -99,7 +109,7 @@ public class ProductListActivity extends AppCompatActivity {
                 cbSeguimiento.setChecked(false);
                 cbPedido.setChecked(false);
                 cbVencimiento.setChecked(false);
-                listProducts(INFRA_SERVER_ADDRESS + GET_PRODUCTS_COUNT, module);
+                listProducts(INFRA_SERVER_ADDRESS + GET_PRODUCTS_COUNT + serverId, module);
             } else {
                 if (!cbEtiquetas.isChecked() && !cbSeguimiento.isChecked() && !cbPedido.isChecked() && !cbVencimiento.isChecked()) {
                     cbConteo.setChecked(true);
@@ -109,13 +119,21 @@ public class ProductListActivity extends AppCompatActivity {
 
         cbEtiquetas.setOnCheckedChangeListener((compoundButton, b) -> {
             if (cbEtiquetas.isChecked()){
+                switch (serverId) {
+                    case 1:
+                        query = GET_PRODUCTS_LABEL;
+                        break;
+                    case 2:
+                        query = GET_PRODUCTS_LABEL2;
+                        break;
+                }
                 btnEnviar.setEnabled(true);
                 module = 2;
                 cbConteo.setChecked(false);
                 cbSeguimiento.setChecked(false);
                 cbPedido.setChecked(false);
                 cbVencimiento.setChecked(false);
-                listProducts(INFRA_SERVER_ADDRESS + GET_PRODUCTS_LABEL, module);
+                listProducts(INFRA_SERVER_ADDRESS + query, module);
             } else {
                 if (!cbConteo.isChecked() && !cbSeguimiento.isChecked() && !cbPedido.isChecked() && !cbVencimiento.isChecked()){
                     cbEtiquetas.setChecked(true);
@@ -131,7 +149,7 @@ public class ProductListActivity extends AppCompatActivity {
                 cbEtiquetas.setChecked(false);
                 cbPedido.setChecked(false);
                 cbVencimiento.setChecked(false);
-                listProducts(INFRA_SERVER_ADDRESS + GET_PRODUCTS_FOLLOW, module);
+                listProducts(INFRA_SERVER_ADDRESS + GET_PRODUCTS_FOLLOW + serverId, module);
             } else {
                 if (!cbConteo.isChecked() && !cbEtiquetas.isChecked() && !cbPedido.isChecked() && !cbVencimiento.isChecked()){
                     cbSeguimiento.setChecked(true);
@@ -147,7 +165,7 @@ public class ProductListActivity extends AppCompatActivity {
                 cbEtiquetas.setChecked(false);
                 cbSeguimiento.setChecked(false);
                 cbVencimiento.setChecked(false);
-                listProducts(INFRA_SERVER_ADDRESS + GET_PRODUCTS_REQUEST, module);
+                listProducts(INFRA_SERVER_ADDRESS + GET_PRODUCTS_REQUEST + serverId, module);
             } else {
                 if (!cbConteo.isChecked() && !cbEtiquetas.isChecked() && !cbSeguimiento.isChecked() && !cbVencimiento.isChecked()){
                     cbPedido.setChecked(true);
@@ -163,7 +181,7 @@ public class ProductListActivity extends AppCompatActivity {
                 cbEtiquetas.setChecked(false);
                 cbSeguimiento.setChecked(false);
                 cbPedido.setChecked(false);
-                listProducts(INFRA_SERVER_ADDRESS + GET_PRODUCTS_DEFECT, module);
+                listProducts(INFRA_SERVER_ADDRESS + GET_PRODUCTS_DEFECT + serverId, module);
             } else {
                 if (!cbConteo.isChecked() && !cbEtiquetas.isChecked() && !cbSeguimiento.isChecked() && !cbPedido.isChecked()){
                     cbVencimiento.setChecked(true);
@@ -179,7 +197,7 @@ public class ProductListActivity extends AppCompatActivity {
         btnEnviar = findViewById(R.id.btnEnviar);
         btnEnviar.setOnClickListener(view -> {
             AlertDialog.Builder dialog = new AlertDialog.Builder(ProductListActivity.this);
-            dialog.setMessage("Esta seguro que desea enviar los Datos? ESTA ACCION NO SE PUEDE DESHACER")
+            dialog.setMessage("Esta seguro que desea Borrar los Datos? ESTA ACCION NO SE PUEDE DESHACER")
                     .setPositiveButton("Si", (d, which) -> {
                         d.dismiss();
                         processCSV(view, module);
@@ -194,6 +212,13 @@ public class ProductListActivity extends AppCompatActivity {
         });
     }
 
+    private void recuperarPreferencias() {
+        preferences = getSharedPreferences("smiPreferences", Context.MODE_PRIVATE);
+        rol = preferences.getString("role", "");
+        usuario = preferences.getString("name", "");
+        serverId = preferences.getInt("serverId", 1);
+    }
+
     private void enviarDatos(String path, int module) {
         HttpsTrustManager.allowAllSSL();
         StringRequest stringRequest;
@@ -202,8 +227,8 @@ public class ProductListActivity extends AppCompatActivity {
             case 1:
                 stringRequest =
                         new StringRequest(
-                                Request.Method.POST,
-                                path + SEND_COUNT_DATA,
+                                Request.Method.GET,
+                                path + SEND_COUNT_DATA + serverId,
                                 response -> {
                                     if (response.equals("200")){
                                         Toast.makeText(getApplicationContext(), "Datos Enviados!!!", Toast.LENGTH_SHORT).show();
@@ -221,10 +246,17 @@ public class ProductListActivity extends AppCompatActivity {
                 queue.add(stringRequest);
                 break;
             case 2:
+                switch (serverId) {
+                    case 1:
+                        query = SEND_LABEL_DATA;
+                        break;
+                    case 2:
+                        query = SEND_LABEL_DATA2;
+                }
                 stringRequest =
                         new StringRequest(
-                                Request.Method.POST,
-                                path + SEND_LABEL_DATA,
+                                Request.Method.GET,
+                                path + query,
                                 response -> {
                                     if (response.equals("200")){
                                         Toast.makeText(getApplicationContext(), "Datos Enviados!!!", Toast.LENGTH_SHORT).show();
@@ -244,8 +276,8 @@ public class ProductListActivity extends AppCompatActivity {
             case 3:
                 stringRequest =
                         new StringRequest(
-                                Request.Method.POST,
-                                path + SEND_FOLLOW_DATA,
+                                Request.Method.GET,
+                                path + SEND_FOLLOW_DATA + serverId,
                                 response -> {
                                     if (response.equals("200")){
                                         Toast.makeText(getApplicationContext(), "Datos Enviados!!!", Toast.LENGTH_SHORT).show();
@@ -265,8 +297,8 @@ public class ProductListActivity extends AppCompatActivity {
             case 4:
                 stringRequest =
                         new StringRequest(
-                                Request.Method.POST,
-                                path + SEND_REQUEST_DATA,
+                                Request.Method.GET,
+                                path + SEND_REQUEST_DATA + serverId,
                                 response -> {
                                     if (response.equals("200")){
                                         Toast.makeText(getApplicationContext(), "Datos Enviados!!!", Toast.LENGTH_SHORT).show();
@@ -286,8 +318,8 @@ public class ProductListActivity extends AppCompatActivity {
             case 5:
                 stringRequest =
                         new StringRequest(
-                                Request.Method.POST,
-                                path + SEND_DEFECT_DATA,
+                                Request.Method.GET,
+                                path + SEND_DEFECT_DATA + serverId,
                                 response -> {
                                     if (response.equals("200")){
                                         Toast.makeText(getApplicationContext(), "Datos Enviados!!!", Toast.LENGTH_SHORT).show();
@@ -338,7 +370,6 @@ public class ProductListActivity extends AppCompatActivity {
                         rvProducts.setAdapter(productAdapterCount);
                         break;
                     case 2:
-                    case 3:
                         productList.clear();
                         for (int i = 0; i < jsonArray.length(); i++) {
                             JSONObject jsonObject = jsonArray.getJSONObject(i);
@@ -358,6 +389,28 @@ public class ProductListActivity extends AppCompatActivity {
                         }
                         productAdapterLabel = new ProductAdapterLabel(ProductListActivity.this, productList);
                         rvProducts.setAdapter(productAdapterLabel);
+                        break;
+                    case 3:
+                        productList.clear();
+                        for (int i = 0; i < jsonArray.length(); i++) {
+                            JSONObject jsonObject = jsonArray.getJSONObject(i);
+                            Product product = new Product();
+                            product.setCode(jsonObject.getInt("code"));
+                            product.setCodlocal(jsonObject.getInt("codlocal"));
+                            product.setActivado(jsonObject.getInt("activado"));
+                            product.setDep(jsonObject.getString("dep"));
+                            product.setEan_13(jsonObject.getString("ean_13"));
+                            product.setLinea(jsonObject.getInt("linea"));
+                            product.setDetalle(jsonObject.getString("detalle"));
+                            product.setSucursal(jsonObject.getString("sucursal"));
+                            product.setStock_(jsonObject.getLong("stock_"));
+                            product.setPventa(jsonObject.getLong("pventa"));
+                            product.setPoferta(jsonObject.getLong("p_oferta"));
+                            product.setCodSucursal(jsonObject.getString("codSucursal"));
+                            productList.add(product);
+                        }
+                        productAdapterFollow = new ProductAdapterFollow(ProductListActivity.this, productList);
+                        rvProducts.setAdapter(productAdapterFollow);
                         break;
                     case 4:
                         productList.clear();
@@ -497,7 +550,7 @@ public class ProductListActivity extends AppCompatActivity {
                 enviarDatos(INFRA_SERVER_ADDRESS, module);
                 break;
             case 3:
-                csvData = "codlocal, sucursal, activado, dep, ean_13, linea, code, detalle, stock, pventa, poferta \n";
+                csvData = "codlocal, sucursal, activado, dep, ean_13, linea, code, detalle, stock, pventa, poferta, codSucursal \n";
                 for (int i = 0; i < productList.size(); i++) {
                     Product product = new Product();
                     product.setActivado(productList.get(i).getActivado());
@@ -511,7 +564,8 @@ public class ProductListActivity extends AppCompatActivity {
                     product.setStock_(productList.get(i).getStock_());
                     product.setPventa(productList.get(i).getPventa());
                     product.setPoferta(productList.get(i).getPoferta());
-                    String[] data = product.toStringLabel().split(",");
+                    product.setCodSucursal(productList.get(i).getCodSucursal());
+                    String[] data = product.toStringFollow().split(",");
                     csvData += toCSV(data, module) + "\n";
                 }
                 directory = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS);

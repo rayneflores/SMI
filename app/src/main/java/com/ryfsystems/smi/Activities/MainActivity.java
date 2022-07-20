@@ -25,10 +25,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     Button btnSettings;
     CardView cvInventario, cvEtiquetas, cvChecklist, cvSeguimiento, cvConsulta, cvPedido, cvVencimiento, cvManualSearch;
     Intent nextIntent;
+    int serverId;
     ProgressDialog progressDialog;
-    String rol, usuario;
+    String rol, usuario, serverAddress;
     SharedPreferences preferences;
-    TextView tvBienvenida;
+    TextView tvBienvenida, tvSucursal;
 
 
     @Override
@@ -73,12 +74,17 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         tvBienvenida = findViewById(R.id.tvBienvenida);
         tvBienvenida.setText(MessageFormat.format("{0} {1}", getString(R.string.bienvenido), usuario));
+
+        tvSucursal = findViewById(R.id.tvSucursal);
+        tvSucursal.setText(MessageFormat.format("{0} {1}", "Sucursal:", serverAddress));
     }
 
     private void recuperarPreferencias() {
         preferences = getSharedPreferences("smiPreferences", Context.MODE_PRIVATE);
         rol = preferences.getString("role", "");
         usuario = preferences.getString("name", "");
+        serverAddress = preferences.getString("serverAddress", "");
+        serverId = preferences.getInt("serverId", 1);
     }
 
     private void getPermissions() {
@@ -128,6 +134,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 break;
             case R.id.cvInventario:
                 extras.putInt("module", 1);
+                extras.putInt("serverId", serverId);
                 i = new Intent(getApplicationContext(), TomaInventarioActivity.class);
                 i.putExtras(extras);
                 startActivity(i);
@@ -141,6 +148,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 finish();
                 break;
             case R.id.cvChecklist:
+                extras.putInt("serverId", serverId);
                 i = new Intent(getApplicationContext(), ProductListActivity.class);
                 startActivity(i);
                 finish();
@@ -174,6 +182,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 finish();
                 break;
             case R.id.cvManualSearch:
+                extras.putInt("serverId", serverId);
                 i = new Intent(getApplicationContext(), BusquedaManualActivity.class);
                 startActivity(i);
                 finish();

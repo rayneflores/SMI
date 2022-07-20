@@ -8,8 +8,11 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -21,13 +24,16 @@ import com.android.volley.RequestQueue;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
+import com.ryfsystems.smi.Adapters.ServerAdapter;
 import com.ryfsystems.smi.BuildConfig;
+import com.ryfsystems.smi.Models.Server;
 import com.ryfsystems.smi.Models.User;
 import com.ryfsystems.smi.R;
 import com.ryfsystems.smi.Utils.HttpsTrustManager;
 
 import org.json.JSONObject;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -35,9 +41,11 @@ public class LoginActivity extends AppCompatActivity {
 
     Button btnLogin;
     EditText tvUsuario, tvPassword;
+    int serverId;
     Intent nextIntent;
+    private ArrayList<Server> serverList;
     RequestQueue queue;
-    String path = INFRA_SERVER_ADDRESS, programVersion;
+    String path = INFRA_SERVER_ADDRESS, programVersion, serverAddress;
     TextView tvVersion;
     User user;
     SharedPreferences preferences;
@@ -49,6 +57,8 @@ public class LoginActivity extends AppCompatActivity {
 
         programVersion = "V." + BuildConfig.VERSION_NAME;
 
+        getServerList();
+
         tvVersion = findViewById(R.id.tvVersion);
         tvVersion.setText(programVersion);
 
@@ -56,11 +66,30 @@ public class LoginActivity extends AppCompatActivity {
         tvUsuario = findViewById(R.id.tvUsuario);
         tvPassword = findViewById(R.id.tvPassword);
 
+        Spinner spServers = findViewById(R.id.spServers);
+        ServerAdapter serverAdapter = new ServerAdapter(getApplicationContext(), serverList);
+        spServers.setAdapter(serverAdapter);
+
+        spServers.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+                Server selectedServer = (Server) adapterView.getItemAtPosition(i);
+                serverAddress = selectedServer.getServerAddress();
+                serverId = selectedServer.getServerId();
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> adapterView) {
+
+            }
+        });
+
         queue = Volley.newRequestQueue(getApplicationContext());
 
         recuperarPreferencias();
 
         btnLogin.setOnClickListener(view -> {
+
             btnLogin.setEnabled(false);
             if (!tvUsuario.getText().toString().trim().isEmpty() && !tvPassword.getText().toString().trim().isEmpty()) {
                 login(tvUsuario.getText().toString().trim(), tvPassword.getText().toString().trim());
@@ -129,6 +158,8 @@ public class LoginActivity extends AppCompatActivity {
         preferences = getSharedPreferences("smiPreferences", Context.MODE_PRIVATE);
         tvUsuario.setText(preferences.getString("usuario", ""));
         tvPassword.setText(preferences.getString("password", ""));
+        serverAddress = preferences.getString("serverAddress", "");
+        serverId = preferences.getInt("serverId", 1);
     }
 
     private void guardarPreferencias() {
@@ -137,6 +168,14 @@ public class LoginActivity extends AppCompatActivity {
         editor.putString("name", user.getName());
         editor.putString("role", user.getRol());
         editor.putBoolean("sesion", true);
+        editor.putString("serverAddress", serverAddress);
+        editor.putInt("serverId", serverId);
         editor.apply();
+    }
+
+    private void getServerList() {
+        serverList = new ArrayList<>();
+        serverList.add(new Server(1,"Farmacia Magallanes","Direccion 1", R.drawable.ic_house));
+        serverList.add(new Server(2, "Farmacia Magallanes 2","Punta Arenas", R.drawable.ic_house));
     }
 }

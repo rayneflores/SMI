@@ -93,6 +93,10 @@ public class ProductAdapterLabel extends RecyclerView.Adapter<ProductViewHolder>
         SpannableString poferta = new SpannableString("Precio Oferta: " + productList.get(i).getPoferta());
         poferta.setSpan(new StyleSpan(Typeface.BOLD), 0, 13, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
         viewHolder.tvListProductpOferta.setText(poferta);
+
+        /*SpannableString codSucursal = new SpannableString("Cod. Sucursal: " + productList.get(i).getCodSucursal());
+        codSucursal.setSpan(new StyleSpan(Typeface.BOLD), 0, 13, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+        viewHolder.tvListCodSucursal.setText(codSucursal);*/
     }
 
     @Override
