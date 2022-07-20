@@ -512,7 +512,7 @@ public class ProductListActivity extends AppCompatActivity {
                     csvData += toCSV(data, module) + "\n";
                 }
                 directory = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS);
-                uniqueFileName = "reporte_conteo_magallEAN.csv";
+                uniqueFileName = "reporte_conteo_magallEAN_suc_"+serverId+".csv";
                 file = new File(directory, uniqueFileName);
                 fileWriter = new FileWriter(file);
                 fileWriter.write(csvData);
@@ -540,7 +540,7 @@ public class ProductListActivity extends AppCompatActivity {
                     csvData += toCSV(data, module) + "\n";
                 }
                 directory = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS);
-                uniqueFileName = "reporte_etiquetas_magallEAN.csv";
+                uniqueFileName = "reporte_etiquetas_magallEAN_suc_"+serverId+".csv";
                 file = new File(directory, uniqueFileName);
                 fileWriter = new FileWriter(file);
                 fileWriter.write(csvData);
@@ -569,7 +569,7 @@ public class ProductListActivity extends AppCompatActivity {
                     csvData += toCSV(data, module) + "\n";
                 }
                 directory = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS);
-                uniqueFileName = "reporte_seguimiento_magallEAN.csv";
+                uniqueFileName = "reporte_seguimiento_magallEAN_suc_"+serverId+".csv";
                 file = new File(directory, uniqueFileName);
                 fileWriter = new FileWriter(file);
                 fileWriter.write(csvData);
@@ -599,7 +599,7 @@ public class ProductListActivity extends AppCompatActivity {
                     csvData += toCSV(data, module) + "\n";
                 }
                 directory = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS);
-                uniqueFileName = "reporte_pedido_magallEAN.csv";
+                uniqueFileName = "reporte_pedido_magallEAN_suc_"+serverId+".csv";
                 file = new File(directory, uniqueFileName);
                 fileWriter = new FileWriter(file);
                 fileWriter.write(csvData);
@@ -620,7 +620,7 @@ public class ProductListActivity extends AppCompatActivity {
                     csvData += toCSV(data, module) + "\n";
                 }
                 directory = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS);
-                uniqueFileName = "reporte_vencimiento_magallEAN.csv";
+                uniqueFileName = "reporte_vencimiento_magallEAN_suc_"+serverId+".csv";
                 file = new File(directory, uniqueFileName);
                 fileWriter = new FileWriter(file);
                 fileWriter.write(csvData);
