@@ -19,7 +19,6 @@ import com.ryfsystems.smi.Models.User;
 import com.ryfsystems.smi.R;
 import com.ryfsystems.smi.ViewHolders.UserViewHolder;
 
-import java.io.IOException;
 import java.util.List;
 
 public class UserAdapter extends RecyclerView.Adapter<UserViewHolder> {

@@ -27,6 +27,14 @@ public class Product implements Serializable {
     public Product() {
     }
 
+    public Product(Integer codlocal, String dep, String ean_13, Integer code, String detalle) {
+        this.codlocal = codlocal;
+        this.dep = dep;
+        this.ean_13 = ean_13;
+        this.code = code;
+        this.detalle = detalle;
+    }
+
     public Product(Integer codlocal,
                    String sucursal,
                    Integer activado,

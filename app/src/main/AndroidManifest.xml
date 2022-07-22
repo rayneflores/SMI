@@ -16,6 +16,9 @@
         android:theme="@style/Theme.SMI"
         android:usesCleartextTraffic="true">
         <activity
+            android:name=".Activities.ProductSelectionActivity"
+            android:exported="false" />
+        <activity
             android:name=".Activities.BusquedaManualActivity"
             android:exported="false" />
         <activity

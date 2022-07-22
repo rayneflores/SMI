@@ -2,8 +2,11 @@ package com.ryfsystems.smi.Activities;
 
 import static com.ryfsystems.smi.Utils.Constants.GET_PRODUCT;
 import static com.ryfsystems.smi.Utils.Constants.GET_PRODUCT2;
+import static com.ryfsystems.smi.Utils.Constants.GET_QUERY_PRODUCT1;
+import static com.ryfsystems.smi.Utils.Constants.GET_QUERY_PRODUCT2;
 import static com.ryfsystems.smi.Utils.Constants.INFRA_SERVER_ADDRESS;
 
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -34,9 +37,10 @@ public class BusquedaManualActivity extends AppCompatActivity {
 
     Bundle extras;
     Button btnSearch;
-    CheckBox cbConteo1, cbEtiquetas1, cbSeguimiento1, cbConsulta1, cbPedido1, cbVencimiento1;
+    CheckBox cbConteo1, cbEtiquetas1, cbSeguimiento1, cbConsulta1, cbPedido1, cbVencimiento1, cbQueryMode1, cbQueryMode2;
     Integer module, serverId;
     Intent nextIntent;
+    ProgressDialog progressDialog;
     String path = INFRA_SERVER_ADDRESS;
     String rol, usuario, serverAddress, query;
     SharedPreferences preferences;
@@ -49,6 +53,11 @@ public class BusquedaManualActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_busqueda_manual);
 
+        progressDialog = new ProgressDialog(this);
+        progressDialog.setTitle("Espere...");
+        progressDialog.setMessage("Listando Productos...");
+        progressDialog.setCanceledOnTouchOutside(false);
+
         btnSearch = findViewById(R.id.btnSearch);
         cbConteo1 = findViewById(R.id.cbConteo1);
         cbEtiquetas1 = findViewById(R.id.cbEtiquetas1);
@@ -56,6 +65,8 @@ public class BusquedaManualActivity extends AppCompatActivity {
         cbConsulta1 = findViewById(R.id.cbConsulta);
         cbPedido1 = findViewById(R.id.cbPedido1);
         cbVencimiento1 = findViewById(R.id.cbVencimiento1);
+        cbQueryMode1 = findViewById(R.id.cbQueryMode1);
+        cbQueryMode2 = findViewById(R.id.cbQueryMode2);
         etSearchText = findViewById(R.id.etSearchText);
         titCodigo = findViewById(R.id.titCodigo);
 
@@ -64,8 +75,34 @@ public class BusquedaManualActivity extends AppCompatActivity {
         extras = new Bundle();
 
         cbConteo1.setChecked(true);
+        cbQueryMode1.setChecked(true);
         btnSearch.setEnabled(false);
+
         module = 1;
+
+        cbQueryMode1.setOnCheckedChangeListener((buttonView, isChecked) -> {
+            if (isChecked) {
+                cbQueryMode2.setChecked(false);
+                etSearchText.setHint("Codigo");
+                titCodigo.setText("");
+            } else {
+                cbQueryMode2.setChecked(true);
+                etSearchText.setHint("Descripcion");
+                titCodigo.setText("");
+            }
+        });
+
+        cbQueryMode2.setOnCheckedChangeListener((buttonView, isChecked) -> {
+            if (isChecked) {
+                cbQueryMode1.setChecked(false);
+                etSearchText.setHint("Descripcion");
+                titCodigo.setText("");
+            } else {
+                cbQueryMode1.setChecked(true);
+                etSearchText.setHint("Codigo");
+                titCodigo.setText("");
+            }
+        });
 
         cbConteo1.setOnCheckedChangeListener((compoundButton, b) -> {
             if (cbConteo1.isChecked()) {
@@ -92,7 +129,7 @@ public class BusquedaManualActivity extends AppCompatActivity {
                 cbVencimiento1.setChecked(false);
                 module = 2;
             } else {
-                if (!cbConteo1.isChecked() && !cbSeguimiento1.isChecked() && !cbConsulta1.isChecked() && !cbPedido1.isChecked() && !cbVencimiento1.isChecked()){
+                if (!cbConteo1.isChecked() && !cbSeguimiento1.isChecked() && !cbConsulta1.isChecked() && !cbPedido1.isChecked() && !cbVencimiento1.isChecked()) {
                     cbEtiquetas1.setChecked(true);
                 }
             }
@@ -107,7 +144,7 @@ public class BusquedaManualActivity extends AppCompatActivity {
                 cbVencimiento1.setChecked(false);
                 module = 3;
             } else {
-                if (!cbConteo1.isChecked() && !cbEtiquetas1.isChecked() && !cbConsulta1.isChecked() && !cbPedido1.isChecked() && !cbVencimiento1.isChecked()){
+                if (!cbConteo1.isChecked() && !cbEtiquetas1.isChecked() && !cbConsulta1.isChecked() && !cbPedido1.isChecked() && !cbVencimiento1.isChecked()) {
                     cbSeguimiento1.setChecked(true);
                 }
             }
@@ -122,7 +159,7 @@ public class BusquedaManualActivity extends AppCompatActivity {
                 cbVencimiento1.setChecked(false);
                 module = 4;
             } else {
-                if (!cbConsulta1.isChecked() && !cbPedido1.isChecked() && !cbSeguimiento1.isChecked() && !cbEtiquetas1.isChecked() && !cbVencimiento1.isChecked()) {
+                if (!cbConteo1.isChecked() && !cbPedido1.isChecked() && !cbSeguimiento1.isChecked() && !cbEtiquetas1.isChecked() && !cbVencimiento1.isChecked()) {
                     cbConsulta1.setChecked(true);
                 }
             }
@@ -137,7 +174,7 @@ public class BusquedaManualActivity extends AppCompatActivity {
                 cbVencimiento1.setChecked(false);
                 module = 5;
             } else {
-                if (!cbConteo1.isChecked() && !cbEtiquetas1.isChecked() && !cbConsulta1.isChecked() && !cbSeguimiento1.isChecked() && !cbVencimiento1.isChecked()){
+                if (!cbConteo1.isChecked() && !cbEtiquetas1.isChecked() && !cbConsulta1.isChecked() && !cbSeguimiento1.isChecked() && !cbVencimiento1.isChecked()) {
                     cbPedido1.setChecked(true);
                 }
             }
@@ -152,7 +189,7 @@ public class BusquedaManualActivity extends AppCompatActivity {
                 cbPedido1.setChecked(false);
                 module = 6;
             } else {
-                if (!cbConteo1.isChecked() && !cbEtiquetas1.isChecked() && !cbConsulta1.isChecked() && !cbSeguimiento1.isChecked() && !cbPedido1.isChecked()){
+                if (!cbConteo1.isChecked() && !cbEtiquetas1.isChecked() && !cbConsulta1.isChecked() && !cbSeguimiento1.isChecked() && !cbPedido1.isChecked()) {
                     cbVencimiento1.setChecked(true);
                 }
             }
@@ -178,19 +215,16 @@ public class BusquedaManualActivity extends AppCompatActivity {
         btnSearch.setOnClickListener(view -> {
             btnSearch.setEnabled(false);
             String code = Objects.requireNonNull(titCodigo.getText()).toString();
-            buscarDatosProducto(code);
+
+            if (cbQueryMode1.isChecked()) {
+                buscarDatosProductoByCode(code);
+            } else {
+                buscarDatosProductoByDescription(code);
+            }
         });
     }
 
-    private void recuperarPreferencias() {
-        preferences = getSharedPreferences("smiPreferences", Context.MODE_PRIVATE);
-        rol = preferences.getString("role", "");
-        usuario = preferences.getString("name", "");
-        serverAddress = preferences.getString("serverAddress", "");
-        serverId = preferences.getInt("serverId", 1);
-    }
-
-    public void buscarDatosProducto(String code) {
+    public void buscarDatosProductoByCode(String code) {
         HttpsTrustManager.allowAllSSL();
 
         switch (serverId) {
@@ -258,6 +292,35 @@ public class BusquedaManualActivity extends AppCompatActivity {
         });
         RequestQueue requestQueue = Volley.newRequestQueue(this);
         requestQueue.add(jsonObjectRequest);
+    }
+
+    public void buscarDatosProductoByDescription(String description) {
+        HttpsTrustManager.allowAllSSL();
+        progressDialog.setMessage("Listando Productos...");
+        progressDialog.show();
+
+        switch (serverId) {
+            case 1:
+                query = GET_QUERY_PRODUCT1;
+                break;
+            case 2:
+                query = GET_QUERY_PRODUCT2;
+        }
+
+        nextIntent = new Intent(getApplicationContext(), ProductSelectionActivity.class);
+        extras.putInt("module", module);
+        extras.putString("detalle", description);
+        nextIntent.putExtras(extras);
+        startActivity(nextIntent);
+        finish();
+    }
+
+    private void recuperarPreferencias() {
+        preferences = getSharedPreferences("smiPreferences", Context.MODE_PRIVATE);
+        rol = preferences.getString("role", "");
+        usuario = preferences.getString("name", "");
+        serverAddress = preferences.getString("serverAddress", "");
+        serverId = preferences.getInt("serverId", 1);
     }
 
     @Override

@@ -33,4 +33,7 @@
     <string name="ingrese_su_codigo_aqui">Codigo</string>
     <string name="consulta2">Consulta</string>
     <string name="server">Server</string>
+    <string name="byCode">Por Codigo</string>
+    <string name="byDescription">Por Descripcion</string>
+    <string name="lista_de_productos">Lista de Productos</string>
 </resources>
