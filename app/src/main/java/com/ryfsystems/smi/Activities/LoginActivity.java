@@ -116,7 +116,6 @@ public class LoginActivity extends AppCompatActivity {
                             }
                         }, error -> {
                             btnLogin.setEnabled(true);
-                            System.out.println(error.getMessage());
                             Toast.makeText(getApplicationContext(), error.getMessage(), Toast.LENGTH_SHORT).show();
                         }) {
             @Override

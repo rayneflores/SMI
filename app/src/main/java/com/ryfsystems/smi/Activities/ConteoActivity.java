@@ -85,10 +85,6 @@ public class ConteoActivity extends AppCompatActivity {
 
             module = (int) received.get("module");
 
-            System.out.println("Traigo pventa: " + productReceived.getPventa());
-            System.out.println("Traigo poferta: " + productReceived.getPoferta());
-            System.out.println("Traigo modulo: " + module);
-
             switch (module) {
                 case 1:
                     tvConteoTitle.setText(R.string.conteo_articulo);
