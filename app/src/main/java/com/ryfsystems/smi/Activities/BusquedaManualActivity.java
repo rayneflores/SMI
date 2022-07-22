@@ -6,7 +6,6 @@ import static com.ryfsystems.smi.Utils.Constants.GET_QUERY_PRODUCT1;
 import static com.ryfsystems.smi.Utils.Constants.GET_QUERY_PRODUCT2;
 import static com.ryfsystems.smi.Utils.Constants.INFRA_SERVER_ADDRESS;
 
-import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -40,7 +39,6 @@ public class BusquedaManualActivity extends AppCompatActivity {
     CheckBox cbConteo1, cbEtiquetas1, cbSeguimiento1, cbConsulta1, cbPedido1, cbVencimiento1, cbQueryMode1, cbQueryMode2;
     Integer module, serverId;
     Intent nextIntent;
-    ProgressDialog progressDialog;
     String path = INFRA_SERVER_ADDRESS;
     String rol, usuario, serverAddress, query;
     SharedPreferences preferences;
@@ -52,11 +50,6 @@ public class BusquedaManualActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_busqueda_manual);
-
-        progressDialog = new ProgressDialog(this);
-        progressDialog.setTitle("Espere...");
-        progressDialog.setMessage("Listando Productos...");
-        progressDialog.setCanceledOnTouchOutside(false);
 
         btnSearch = findViewById(R.id.btnSearch);
         cbConteo1 = findViewById(R.id.cbConteo1);
@@ -296,8 +289,6 @@ public class BusquedaManualActivity extends AppCompatActivity {
 
     public void buscarDatosProductoByDescription(String description) {
         HttpsTrustManager.allowAllSSL();
-        progressDialog.setMessage("Listando Productos...");
-        progressDialog.show();
 
         switch (serverId) {
             case 1:

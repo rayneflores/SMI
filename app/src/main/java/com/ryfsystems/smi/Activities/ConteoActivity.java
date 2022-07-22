@@ -43,7 +43,7 @@ public class ConteoActivity extends AppCompatActivity {
     Button btnConteoContar;
     int module, serverId;
     Intent nextIntent;
-    Long prevStock;
+    Long prevStock = 0L;
     Product productReceived;
     RequestQueue requestQueue;
     String rol, usuario, serverAddress, query;
@@ -84,6 +84,10 @@ public class ConteoActivity extends AppCompatActivity {
             productReceived = (Product) received.getSerializable("Product");
 
             module = (int) received.get("module");
+
+            System.out.println("Traigo pventa: " + productReceived.getPventa());
+            System.out.println("Traigo poferta: " + productReceived.getPoferta());
+            System.out.println("Traigo modulo: " + module);
 
             switch (module) {
                 case 1:
@@ -263,7 +267,9 @@ public class ConteoActivity extends AppCompatActivity {
         JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.GET, path + GET_REAL_EXISTENCE + ean_13 + "&codSucursal=" + serverId, null, response -> {
             try {
                 JSONObject jsonObject = response.getJSONObject("Stock");
-                prevStock = jsonObject.getLong("st_actual");
+                if (!jsonObject.isNull("st_actual")) {
+                    prevStock = jsonObject.getLong("st_actual");
+                }
                 tvConteoCantidad2.setText(prevStock.toString());
             } catch (Exception exception) {
                 Toast.makeText(getApplicationContext(), exception.getMessage(), Toast.LENGTH_SHORT).show();

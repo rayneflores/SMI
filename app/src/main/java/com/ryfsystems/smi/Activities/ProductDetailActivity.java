@@ -38,10 +38,10 @@ public class ProductDetailActivity extends AppCompatActivity {
 
     Bundle received;
     Button btnDetailOption;
-    Double margen, stock, vtaSem;
+    Double margen, vtaSem;
     int module, serverId;
     Intent nextIntent;
-    Long poferta, pventa, costoProm;
+    Long poferta, pventa, costoProm, stock = 0L;
     Product productReceived;
     RequestQueue requestQueue;
     String path = INFRA_SERVER_ADDRESS;
@@ -237,7 +237,9 @@ public class ProductDetailActivity extends AppCompatActivity {
             try {
 
                 JSONObject jsonObject = response.getJSONObject("Stock");
-                stock = jsonObject.getDouble("st_actual");
+                if (!jsonObject.isNull("st_actual")) {
+                    stock = jsonObject.getLong("st_actual");
+                }
                 tvDetailStock2.setText(stock.toString());
             } catch (Exception exception) {
                 Toast.makeText(getApplicationContext(), exception.getMessage(), Toast.LENGTH_SHORT).show();
