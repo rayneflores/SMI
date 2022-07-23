@@ -135,10 +135,6 @@ public class ProductAdapterSelection extends RecyclerView.Adapter<ProductViewHol
         SpannableString sucursal = new SpannableString("Sucursal: " + productList.get(i).getSucursal());
         sucursal.setSpan(new StyleSpan(Typeface.BOLD), 0, 8, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
         viewHolder.tvListProductSucursal.setText(sucursal);
-
-        SpannableString stock = new SpannableString("Stock: " + productList.get(i).getStock_());
-        stock.setSpan(new StyleSpan(Typeface.BOLD), 0, 5, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
-        viewHolder.tvListProductStock.setText(stock);
     }
 
     @Override

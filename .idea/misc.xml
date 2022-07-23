@@ -38,7 +38,7 @@
         <entry key="app/src/main/res/layout/product_label_layout.xml" value="0.1" />
         <entry key="app/src/main/res/layout/product_layout.xml" value="0.5" />
         <entry key="app/src/main/res/layout/product_request_layout.xml" value="0.3302083333333333" />
-        <entry key="app/src/main/res/layout/product_selection_layout.xml" value="0.32916666666666666" />
+        <entry key="app/src/main/res/layout/product_selection_layout.xml" value="0.5" />
         <entry key="app/src/main/res/layout/server_spinner_layout.xml" value="0.32916666666666666" />
         <entry key="app/src/main/res/layout/user_layout.xml" value="0.5" />
       </map>
