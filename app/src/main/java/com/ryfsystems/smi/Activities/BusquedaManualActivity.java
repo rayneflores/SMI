@@ -226,6 +226,7 @@ public class BusquedaManualActivity extends AppCompatActivity {
                 break;
             case 2:
                 query = GET_PRODUCT2;
+                break;
         }
 
         JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.GET, path + query + code, null, response -> {
