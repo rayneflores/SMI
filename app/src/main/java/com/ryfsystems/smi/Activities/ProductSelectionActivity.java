@@ -2,6 +2,7 @@ package com.ryfsystems.smi.Activities;
 
 import static com.ryfsystems.smi.Utils.Constants.GET_QUERY_PRODUCT1;
 import static com.ryfsystems.smi.Utils.Constants.GET_QUERY_PRODUCT2;
+import static com.ryfsystems.smi.Utils.Constants.GET_QUERY_PRODUCT3;
 import static com.ryfsystems.smi.Utils.Constants.INFRA_SERVER_ADDRESS;
 
 import android.app.ProgressDialog;
@@ -71,6 +72,9 @@ public class ProductSelectionActivity extends AppCompatActivity {
                 break;
             case 2:
                 query = GET_QUERY_PRODUCT2 + detalle;
+                break;
+            case 3:
+                query = GET_QUERY_PRODUCT3 + detalle;
                 break;
         }
 

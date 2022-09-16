@@ -2,6 +2,7 @@ package com.ryfsystems.smi.Activities;
 
 import static com.ryfsystems.smi.Utils.Constants.GET_PRODUCT;
 import static com.ryfsystems.smi.Utils.Constants.GET_PRODUCT2;
+import static com.ryfsystems.smi.Utils.Constants.GET_PRODUCT3;
 import static com.ryfsystems.smi.Utils.Constants.INFRA_SERVER_ADDRESS;
 
 import android.content.Context;
@@ -108,6 +109,9 @@ public class TomaInventarioActivity extends AppCompatActivity implements ZBarSca
                 break;
             case 2:
                 query = GET_PRODUCT2;
+                break;
+            case 3:
+                query = GET_PRODUCT3;
                 break;
         }
 

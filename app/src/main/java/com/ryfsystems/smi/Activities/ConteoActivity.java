@@ -6,6 +6,7 @@ import static com.ryfsystems.smi.Utils.Constants.INFRA_SERVER_ADDRESS;
 import static com.ryfsystems.smi.Utils.Constants.SET_COUNT_PRODUCT;
 import static com.ryfsystems.smi.Utils.Constants.SET_LABEL_PRODUCT;
 import static com.ryfsystems.smi.Utils.Constants.SET_LABEL_PRODUCT2;
+import static com.ryfsystems.smi.Utils.Constants.SET_LABEL_PRODUCT3;
 import static com.ryfsystems.smi.Utils.Constants.SET_SEGUI_PRODUCT;
 
 import android.content.Context;
@@ -315,6 +316,9 @@ public class ConteoActivity extends AppCompatActivity {
                 break;
             case 2:
                 query = SET_LABEL_PRODUCT2;
+                break;
+            case 3:
+                query = SET_LABEL_PRODUCT3;
                 break;
         }
 

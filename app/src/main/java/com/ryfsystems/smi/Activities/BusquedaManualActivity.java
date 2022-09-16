@@ -2,8 +2,10 @@ package com.ryfsystems.smi.Activities;
 
 import static com.ryfsystems.smi.Utils.Constants.GET_PRODUCT;
 import static com.ryfsystems.smi.Utils.Constants.GET_PRODUCT2;
+import static com.ryfsystems.smi.Utils.Constants.GET_PRODUCT3;
 import static com.ryfsystems.smi.Utils.Constants.GET_QUERY_PRODUCT1;
 import static com.ryfsystems.smi.Utils.Constants.GET_QUERY_PRODUCT2;
+import static com.ryfsystems.smi.Utils.Constants.GET_QUERY_PRODUCT3;
 import static com.ryfsystems.smi.Utils.Constants.INFRA_SERVER_ADDRESS;
 
 import android.content.Context;
@@ -227,6 +229,9 @@ public class BusquedaManualActivity extends AppCompatActivity {
             case 2:
                 query = GET_PRODUCT2;
                 break;
+            case 3:
+                query = GET_PRODUCT3;
+                break;
         }
 
         JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.GET, path + query + code, null, response -> {
@@ -297,6 +302,10 @@ public class BusquedaManualActivity extends AppCompatActivity {
                 break;
             case 2:
                 query = GET_QUERY_PRODUCT2;
+                break;
+            case 3:
+                query = GET_QUERY_PRODUCT3;
+                break;
         }
 
         nextIntent = new Intent(getApplicationContext(), ProductSelectionActivity.class);

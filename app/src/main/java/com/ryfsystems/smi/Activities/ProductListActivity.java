@@ -5,6 +5,7 @@ import static com.ryfsystems.smi.Utils.Constants.GET_PRODUCTS_DEFECT;
 import static com.ryfsystems.smi.Utils.Constants.GET_PRODUCTS_FOLLOW;
 import static com.ryfsystems.smi.Utils.Constants.GET_PRODUCTS_LABEL;
 import static com.ryfsystems.smi.Utils.Constants.GET_PRODUCTS_LABEL2;
+import static com.ryfsystems.smi.Utils.Constants.GET_PRODUCTS_LABEL3;
 import static com.ryfsystems.smi.Utils.Constants.GET_PRODUCTS_REQUEST;
 import static com.ryfsystems.smi.Utils.Constants.INFRA_SERVER_ADDRESS;
 import static com.ryfsystems.smi.Utils.Constants.SEND_COUNT_DATA;
@@ -12,6 +13,7 @@ import static com.ryfsystems.smi.Utils.Constants.SEND_DEFECT_DATA;
 import static com.ryfsystems.smi.Utils.Constants.SEND_FOLLOW_DATA;
 import static com.ryfsystems.smi.Utils.Constants.SEND_LABEL_DATA;
 import static com.ryfsystems.smi.Utils.Constants.SEND_LABEL_DATA2;
+import static com.ryfsystems.smi.Utils.Constants.SEND_LABEL_DATA3;
 import static com.ryfsystems.smi.Utils.Constants.SEND_REQUEST_DATA;
 
 import android.Manifest;
@@ -125,6 +127,9 @@ public class ProductListActivity extends AppCompatActivity {
                         break;
                     case 2:
                         query = GET_PRODUCTS_LABEL2;
+                        break;
+                    case 3:
+                        query = GET_PRODUCTS_LABEL3;
                         break;
                 }
                 btnEnviar.setEnabled(true);
@@ -252,6 +257,10 @@ public class ProductListActivity extends AppCompatActivity {
                         break;
                     case 2:
                         query = SEND_LABEL_DATA2;
+                        break;
+                    case 3:
+                        query = SEND_LABEL_DATA3;
+                        break;
                 }
                 stringRequest =
                         new StringRequest(
