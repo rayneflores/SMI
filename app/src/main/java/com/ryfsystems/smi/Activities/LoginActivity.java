@@ -176,6 +176,6 @@ public class LoginActivity extends AppCompatActivity {
         serverList = new ArrayList<>();
         serverList.add(new Server(1,"Farmacia Magallanes","Puerto Natales", R.drawable.ic_house));
         serverList.add(new Server(2, "Farmacia Magallanes 2","Punta Arenas Shell", R.drawable.ic_house));
-        serverList.add(new Server(3, "Farmacia Magallanes 3", "Nueva Farmacia", R.drawable.ic_house));
+        serverList.add(new Server(3, "Farmacia Magallanes 3", "Zona Franca", R.drawable.ic_house));
     }
 }
