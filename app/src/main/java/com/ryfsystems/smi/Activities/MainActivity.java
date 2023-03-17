@@ -34,9 +34,12 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     Intent nextIntent;
     int serverId;
     ProgressDialog progressDialog;
-    String rol, usuario, serverAddress;
+    String rol;
+    String usuario;
+    String serverAddress;
     SharedPreferences preferences;
-    TextView tvBienvenida, tvSucursal;
+    TextView tvBienvenida;
+    TextView tvSucursal;
 
     /**
      * En esta Version 2.0.0 Solo Habilitaremos Captura de Productos para Generar Etiquetas

@@ -20,6 +20,7 @@ import com.android.volley.RequestQueue;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
 import com.ryfsystems.smi.Models.NewProduct;
+import com.ryfsystems.smi.Utils.HttpsTrustManager;
 
 import org.json.JSONObject;
 
@@ -94,9 +95,6 @@ public class TomaInventarioActivity extends AppCompatActivity implements ZBarSca
             Uri notification = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION);
             Ringtone r = RingtoneManager.getRingtone(getApplicationContext(), notification);
             r.play();
-            /*Creacion de la Busqueda de Productos*/
-            //buscarDatosProducto(code);
-            /*Por ahora buscamos solo por codigo de Barra */
             buscarPorBarCode(code);
         } catch (Exception e) {
             Log.e(TAG, e.getLocalizedMessage());
@@ -104,6 +102,7 @@ public class TomaInventarioActivity extends AppCompatActivity implements ZBarSca
     }
 
     private void buscarPorBarCode(String code) {
+        HttpsTrustManager.allowAllSSL();
         query = NEW_SEARCH_PRODUCT_BY_CODE;
         JsonObjectRequest jObjReq = new JsonObjectRequest(
                 Request.Method.GET,
@@ -118,7 +117,7 @@ public class TomaInventarioActivity extends AppCompatActivity implements ZBarSca
                         newProduct.setDetalle(jsonObject.getString("detalle"));
                         newProduct.setPrecio_venta(jsonObject.getString("precio_venta"));
                         newProduct.setPrecio_oferta(jsonObject.getInt("precio_oferta"));
-                        extras.putSerializable("newProduct", newProduct);
+                        extras.putSerializable("NewProduct", newProduct);
                         intent = new Intent(getApplicationContext(), ConteoActivity.class);
                         intent.putExtras(extras);
                         startActivity(intent);
@@ -137,78 +136,4 @@ public class TomaInventarioActivity extends AppCompatActivity implements ZBarSca
         RequestQueue requestQueue = Volley.newRequestQueue(this);
         requestQueue.add(jObjReq);
     }
-
-    /*public void buscarDatosProducto(String code) {
-        HttpsTrustManager.allowAllSSL();
-
-        switch (serverId) {
-            case 1:
-                query = GET_PRODUCT;
-                break;
-            case 2:
-                query = GET_PRODUCT2;
-                break;
-            case 3:
-                query = GET_PRODUCT3;
-                break;
-        }
-
-        JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.GET, path + query + code, null, response -> {
-            try {
-                JSONObject jsonObject = response.getJSONObject("Product");
-                Product product = new Product();
-                product.setActivado(jsonObject.getInt("activado"));
-                product.setCode(jsonObject.getInt("code"));
-                product.setCodlocal(jsonObject.getInt("codlocal"));
-                product.setDetalle(jsonObject.getString("detalle"));
-                product.setDep(jsonObject.getString("dep"));
-                product.setEan_13(jsonObject.getString("ean_13"));
-                product.setLinea(jsonObject.getInt("linea"));
-                product.setSucursal(jsonObject.getString("sucursal"));
-                product.setStock_(jsonObject.getLong("stock_"));
-                product.setPventa(jsonObject.getLong("pventa"));
-                product.setPoferta(jsonObject.getLong("p_oferta"));
-                product.setAvg_pro(jsonObject.getDouble("avg_pro"));
-                product.setCosto_prom(jsonObject.getLong("costo_prom"));
-                product.setCodBarra(code);
-                product.setPcadena(jsonObject.getDouble("pcadena"));
-
-                switch (module) {
-                    case 1:
-                    case 2:
-                    case 3:
-                        extras.putSerializable("Product", product);
-                        intent = new Intent(getApplicationContext(), ConteoActivity.class);
-                        intent.putExtras(extras);
-                        startActivity(intent);
-                        finish();
-                        break;
-                    case 4:
-                    case 5:
-                        extras.putSerializable("Product", product);
-                        intent = new Intent(getApplicationContext(), ProductDetailActivity.class);
-                        intent.putExtras(extras);
-                        startActivity(intent);
-                        finish();
-                        break;
-                    case 6:
-                        extras.putSerializable("Product", product);
-                        intent = new Intent(getApplicationContext(), VencimientoActivity.class);
-                        intent.putExtras(extras);
-                        startActivity(intent);
-                        finish();
-                        break;
-                }
-
-            } catch (Exception exception) {
-                exception.printStackTrace();
-            }
-        }, error -> {
-            Toast.makeText(getApplicationContext(), "Fallo en la Lectura, Reintente!!!", Toast.LENGTH_SHORT).show();
-            onResume();
-        });
-        RequestQueue requestQueue = Volley.newRequestQueue(this);
-        requestQueue.add(jsonObjectRequest);
-    }*/
-
 }
