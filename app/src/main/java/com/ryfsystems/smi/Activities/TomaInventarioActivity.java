@@ -1,9 +1,7 @@
 package com.ryfsystems.smi.Activities;
 
-import static com.ryfsystems.smi.Utils.Constants.GET_PRODUCT;
-import static com.ryfsystems.smi.Utils.Constants.GET_PRODUCT2;
-import static com.ryfsystems.smi.Utils.Constants.GET_PRODUCT3;
 import static com.ryfsystems.smi.Utils.Constants.INFRA_SERVER_ADDRESS;
+import static com.ryfsystems.smi.Utils.Constants.NEW_SEARCH_PRODUCT_BY_CODE;
 
 import android.content.Context;
 import android.content.Intent;
@@ -21,8 +19,7 @@ import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
-import com.ryfsystems.smi.Models.Product;
-import com.ryfsystems.smi.Utils.HttpsTrustManager;
+import com.ryfsystems.smi.Models.NewProduct;
 
 import org.json.JSONObject;
 
@@ -32,12 +29,16 @@ import me.dm7.barcodescanner.zbar.ZBarScannerView;
 public class TomaInventarioActivity extends AppCompatActivity implements ZBarScannerView.ResultHandler {
 
     Bundle extras;
-    Bundle receieved;
-    int module, serverId;
-    Intent nextIntent, intent;
+    Bundle received;
+    int module;
+    int serverId;
+    Intent nextIntent;
+    Intent intent;
     private static final String TAG = "ScannerLog";
     String path = INFRA_SERVER_ADDRESS;
-    String rol, usuario, query;
+    String rol;
+    String usuario;
+    String query;
     SharedPreferences preferences;
     private ZBarScannerView mScannerView;
 
@@ -46,9 +47,9 @@ public class TomaInventarioActivity extends AppCompatActivity implements ZBarSca
         super.onCreate(savedInstanceState);
         mScannerView = new ZBarScannerView(this);
         setContentView(mScannerView);
-        receieved = getIntent().getExtras();
-        if (receieved != null) {
-            module = receieved.getInt("module");
+        received = getIntent().getExtras();
+        if (received != null) {
+            module = received.getInt("module");
         }
         extras = new Bundle();
         extras.putInt("module", module);
@@ -94,13 +95,50 @@ public class TomaInventarioActivity extends AppCompatActivity implements ZBarSca
             Ringtone r = RingtoneManager.getRingtone(getApplicationContext(), notification);
             r.play();
             /*Creacion de la Busqueda de Productos*/
-            buscarDatosProducto(code);
+            //buscarDatosProducto(code);
+            /*Por ahora buscamos solo por codigo de Barra */
+            buscarPorBarCode(code);
         } catch (Exception e) {
             Log.e(TAG, e.getLocalizedMessage());
         }
     }
 
-    public void buscarDatosProducto(String code) {
+    private void buscarPorBarCode(String code) {
+        query = NEW_SEARCH_PRODUCT_BY_CODE;
+        JsonObjectRequest jObjReq = new JsonObjectRequest(
+                Request.Method.GET,
+                path + query + code,
+                null,
+                response -> {
+                    try {
+                        JSONObject jsonObject = response.getJSONObject("Product");
+                        NewProduct newProduct = new NewProduct();
+                        newProduct.setId_producto(jsonObject.getInt("id_producto"));
+                        newProduct.setCodigo_barras(jsonObject.getString("codigo_barras"));
+                        newProduct.setDetalle(jsonObject.getString("detalle"));
+                        newProduct.setPrecio_venta(jsonObject.getString("precio_venta"));
+                        newProduct.setPrecio_oferta(jsonObject.getInt("precio_oferta"));
+                        extras.putSerializable("newProduct", newProduct);
+                        intent = new Intent(getApplicationContext(), ConteoActivity.class);
+                        intent.putExtras(extras);
+                        startActivity(intent);
+                        finish();
+                    } catch (Exception exception) {
+                        exception.printStackTrace();
+                    }
+                }, error -> {
+            Toast.makeText(
+                    getApplicationContext(),
+                    "Fallo en la Lectura, Reintente!!!",
+                    Toast.LENGTH_SHORT)
+                    .show();
+            onResume();
+        });
+        RequestQueue requestQueue = Volley.newRequestQueue(this);
+        requestQueue.add(jObjReq);
+    }
+
+    /*public void buscarDatosProducto(String code) {
         HttpsTrustManager.allowAllSSL();
 
         switch (serverId) {
@@ -171,6 +209,6 @@ public class TomaInventarioActivity extends AppCompatActivity implements ZBarSca
         });
         RequestQueue requestQueue = Volley.newRequestQueue(this);
         requestQueue.add(jsonObjectRequest);
-    }
+    }*/
 
 }

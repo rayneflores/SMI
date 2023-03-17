@@ -48,4 +48,9 @@ public class Constants {
     public static String SEND_FOLLOW_DATA = "sendFollowData.php?codSucursal=";
     public static String SEND_REQUEST_DATA = "sendRequestData.php?codSucursal=";
     public static String SEND_DEFECT_DATA = "sendDefectData.php?codSucursal=";
+
+
+    //NEW QUERYS
+    public static String NEW_SEARCH_PRODUCT_BY_CODE = "productByCodeBar.php?codeBar=";
+    public static String NEW_SET_LABEL_PRODUCT = "newSetLabelProduct.php";
 }

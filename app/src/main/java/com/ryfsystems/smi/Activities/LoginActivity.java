@@ -40,12 +40,15 @@ import java.util.Map;
 public class LoginActivity extends AppCompatActivity {
 
     Button btnLogin;
-    EditText tvUsuario, tvPassword;
+    EditText tvUsuario;
+    EditText tvPassword;
     int serverId;
     Intent nextIntent;
     private ArrayList<Server> serverList;
     RequestQueue queue;
-    String path = INFRA_SERVER_ADDRESS, programVersion, serverAddress;
+    String path = INFRA_SERVER_ADDRESS;
+    String programVersion;
+    String serverAddress;
     TextView tvVersion;
     User user;
     SharedPreferences preferences;
@@ -91,11 +94,16 @@ public class LoginActivity extends AppCompatActivity {
         btnLogin.setOnClickListener(view -> {
 
             btnLogin.setEnabled(false);
-            if (!tvUsuario.getText().toString().trim().isEmpty() && !tvPassword.getText().toString().trim().isEmpty()) {
+            if (!tvUsuario.getText().toString().trim().isEmpty() &&
+                    !tvPassword.getText().toString().trim().isEmpty()) {
                 login(tvUsuario.getText().toString().trim(), tvPassword.getText().toString().trim());
             } else {
                 btnLogin.setEnabled(true);
-                Toast.makeText(getApplicationContext(), "Debe llenar todos los campos", Toast.LENGTH_SHORT).show();
+                Toast.makeText(
+                        getApplicationContext(),
+                        "Debe llenar todos los campos",
+                        Toast.LENGTH_SHORT)
+                        .show();
             }
         });
     }
@@ -112,48 +120,63 @@ public class LoginActivity extends AppCompatActivity {
                                 buscarDatosUsuario(response);
                             } else {
                                 btnLogin.setEnabled(true);
-                                Toast.makeText(getApplicationContext(), "Combinacion Usuario/Password Incorrecta", Toast.LENGTH_SHORT).show();
+                                Toast.makeText(
+                                        getApplicationContext(),
+                                        "Combinacion Usuario/Password Incorrecta",
+                                        Toast.LENGTH_SHORT)
+                                        .show();
                             }
                         }, error -> {
-                            btnLogin.setEnabled(true);
-                            Toast.makeText(getApplicationContext(), error.getMessage(), Toast.LENGTH_SHORT).show();
-                        }) {
-            @Override
-            protected Map<String, String> getParams() throws AuthFailureError {
-                Map<String, String> params = new HashMap<>();
-                params.put("username", userName);
-                params.put("password", password);
-                return params;
-            }
-        };
+                    btnLogin.setEnabled(true);
+                    Toast.makeText(
+                            getApplicationContext(),
+                            error.getMessage(),
+                            Toast.LENGTH_SHORT)
+                            .show();
+                }) {
+                    @Override
+                    protected Map<String, String> getParams() {
+                        Map<String, String> params = new HashMap<>();
+                        params.put("username", userName);
+                        params.put("password", password);
+                        return params;
+                    }
+                };
         queue.add(stringRequest);
     }
 
     private void buscarDatosUsuario(String userId) {
         HttpsTrustManager.allowAllSSL();
-        JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.GET, path + GET_USER + userId, null, response -> {
-
-            try {
-                JSONObject object = response.getJSONObject("User");
-                user = new User(
-                        object.getString("name"),
-                        object.getString("rol")
-                );
-                guardarPreferencias();
-                nextIntent = new Intent(getApplicationContext(), MainActivity.class);
-                startActivity(nextIntent);
-                finish();
-            } catch (Exception exception) {
-                exception.printStackTrace();
-            }
-        }, error -> {
-            Toast.makeText(getApplicationContext(), error.getMessage(), Toast.LENGTH_SHORT).show();
+        JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(
+                Request.Method.GET,
+                path + GET_USER + userId,
+                null,
+                response -> {
+                    try {
+                        JSONObject object = response.getJSONObject("User");
+                        user = new User(
+                                object.getString("name"),
+                                object.getString("rol")
+                        );
+                        guardarPreferencias();
+                        nextIntent = new Intent(getApplicationContext(), MainActivity.class);
+                        startActivity(nextIntent);
+                        finish();
+                    } catch (Exception exception) {
+                        exception.printStackTrace();
+                    }
+                }, error -> {
+            Toast.makeText(
+                    getApplicationContext(),
+                    error.getMessage(),
+                    Toast.LENGTH_SHORT)
+                    .show();
         });
         RequestQueue requestQueue = Volley.newRequestQueue(this);
         requestQueue.add(jsonObjectRequest);
     }
 
-    private void recuperarPreferencias(){
+    private void recuperarPreferencias() {
         preferences = getSharedPreferences("smiPreferences", Context.MODE_PRIVATE);
         tvUsuario.setText(preferences.getString("usuario", ""));
         tvPassword.setText(preferences.getString("password", ""));
@@ -174,8 +197,8 @@ public class LoginActivity extends AppCompatActivity {
 
     private void getServerList() {
         serverList = new ArrayList<>();
-        serverList.add(new Server(1,"Farmacia Magallanes","Puerto Natales", R.drawable.ic_house));
-        serverList.add(new Server(2, "Farmacia Magallanes 2","Punta Arenas Shell", R.drawable.ic_house));
+        serverList.add(new Server(1, "Farmacia Magallanes", "Puerto Natales", R.drawable.ic_house));
+        serverList.add(new Server(2, "Farmacia Magallanes 2", "Punta Arenas Shell", R.drawable.ic_house));
         serverList.add(new Server(3, "Farmacia Magallanes 3", "Zona Franca", R.drawable.ic_house));
     }
 }

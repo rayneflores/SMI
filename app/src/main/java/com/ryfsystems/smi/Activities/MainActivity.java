@@ -23,7 +23,14 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     Bundle extras;
     Button btnSettings;
-    CardView cvInventario, cvEtiquetas, cvChecklist, cvSeguimiento, cvConsulta, cvPedido, cvVencimiento, cvManualSearch;
+    CardView cvInventario;
+    CardView cvEtiquetas;
+    CardView cvChecklist;
+    CardView cvSeguimiento;
+    CardView cvConsulta;
+    CardView cvPedido;
+    CardView cvVencimiento;
+    CardView cvManualSearch;
     Intent nextIntent;
     int serverId;
     ProgressDialog progressDialog;
@@ -31,11 +38,15 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     SharedPreferences preferences;
     TextView tvBienvenida, tvSucursal;
 
-
+    /**
+     * En esta Version 2.0.0 Solo Habilitaremos Captura de Productos para Generar Etiquetas
+     * @param savedInstanceState
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
 
         extras = new Bundle();
 
@@ -43,6 +54,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         cvInventario = findViewById(R.id.cvInventario);
         cvInventario.setOnClickListener(this);
+        cvInventario.setAlpha(0.3f);
+        cvInventario.setEnabled(false);
 
         cvEtiquetas = findViewById(R.id.cvEtiquetas);
         cvEtiquetas.setOnClickListener(this);
@@ -52,18 +65,28 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         cvSeguimiento = findViewById(R.id.cvSeguimiento);
         cvSeguimiento.setOnClickListener(this);
+        cvSeguimiento.setAlpha(0.3f);
+        cvSeguimiento.setEnabled(false);
 
         cvConsulta = findViewById(R.id.cvConsulta);
         cvConsulta.setOnClickListener(this);
+        cvConsulta.setAlpha(0.3f);
+        cvConsulta.setEnabled(false);
 
         cvPedido = findViewById(R.id.cvPedido);
         cvPedido.setOnClickListener(this);
+        cvPedido.setAlpha(0.3f);
+        cvPedido.setEnabled(false);
 
         cvVencimiento = findViewById(R.id.cvVencimiento);
         cvVencimiento.setOnClickListener(this);
+        cvVencimiento.setAlpha(0.3f);
+        cvVencimiento.setEnabled(false);
 
         cvManualSearch = findViewById(R.id.cvManualSearch);
         cvManualSearch.setOnClickListener(this);
+        cvManualSearch.setAlpha(0.3f);
+        cvManualSearch.setEnabled(false);
 
         btnSettings = findViewById(R.id.btnSettings);
         btnSettings.setOnClickListener(this);
@@ -76,7 +99,12 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         tvBienvenida.setText(MessageFormat.format("{0} {1}", getString(R.string.bienvenido), usuario));
 
         tvSucursal = findViewById(R.id.tvSucursal);
-        tvSucursal.setText(MessageFormat.format("{0} {1}", "Sucursal:", serverAddress));
+        tvSucursal.setText(MessageFormat
+                .format(
+                        "{0} {1}",
+                        "Sucursal:",
+                        serverAddress)
+        );
     }
 
     private void recuperarPreferencias() {
@@ -88,7 +116,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     }
 
     private void getPermissions() {
-        ActivityCompat.requestPermissions(MainActivity.this, new String[] {Manifest.permission.CAMERA}, 0);
+        ActivityCompat.requestPermissions(
+                MainActivity.this,
+                new String[] {Manifest.permission.CAMERA},
+                0);
         progressDialog = new ProgressDialog(this);
         progressDialog.setTitle("Espere...");
         progressDialog.setMessage("Cargando Detalles de Producto...");

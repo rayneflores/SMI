@@ -23,7 +23,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-        android:id="@+id/tvConteoActivado"
+        android:id="@+id/tvConteoId"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Activado: "
@@ -35,7 +35,7 @@
         app:layout_constraintTop_toBottomOf="@+id/tvConteoTitle" />
 
     <TextView
-        android:id="@+id/tvConteoActivado2"
+        android:id="@+id/tvConteoId2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="0"
@@ -46,7 +46,7 @@
         app:layout_constraintTop_toBottomOf="@+id/tvConteoTitle" />
 
     <TextView
-        android:id="@+id/tvConteoCode"
+        android:id="@+id/tvConteoBarCode"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Code: "
@@ -55,10 +55,10 @@
         android:textSize="16sp"
         android:textStyle="bold"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tvConteoActivado" />
+        app:layout_constraintTop_toBottomOf="@+id/tvConteoId" />
 
     <TextView
-        android:id="@+id/tvConteoCode2"
+        android:id="@+id/tvConteoBarCode2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="0"
@@ -66,7 +66,7 @@
         android:layout_marginTop="8dp"
         android:textSize="14sp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tvConteoActivado" />
+        app:layout_constraintTop_toBottomOf="@+id/tvConteoId" />
 
     <TextView
         android:id="@+id/tvConteoCodLocal"
@@ -78,7 +78,7 @@
         android:textSize="16sp"
         android:textStyle="bold"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tvConteoCode" />
+        app:layout_constraintTop_toBottomOf="@+id/tvConteoBarCode" />
 
     <TextView
         android:id="@+id/tvConteoCodLocal2"
@@ -89,7 +89,7 @@
         android:layout_marginTop="8dp"
         android:textSize="14sp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tvConteoCode" />
+        app:layout_constraintTop_toBottomOf="@+id/tvConteoBarCode" />
 
     <TextView
         android:id="@+id/tvConteoDetalle"
