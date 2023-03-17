@@ -3,7 +3,7 @@ package com.ryfsystems.smi.Utils;
 public class Constants {
 
     //General Address of BackEnd Server
-    public static String INFRA_SERVER_ADDRESS = "https://farmaciasmagallanes.com/smi/";
+    public static String INFRA_SERVER_ADDRESS = "http://magallanes.ddns.net/smi/";
 
     //Users Querys
     public static String GET_ALL_USERS = "getUsers.php";
