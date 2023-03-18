@@ -1,0 +1,7 @@
+
+k	java:S117B"QRename this local variable to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(—Åà­øÿÿÿÿ
+k	java:S117F"QRename this local variable to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(¯¾™—þÿÿÿÿ
+x
+java:S1488%"bImmediately return this expression instead of assigning it to the temporary variable "viewHolder".(©–ë¬
+t	java:S120"ZRename this package name to match the regular expression '^[a-z_]+(\.[a-z_][a-z0-9_]*)*$'.(ÏŠ—Üýÿÿÿÿ
+P	java:S125a"<This block of commented-out lines of code should be removed.(öÊøJ
