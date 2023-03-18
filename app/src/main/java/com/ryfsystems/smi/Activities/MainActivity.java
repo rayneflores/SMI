@@ -88,8 +88,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         cvManualSearch = findViewById(R.id.cvManualSearch);
         cvManualSearch.setOnClickListener(this);
-        cvManualSearch.setAlpha(0.3f);
-        cvManualSearch.setEnabled(false);
 
         btnSettings = findViewById(R.id.btnSettings);
         btnSettings.setOnClickListener(this);

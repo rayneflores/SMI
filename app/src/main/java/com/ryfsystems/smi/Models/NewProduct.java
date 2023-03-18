@@ -3,26 +3,26 @@ package com.ryfsystems.smi.Models;
 import java.io.Serializable;
 
 public class NewProduct implements Serializable {
-    private Integer id_producto;
-    private String codigo_barras;
+    private Integer idProducto;
+    private String codigoBarras;
     private String detalle;
-    private String precio_venta;
-    private Integer precio_oferta;
+    private String precioVenta;
+    private Integer precioOferta;
 
-    public Integer getId_producto() {
-        return id_producto;
+    public Integer getIdProducto() {
+        return idProducto;
     }
 
-    public void setId_producto(Integer id_producto) {
-        this.id_producto = id_producto;
+    public void setIdProducto(Integer idProducto) {
+        this.idProducto = idProducto;
     }
 
-    public String getCodigo_barras() {
-        return codigo_barras;
+    public String getCodigoBarras() {
+        return codigoBarras;
     }
 
-    public void setCodigo_barras(String codigo_barras) {
-        this.codigo_barras = codigo_barras;
+    public void setCodigoBarras(String codigoBarras) {
+        this.codigoBarras = codigoBarras;
     }
 
     public String getDetalle() {
@@ -33,28 +33,49 @@ public class NewProduct implements Serializable {
         this.detalle = detalle;
     }
 
-    public String getPrecio_venta() {
-        return precio_venta;
+    public String getPrecioVenta() {
+        return precioVenta;
     }
 
-    public void setPrecio_venta(String precio_venta) {
-        this.precio_venta = precio_venta;
+    public void setPrecioVenta(String precioVenta) {
+        this.precioVenta = precioVenta;
     }
 
-    public Integer getPrecio_oferta() {
-        return precio_oferta;
+    public Integer getPrecioOferta() {
+        return precioOferta;
     }
 
-    public void setPrecio_oferta(Integer precio_oferta) {
-        this.precio_oferta = precio_oferta;
+    public void setPrecioOferta(Integer precioOferta) {
+        this.precioOferta = precioOferta;
+    }
+
+    public NewProduct() {
+    }
+
+    public NewProduct(Integer idProducto, String codigoBarras, String detalle,
+                      String precioVenta, Integer precioOferta) {
+        this.idProducto = idProducto;
+        this.codigoBarras = codigoBarras;
+        this.detalle = detalle;
+        this.precioVenta = precioVenta;
+        this.precioOferta = precioOferta;
+    }
+
+    @Override
+    public String toString() {
+        return  idProducto +
+                ", " + codigoBarras +
+                ", " + detalle +
+                ", " + precioVenta +
+                ", " + precioOferta;
     }
 
     public String toStringLabel() {
         return
-                id_producto +
-                        ", " + codigo_barras +
+                idProducto +
+                        ", " + codigoBarras +
                         ", " + detalle +
-                        ", " + precio_venta +
-                        ", " + precio_oferta;
+                        ", " + precioVenta +
+                        ", " + precioOferta;
     }
 }

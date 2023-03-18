@@ -25,14 +25,14 @@
             android:text="Activado:"
             android:textSize="@dimen/fontMini" />
         <TextView
-            android:id="@+id/tvListProductCode"
+            android:id="@+id/tvListProductId"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
             android:text="Code:"
             android:textSize="@dimen/fontMini" />
         <TextView
-            android:id="@+id/tvListProductCodLocal"
+            android:id="@+id/tvListProductBarCode"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"

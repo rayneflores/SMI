@@ -51,7 +51,7 @@
         android:layout_height="wrap_content"
         android:text="Codigo de Barras: "
         android:layout_marginStart="16dp"
-        android:layout_marginTop="8dp"
+        android:layout_marginTop="12dp"
         android:textSize="16sp"
         android:textStyle="bold"
         app:layout_constraintStart_toStartOf="parent"
@@ -63,7 +63,7 @@
         android:layout_height="wrap_content"
         android:text="0"
         android:layout_marginEnd="18dp"
-        android:layout_marginTop="8dp"
+        android:layout_marginTop="12dp"
         android:textSize="14sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tvConteoId" />
@@ -74,7 +74,7 @@
         android:layout_height="wrap_content"
         android:text="Detalle: "
         android:layout_marginStart="16dp"
-        android:layout_marginTop="8dp"
+        android:layout_marginTop="12dp"
         android:textSize="16sp"
         android:textStyle="bold"
         app:layout_constraintStart_toStartOf="parent"
@@ -86,7 +86,7 @@
         android:layout_height="wrap_content"
         android:text="0"
         android:layout_marginEnd="18dp"
-        android:layout_marginTop="8dp"
+        android:layout_marginTop="12dp"
         android:textSize="14sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tvConteoBarCode" />
@@ -115,24 +115,24 @@
         app:layout_constraintTop_toBottomOf="@+id/tvConteoDetalle" />
 
     <TextView
-        android:id="@+id/tvConteoPrecioOferta"
+        android:id="@+id/tvConteoPoferta"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Precio de Oferta:"
         android:layout_marginStart="16dp"
-        android:layout_marginTop="8dp"
+        android:layout_marginTop="12dp"
         android:textSize="16sp"
         android:textStyle="bold"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tvConteoPventa" />
 
     <TextView
-        android:id="@+id/tvConteoPrecioOferta2"
+        android:id="@+id/tvConteoPoferta2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="0"
         android:layout_marginEnd="18dp"
-        android:layout_marginTop="8dp"
+        android:layout_marginTop="12dp"
         android:textSize="14sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tvConteoPventa" />
@@ -149,6 +149,6 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tvConteoPrecioOferta" />
+        app:layout_constraintTop_toBottomOf="@+id/tvConteoPoferta" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

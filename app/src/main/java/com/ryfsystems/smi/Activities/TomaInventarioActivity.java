@@ -13,6 +13,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.android.volley.Request;
@@ -112,12 +113,12 @@ public class TomaInventarioActivity extends AppCompatActivity implements ZBarSca
                     try {
                         JSONObject jsonObject = response.getJSONObject("Product");
                         NewProduct newProduct = new NewProduct();
-                        newProduct.setId_producto(jsonObject.getInt("id_producto"));
-                        newProduct.setCodigo_barras(jsonObject.getString("codigo_barras"));
+                        newProduct.setIdProducto(jsonObject.getInt("id_producto"));
+                        newProduct.setCodigoBarras(jsonObject.getString("codigo_barras"));
                         newProduct.setDetalle(jsonObject.getString("detalle"));
-                        newProduct.setPrecio_venta(jsonObject.getString("precio_venta"));
-                        newProduct.setPrecio_oferta(jsonObject.getInt("precio_oferta"));
-                        extras.putSerializable("NewProduct", newProduct);
+                        newProduct.setPrecioVenta(jsonObject.getString("precio_venta"));
+                        newProduct.setPrecioOferta(jsonObject.getInt("precio_oferta"));
+                        extras.putSerializable("newProduct", newProduct);
                         intent = new Intent(getApplicationContext(), ConteoActivity.class);
                         intent.putExtras(extras);
                         startActivity(intent);
@@ -135,5 +136,10 @@ public class TomaInventarioActivity extends AppCompatActivity implements ZBarSca
         });
         RequestQueue requestQueue = Volley.newRequestQueue(this);
         requestQueue.add(jObjReq);
+    }
+
+    @Override
+    protected void onSaveInstanceState(@NonNull Bundle outState) {
+        super.onSaveInstanceState(outState);
     }
 }

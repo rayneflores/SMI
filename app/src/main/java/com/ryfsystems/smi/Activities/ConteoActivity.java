@@ -18,6 +18,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.toolbox.StringRequest;
+import com.android.volley.toolbox.Volley;
 import com.google.android.material.textfield.TextInputEditText;
 import com.ryfsystems.smi.Models.NewProduct;
 import com.ryfsystems.smi.R;
@@ -29,12 +30,12 @@ import java.util.Map;
 public class ConteoActivity extends AppCompatActivity {
 
     Bundle received;
+    Intent intent;
     Button btnConteoContar;
     int module;
     int serverId;
     Intent nextIntent;
     NewProduct productReceived;
-    RequestQueue requestQueue;
     String rol;
     String serverAddress;
     String usuario;
@@ -50,8 +51,8 @@ public class ConteoActivity extends AppCompatActivity {
     TextView tvConteoDetalle;
     TextView tvConteoDetalle2;
     TextView tvConteoPventa;
-    TextView tvConteoPOferta;
-    TextView tvConteoPOferta2;
+    TextView tvConteoPoferta;
+    TextView tvConteoPoferta2;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -71,52 +72,54 @@ public class ConteoActivity extends AppCompatActivity {
         tvConteoDetalle2 = findViewById(R.id.tvConteoDetalle2);
         tvConteoPventa = findViewById(R.id.tvConteoPventa);
         tvConteoPventa2 = findViewById(R.id.tvConteoPventa2);
-        tvConteoPOferta = findViewById(R.id.tvConteoPrecioOferta);
-        tvConteoPOferta2 = findViewById(R.id.tvConteoPrecioOferta2);
+        tvConteoPoferta = findViewById(R.id.tvConteoPoferta);
+        tvConteoPoferta2 = findViewById(R.id.tvConteoPoferta2);
 
-        received = getIntent().getExtras();
+        intent = getIntent();
 
         //Metodo Nuevo para Generar la Informacion a partir de la consulta
-        if (received != null) {
-            productReceived = (NewProduct) received.getSerializable("NewProduct");
-            tvConteoTitle.setText(R.string.generacion_etiqueta);
-            tvConteoId2.setText(productReceived.getId_producto());
-            tvConteoBarCode2.setText(productReceived.getCodigo_barras());
-            tvConteoDetalle2.setText(productReceived.getDetalle());
-            if (productReceived.getPrecio_oferta() > 0) {
-                SpannableString pventa = new SpannableString(productReceived.getPrecio_venta());
-                pventa.setSpan(new StrikethroughSpan(), 0, 4, 0);
-                tvConteoPventa2.setText(pventa);
-            } else {
-                tvConteoPventa2.setText(productReceived.getPrecio_venta());
+        if (intent.getExtras().containsKey("newProduct")) {
+            productReceived = (NewProduct) intent.getSerializableExtra("newProduct");
+
+            module = intent.getIntExtra("module", 0);
+            switch (module) {
+                case 2:
+                    tvConteoTitle.setText(R.string.generacion_etiqueta);
+                    tvConteoId2.setText(productReceived.getIdProducto().toString());
+                    tvConteoBarCode2.setText(productReceived.getCodigoBarras());
+                    tvConteoDetalle2.setText(productReceived.getDetalle());
+                    if (productReceived.getPrecioOferta() > 0) {
+                        SpannableString pventa = new SpannableString(productReceived.getPrecioVenta());
+                        pventa.setSpan(new StrikethroughSpan(), 0, 4, 0);
+                        tvConteoPventa2.setText(pventa);
+                    } else {
+                        tvConteoPventa2.setText(productReceived.getPrecioVenta());
+                    }
+                    tvConteoPoferta2.setText(productReceived.getPrecioOferta().toString());
+                    btnConteoContar.setText(R.string.guardar_etiqueta);
+                    break;
             }
-            tvConteoPOferta2.setText(productReceived.getPrecio_oferta().toString());
-            btnConteoContar.setText(R.string.guardar_etiqueta);
         }
 
         //Tambien hay Cambio de Comportamiento para el boton y en el metodo privado
         btnConteoContar.setOnClickListener(
                 view -> updateLabelProduct(
-                        productReceived.getId_producto(),
-                        productReceived.getCodigo_barras(),
+                        String.valueOf(productReceived.getIdProducto()),
+                        productReceived.getCodigoBarras(),
                         productReceived.getDetalle(),
-                        productReceived.getPrecio_venta(),
-                        productReceived.getPrecio_oferta()
+                        productReceived.getPrecioVenta(),
+                        String.valueOf(productReceived.getPrecioOferta())
                 )
         );
     }
 
-    private void updateLabelProduct(
-            Integer id_producto,
-            String codigo_barras,
-            String detalle,
-            String precio_venta,
-            Integer precio_oferta) {
+    private void updateLabelProduct(String idProducto, String codigoBarras, String detalle, String precioVenta, String precioOferta) {
         HttpsTrustManager.allowAllSSL();
         query = NEW_SET_LABEL_PRODUCT;
+        String url = path + query;
         StringRequest stringRequest =
                 new StringRequest(Request.Method.POST,
-                        path + query,
+                        url,
                         response -> Toast
                                 .makeText(
                                         getApplicationContext(),
@@ -133,15 +136,19 @@ public class ConteoActivity extends AppCompatActivity {
                     @Override
                     protected Map<String, String> getParams() {
                         Map<String, String> params = new HashMap<>();
-                        params.put("id_producto", String.valueOf(id_producto));
-                        params.put("codigo_barras", codigo_barras);
+                        params.put("id_producto", idProducto);
+                        params.put("codigo_barras", codigoBarras);
                         params.put("detalle", detalle);
-                        params.put("precio_venta", precio_venta);
-                        params.put("precio_oferta", precio_oferta.toString());
+                        params.put("precio_venta", precioVenta);
+                        params.put("precio_oferta", precioOferta);
                         return params;
                     }
                 };
+        RequestQueue requestQueue = Volley.newRequestQueue(this);
         requestQueue.add(stringRequest);
+        nextIntent = new Intent(getApplicationContext(), MainActivity.class);
+        startActivity(nextIntent);
+        finish();
     }
 
     private void recuperarPreferencias() {

@@ -17,26 +17,18 @@
         android:orientation="vertical">
 
         <TextView
-            android:id="@+id/tvListProductActivado"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:layout_marginStart="8dp"
-            android:text="Activado:"
-            android:textSize="@dimen/fontMini" />
-        <TextView
             android:id="@+id/tvListProductId"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
-            android:text="Code:"
+            android:text="Id del Producto:"
             android:textSize="@dimen/fontMini" />
         <TextView
             android:id="@+id/tvListProductBarCode"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
-            android:text="CodLocal:"
+            android:text="Codigo de Barras:"
             android:textSize="@dimen/fontMini" />
         <TextView
             android:id="@+id/tvListProductDetalle"
@@ -46,40 +38,19 @@
             android:text="Detalle:"
             android:textSize="@dimen/fontMini" />
         <TextView
-            android:id="@+id/tvListProductDep"
+            android:id="@+id/tvListProductPventa"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
-            android:text="Dep:"
+            android:text="Precio de Venta:"
             android:textSize="@dimen/fontMini" />
         <TextView
-            android:id="@+id/tvListProductEan_13"
+            android:id="@+id/tvListProductpOferta"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
-            android:text="Ean_13:"
+            android:layout_marginBottom="8dp"
+            android:text="Precio Oferta: "
             android:textSize="@dimen/fontMini" />
-        <TextView
-            android:id="@+id/tvListProductLinea"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
-            android:text="Linea:"
-            android:textSize="@dimen/fontMini" />
-        <TextView
-            android:id="@+id/tvListProductSucursal"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
-            android:text="Sucursal:"
-            android:textSize="@dimen/fontMini" />
-        <TextView
-            android:id="@+id/tvListProductStock"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
-            android:text="Stock:"
-            android:textSize="@dimen/fontMini"
-            android:layout_marginBottom="8dp"/>
     </LinearLayout>
 </androidx.cardview.widget.CardView>

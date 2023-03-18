@@ -33,8 +33,8 @@ public class ProductViewHolder extends RecyclerView.ViewHolder {
         });
 
         tvListProductActivado = mView.findViewById(R.id.tvListProductActivado);
-        tvListProductCode = mView.findViewById(R.id.tvListProductCode);
-        tvListProductCodLocal = mView.findViewById(R.id.tvListProductCodLocal);
+        tvListProductCode = mView.findViewById(R.id.tvListProductId);
+        tvListProductCodLocal = mView.findViewById(R.id.tvListProductBarCode);
         tvListProductDetalle = mView.findViewById(R.id.tvListProductDetalle);
         tvListProductDep = mView.findViewById(R.id.tvListProductDep);
         tvListProductEan_13 = mView.findViewById(R.id.tvListProductEan_13);
