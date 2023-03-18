@@ -53,4 +53,5 @@ public class Constants {
     //NEW QUERYS
     public static String NEW_SEARCH_PRODUCT_BY_CODE = "productByCodeBar.php?codeBar=";
     public static String NEW_SET_LABEL_PRODUCT = "newSetLabelProduct.php";
+    public static String NEW_GET_QUERY_PRODUCT = "newGetQueryProduct.php?detalle=";
 }

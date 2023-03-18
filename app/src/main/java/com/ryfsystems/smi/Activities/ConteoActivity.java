@@ -29,7 +29,6 @@ import java.util.Map;
 
 public class ConteoActivity extends AppCompatActivity {
 
-    Bundle received;
     Intent intent;
     Button btnConteoContar;
     int module;

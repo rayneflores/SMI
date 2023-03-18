@@ -29,6 +29,7 @@ import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
@@ -106,11 +107,11 @@ public class NewProductListActivity extends AppCompatActivity {
         cbVencimiento.setAlpha(0.3f);
         cbVencimiento.setEnabled(false);
 
-        module = 1;
+        module = 2;
 
         recuperarPreferencias();
 
-        listProducts(INFRA_SERVER_ADDRESS + GET_PRODUCTS_COUNT + serverId, module);
+        listProducts(INFRA_SERVER_ADDRESS + GET_PRODUCTS_LABEL + serverId, module);
 
         cbEtiquetas.setChecked(true);
 
@@ -680,5 +681,10 @@ public class NewProductListActivity extends AppCompatActivity {
         nextIntent = new Intent(getApplicationContext(), MainActivity.class);
         startActivity(nextIntent);
         finish();
+    }
+
+    @Override
+    protected void onSaveInstanceState(@NonNull Bundle outState) {
+        super.onSaveInstanceState(outState);
     }
 }

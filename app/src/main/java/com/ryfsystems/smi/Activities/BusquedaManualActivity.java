@@ -1,8 +1,5 @@
 package com.ryfsystems.smi.Activities;
 
-import static com.ryfsystems.smi.Utils.Constants.GET_QUERY_PRODUCT1;
-import static com.ryfsystems.smi.Utils.Constants.GET_QUERY_PRODUCT2;
-import static com.ryfsystems.smi.Utils.Constants.GET_QUERY_PRODUCT3;
 import static com.ryfsystems.smi.Utils.Constants.INFRA_SERVER_ADDRESS;
 import static com.ryfsystems.smi.Utils.Constants.NEW_SEARCH_PRODUCT_BY_CODE;
 
@@ -16,6 +13,7 @@ import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.android.volley.Request;
@@ -38,6 +36,7 @@ public class BusquedaManualActivity extends AppCompatActivity {
     Button btnSearch;
     CheckBox cbConteo1, cbEtiquetas1, cbSeguimiento1, cbConsulta1, cbPedido1, cbVencimiento1, cbQueryMode1, cbQueryMode2;
     Integer module, serverId;
+    Intent intent;
     Intent nextIntent;
     String path = INFRA_SERVER_ADDRESS;
     String rol, usuario, serverAddress, query;
@@ -82,7 +81,7 @@ public class BusquedaManualActivity extends AppCompatActivity {
         cbQueryMode1.setChecked(true);
         btnSearch.setEnabled(false);
 
-        module = 1;
+        module = 2;
 
         cbQueryMode1.setOnCheckedChangeListener((buttonView, isChecked) -> {
             if (isChecked) {
@@ -221,32 +220,48 @@ public class BusquedaManualActivity extends AppCompatActivity {
             String code = Objects.requireNonNull(titCodigo.getText()).toString();
 
             if (cbQueryMode1.isChecked()) {
-                buscarDatosProductoByCode(code);
+                buscarPorBarCode(code);
             } else {
-                buscarDatosProductoByDescription(code);
+                buscarPorDetalle(code);
             }
         });
     }
 
-    public void buscarDatosProductoByCode(String code) {
+    public void buscarPorBarCode(String code) {
         HttpsTrustManager.allowAllSSL();
-
         query = NEW_SEARCH_PRODUCT_BY_CODE;
-
-        JsonObjectRequest jObReq = new JsonObjectRequest(Request.Method.GET, path + query + code, null, response -> {
-            try {
-                JSONObject productResponse = response.getJSONObject("Product");
-                NewProduct newProduct = new NewProduct();
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-
-        }, error -> {
-            Toast.makeText(getApplicationContext(), "Fallo en la Lectura, Reintente!!!", Toast.LENGTH_SHORT).show();
+        JsonObjectRequest jObjReq = new JsonObjectRequest(
+                Request.Method.GET,
+                path + query + code,
+                null,
+                response -> {
+                    try {
+                        JSONObject jsonObject = response.getJSONObject("Product");
+                        NewProduct newProduct = new NewProduct();
+                        newProduct.setIdProducto(jsonObject.getInt("id_producto"));
+                        newProduct.setCodigoBarras(jsonObject.getString("codigo_barras"));
+                        newProduct.setDetalle(jsonObject.getString("detalle"));
+                        newProduct.setPrecioVenta(jsonObject.getString("precio_venta"));
+                        newProduct.setPrecioOferta(jsonObject.getInt("precio_oferta"));
+                        extras.putSerializable("newProduct", newProduct);
+                        intent = new Intent(getApplicationContext(), ConteoActivity.class);
+                        extras.putInt("module", module);
+                        intent.putExtras(extras);
+                        startActivity(intent);
+                        finish();
+                    } catch (Exception exception) {
+                        exception.printStackTrace();
+                    }
+                }, error -> {
+            Toast.makeText(
+                            getApplicationContext(),
+                            "Fallo en la Lectura, Reintente!!!",
+                            Toast.LENGTH_SHORT)
+                    .show();
             onResume();
         });
         RequestQueue requestQueue = Volley.newRequestQueue(this);
-        requestQueue.add(jObReq);
+        requestQueue.add(jObjReq);
 
         /*switch (serverId) {
             case 1:
@@ -319,10 +334,10 @@ public class BusquedaManualActivity extends AppCompatActivity {
         requestQueue.add(jsonObjectRequest);*/
     }
 
-    public void buscarDatosProductoByDescription(String description) {
+    public void buscarPorDetalle(String description) {
         HttpsTrustManager.allowAllSSL();
 
-        switch (serverId) {
+        /*switch (serverId) {
             case 1:
                 query = GET_QUERY_PRODUCT1;
                 break;
@@ -332,9 +347,9 @@ public class BusquedaManualActivity extends AppCompatActivity {
             case 3:
                 query = GET_QUERY_PRODUCT3;
                 break;
-        }
+        }*/
 
-        nextIntent = new Intent(getApplicationContext(), ProductSelectionActivity.class);
+        nextIntent = new Intent(getApplicationContext(), NewProductSelectionActivity.class);
         extras.putInt("module", module);
         extras.putString("detalle", description);
         nextIntent.putExtras(extras);
@@ -356,5 +371,10 @@ public class BusquedaManualActivity extends AppCompatActivity {
         nextIntent = new Intent(getApplicationContext(), MainActivity.class);
         startActivity(nextIntent);
         finish();
+    }
+
+    @Override
+    protected void onSaveInstanceState(@NonNull Bundle outState) {
+        super.onSaveInstanceState(outState);
     }
 }

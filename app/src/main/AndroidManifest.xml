@@ -57,6 +57,12 @@
         <activity
             android:name=".Activities.MainActivity"
             android:exported="true" />
+        <activity
+            android:name=".Activities.NewProductSelectionActivity"
+            android:exported="true" />
+        <activity
+            android:name=".Activities.NewProductListActivity"
+            android:exported="true" />
     </application>
 
 </manifest>

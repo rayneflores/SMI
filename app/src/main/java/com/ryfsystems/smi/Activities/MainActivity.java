@@ -10,6 +10,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.cardview.widget.CardView;
@@ -65,6 +66,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         cvChecklist = findViewById(R.id.cvChecklist);
         cvChecklist.setOnClickListener(this);
+        cvChecklist.setAlpha(0.3f);
+        cvChecklist.setEnabled(false);
 
         cvSeguimiento = findViewById(R.id.cvSeguimiento);
         cvSeguimiento.setOnClickListener(this);
@@ -181,7 +184,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 break;
             case R.id.cvChecklist:
                 extras.putInt("serverId", serverId);
-                i = new Intent(getApplicationContext(), ProductListActivity.class);
+                i = new Intent(getApplicationContext(), NewProductListActivity.class);
                 startActivity(i);
                 finish();
                 break;
@@ -228,5 +231,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         Intent mainIntent = new Intent(getApplicationContext(), LoginActivity.class);
         startActivity(mainIntent);
         finish();
+    }
+
+    @Override
+    protected void onSaveInstanceState(@NonNull Bundle outState) {
+        super.onSaveInstanceState(outState);
     }
 }
