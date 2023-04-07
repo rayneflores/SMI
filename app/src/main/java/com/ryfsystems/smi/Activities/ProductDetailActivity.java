@@ -39,7 +39,7 @@ public class ProductDetailActivity extends AppCompatActivity {
     Bundle received;
     Button btnDetailOption;
     Double margen, vtaSem;
-    int module, serverId;
+    int module, serverId, userId;
     Intent nextIntent;
     Long poferta, pventa, costoProm, stock = 0L;
     Product productReceived;
@@ -183,6 +183,7 @@ public class ProductDetailActivity extends AppCompatActivity {
         usuario = preferences.getString("name", "");
         serverAddress = preferences.getString("serverAddress", "");
         serverId = preferences.getInt("serverId", 1);
+        userId = preferences.getInt("userId", 1);
     }
 
     private void updateReqProduct(

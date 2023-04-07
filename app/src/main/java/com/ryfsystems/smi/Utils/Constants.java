@@ -15,7 +15,7 @@ public class Constants {
 
     //Products Querys
     public static String GET_PRODUCTS_COUNT = "getProductsCount.php?codSucursal=";
-    public static String GET_PRODUCTS_LABEL = "getProductsLabel.php";
+    //public static String GET_PRODUCTS_LABEL = "getProductsLabel.php?id_suc=";
     public static String GET_PRODUCTS_LABEL2 = "getProductsLabel2.php";
     public static String GET_PRODUCTS_LABEL3 = "getProductsLabel3.php";
     public static String GET_PRODUCTS_FOLLOW = "getProductsFollow.php?codSucursal=";
@@ -42,7 +42,7 @@ public class Constants {
 
     //Send Data
     public static String SEND_COUNT_DATA = "sendCountData.php?codSucursal=";
-    public static String SEND_LABEL_DATA = "sendLabelData.php";
+    //public static String SEND_LABEL_DATA = "sendLabelData.php";
     public static String SEND_LABEL_DATA2 = "sendLabelData2.php";
     public static String SEND_LABEL_DATA3 = "sendLabelData3.php";
     public static String SEND_FOLLOW_DATA = "sendFollowData.php?codSucursal=";
@@ -54,4 +54,6 @@ public class Constants {
     public static String NEW_SEARCH_PRODUCT_BY_CODE = "productByCodeBar.php?codeBar=";
     public static String NEW_SET_LABEL_PRODUCT = "newSetLabelProduct.php";
     public static String NEW_GET_QUERY_PRODUCT = "newGetQueryProduct.php?detalle=";
+    public static String NEW_GET_PRODUCTS_LABEL = "newGetProductsLabel.php?id_suc=";
+    public static String SEND_LABEL_DATA = "sendLabelData.php?id_suc=";
 }

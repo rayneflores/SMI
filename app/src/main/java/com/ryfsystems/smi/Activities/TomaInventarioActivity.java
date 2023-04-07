@@ -34,6 +34,7 @@ public class TomaInventarioActivity extends AppCompatActivity implements ZBarSca
     Bundle received;
     int module;
     int serverId;
+    int userId;
     Intent nextIntent;
     Intent intent;
     private static final String TAG = "ScannerLog";
@@ -65,6 +66,7 @@ public class TomaInventarioActivity extends AppCompatActivity implements ZBarSca
         rol = preferences.getString("role", "");
         usuario = preferences.getString("name", "");
         serverId = preferences.getInt("serverId", 1);
+        userId = preferences.getInt("userId",1);
     }
 
     @Override

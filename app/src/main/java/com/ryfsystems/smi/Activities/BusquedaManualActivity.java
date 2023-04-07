@@ -35,7 +35,7 @@ public class BusquedaManualActivity extends AppCompatActivity {
     Bundle extras;
     Button btnSearch;
     CheckBox cbConteo1, cbEtiquetas1, cbSeguimiento1, cbConsulta1, cbPedido1, cbVencimiento1, cbQueryMode1, cbQueryMode2;
-    Integer module, serverId;
+    Integer module, serverId, userId;
     Intent intent;
     Intent nextIntent;
     String path = INFRA_SERVER_ADDRESS;
@@ -362,6 +362,7 @@ public class BusquedaManualActivity extends AppCompatActivity {
         rol = preferences.getString("role", "");
         usuario = preferences.getString("name", "");
         serverAddress = preferences.getString("serverAddress", "");
+        userId = preferences.getInt("userId",1);
         serverId = preferences.getInt("serverId", 1);
     }
 

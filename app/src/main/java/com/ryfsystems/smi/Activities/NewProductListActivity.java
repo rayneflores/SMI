@@ -3,15 +3,13 @@ package com.ryfsystems.smi.Activities;
 import static com.ryfsystems.smi.Utils.Constants.GET_PRODUCTS_COUNT;
 import static com.ryfsystems.smi.Utils.Constants.GET_PRODUCTS_DEFECT;
 import static com.ryfsystems.smi.Utils.Constants.GET_PRODUCTS_FOLLOW;
-import static com.ryfsystems.smi.Utils.Constants.GET_PRODUCTS_LABEL;
 import static com.ryfsystems.smi.Utils.Constants.GET_PRODUCTS_REQUEST;
 import static com.ryfsystems.smi.Utils.Constants.INFRA_SERVER_ADDRESS;
+import static com.ryfsystems.smi.Utils.Constants.NEW_GET_PRODUCTS_LABEL;
 import static com.ryfsystems.smi.Utils.Constants.SEND_COUNT_DATA;
 import static com.ryfsystems.smi.Utils.Constants.SEND_DEFECT_DATA;
 import static com.ryfsystems.smi.Utils.Constants.SEND_FOLLOW_DATA;
 import static com.ryfsystems.smi.Utils.Constants.SEND_LABEL_DATA;
-import static com.ryfsystems.smi.Utils.Constants.SEND_LABEL_DATA2;
-import static com.ryfsystems.smi.Utils.Constants.SEND_LABEL_DATA3;
 import static com.ryfsystems.smi.Utils.Constants.SEND_REQUEST_DATA;
 
 import android.Manifest;
@@ -22,7 +20,6 @@ import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.os.Bundle;
-import android.os.Environment;
 import android.provider.Settings;
 import android.view.View;
 import android.widget.Button;
@@ -67,7 +64,7 @@ public class NewProductListActivity extends AppCompatActivity {
     CheckBox cbSeguimiento;
     CheckBox cbPedido;
     CheckBox cbVencimiento;
-    int module, serverId;
+    int module, serverId, userId;
     Intent nextIntent;
     JsonObjectRequest jsonObjectRequest;
     List<NewProduct> productList = new ArrayList<>();
@@ -111,7 +108,7 @@ public class NewProductListActivity extends AppCompatActivity {
 
         recuperarPreferencias();
 
-        listProducts(INFRA_SERVER_ADDRESS + GET_PRODUCTS_LABEL + serverId, module);
+        listProducts(INFRA_SERVER_ADDRESS + NEW_GET_PRODUCTS_LABEL + serverId + "&id_user=" + userId, module);
 
         cbEtiquetas.setChecked(true);
 
@@ -133,18 +130,7 @@ public class NewProductListActivity extends AppCompatActivity {
 
         cbEtiquetas.setOnCheckedChangeListener((compoundButton, b) -> {
             if (cbEtiquetas.isChecked()){
-                query = GET_PRODUCTS_LABEL;
-                /*switch (serverId) {
-                    case 1:
-                        query = GET_PRODUCTS_LABEL;
-                        break;
-                    case 2:
-                        query = GET_PRODUCTS_LABEL2;
-                        break;
-                    case 3:
-                        query = GET_PRODUCTS_LABEL3;
-                        break;
-                }*/
+                query = NEW_GET_PRODUCTS_LABEL;
                 btnEnviar.setEnabled(true);
                 module = 2;
                 cbConteo.setChecked(false);
@@ -235,6 +221,7 @@ public class NewProductListActivity extends AppCompatActivity {
         rol = preferences.getString("role", "");
         usuario = preferences.getString("name", "");
         serverId = preferences.getInt("serverId", 1);
+        userId = preferences.getInt("userId",1);
     }
 
     private void enviarDatos(String path, int module) {
@@ -264,17 +251,7 @@ public class NewProductListActivity extends AppCompatActivity {
                 queue.add(stringRequest);
                 break;
             case 2:
-                switch (serverId) {
-                    case 1:
-                        query = SEND_LABEL_DATA;
-                        break;
-                    case 2:
-                        query = SEND_LABEL_DATA2;
-                        break;
-                    case 3:
-                        query = SEND_LABEL_DATA3;
-                        break;
-                }
+                query = SEND_LABEL_DATA + serverId + "&id_user=" + userId;
                 stringRequest =
                         new StringRequest(
                                 Request.Method.GET,
@@ -399,8 +376,8 @@ public class NewProductListActivity extends AppCompatActivity {
                             product.setIdProducto(jsonObject.getInt("id_producto"));
                             product.setCodigoBarras(jsonObject.getString("codigo_barras"));
                             product.setDetalle(jsonObject.getString("detalle"));
-                            product.setPrecioVenta(jsonObject.getString("pventa"));
-                            product.setPrecioOferta(jsonObject.getInt("p_oferta"));
+                            product.setPrecioVenta(jsonObject.getString("precio_venta"));
+                            product.setPrecioOferta(jsonObject.getInt("precio_oferta"));
                             productList.add(product);
                         }
                         productAdapterLabel = new NewProductAdapterLabel(NewProductListActivity.this, productList);
@@ -538,7 +515,7 @@ public class NewProductListActivity extends AppCompatActivity {
                 enviarDatos(INFRA_SERVER_ADDRESS, module);*/
                 break;
             case 2:
-                csvData = "Id_Producto, Codigo_Barras, detalle, pventa, poferta \n";
+                /*csvData = "Id_Producto, Codigo_Barras, detalle, pventa, poferta \n";
                 for (int i = 0; i < productList.size(); i++) {
                     NewProduct product = new NewProduct();
                     product.setIdProducto(productList.get(i).getIdProducto());
@@ -550,13 +527,17 @@ public class NewProductListActivity extends AppCompatActivity {
                     csvData += toCSV(data, module) + "\n";
                 }
                 directory = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS);
-                uniqueFileName = "reporte_etiquetas_magallEAN_suc_"+serverId+".csv";
+                uniqueFileName = "reporte_etiquetas_magallEAN_suc_"+serverId+"_user_"+userId+".csv";
                 file = new File(directory, uniqueFileName);
                 fileWriter = new FileWriter(file);
                 fileWriter.write(csvData);
                 fileWriter.flush();
-                fileWriter.close();
-                Toast.makeText(NewProductListActivity.this, "Archivo Exportado Satisfactoriamente", Toast.LENGTH_SHORT).show();
+                fileWriter.close();*/
+                Toast.makeText(
+                        NewProductListActivity.this,
+                        "Archivo Eliminado Satisfactoriamente",
+                        Toast.LENGTH_SHORT)
+                        .show();
                 enviarDatos(INFRA_SERVER_ADDRESS, module);
                 break;
             case 3:

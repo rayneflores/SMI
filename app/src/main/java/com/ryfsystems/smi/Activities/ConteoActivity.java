@@ -33,6 +33,7 @@ public class ConteoActivity extends AppCompatActivity {
     Button btnConteoContar;
     int module;
     int serverId;
+    int userId;
     Intent nextIntent;
     NewProduct productReceived;
     String rol;
@@ -125,12 +126,15 @@ public class ConteoActivity extends AppCompatActivity {
                                         response,
                                         Toast.LENGTH_SHORT)
                                 .show(),
-                        error -> Toast
-                                .makeText(
-                                        getApplicationContext(),
-                                        "Error_Det: " + error.getMessage(),
-                                        Toast.LENGTH_SHORT)
-                                .show()
+                        error -> {
+                            Toast
+                                    .makeText(
+                                            getApplicationContext(),
+                                            "Error_Det: " + error.getMessage(),
+                                            Toast.LENGTH_SHORT)
+                                    .show();
+                            System.out.println("Db Error: " + error.getMessage());
+                        }
                 ) {
                     @Override
                     protected Map<String, String> getParams() {
@@ -140,6 +144,8 @@ public class ConteoActivity extends AppCompatActivity {
                         params.put("detalle", detalle);
                         params.put("precio_venta", precioVenta);
                         params.put("precio_oferta", precioOferta);
+                        params.put("id_user", String.valueOf(userId));
+                        params.put("id_suc", String.valueOf(serverId));
                         return params;
                     }
                 };
@@ -156,6 +162,7 @@ public class ConteoActivity extends AppCompatActivity {
         usuario = preferences.getString("name", "");
         serverAddress = preferences.getString("serverAddress", "");
         serverId = preferences.getInt("serverId", 1);
+        userId = preferences.getInt("userId",1);
     }
 
     @Override

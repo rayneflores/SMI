@@ -34,7 +34,7 @@ import java.util.List;
 public class NewProductSelectionActivity extends AppCompatActivity {
 
     Bundle received;
-    int module, serverId;
+    int module, serverId, userId;
     Intent nextIntent;
     JsonObjectRequest jsonObjectRequest;
     List<NewProduct> productList = new ArrayList<>();
@@ -111,6 +111,7 @@ public class NewProductSelectionActivity extends AppCompatActivity {
         rol = preferences.getString("role", "");
         usuario = preferences.getString("name", "");
         serverId = preferences.getInt("serverId", 1);
+        userId = preferences.getInt("userId",1);
     }
 
     @Override

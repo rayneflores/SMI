@@ -18,7 +18,6 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.toolbox.JsonObjectRequest;
@@ -43,6 +42,7 @@ public class LoginActivity extends AppCompatActivity {
     EditText tvUsuario;
     EditText tvPassword;
     int serverId;
+    int userId;
     Intent nextIntent;
     private ArrayList<Server> serverList;
     RequestQueue queue;
@@ -155,6 +155,7 @@ public class LoginActivity extends AppCompatActivity {
                     try {
                         JSONObject object = response.getJSONObject("User");
                         user = new User(
+                                object.getInt("id"),
                                 object.getString("name"),
                                 object.getString("rol")
                         );
@@ -182,6 +183,7 @@ public class LoginActivity extends AppCompatActivity {
         tvPassword.setText(preferences.getString("password", ""));
         serverAddress = preferences.getString("serverAddress", "");
         serverId = preferences.getInt("serverId", 1);
+        userId = preferences.getInt("userId",1);
     }
 
     private void guardarPreferencias() {
@@ -189,6 +191,7 @@ public class LoginActivity extends AppCompatActivity {
         SharedPreferences.Editor editor = preferences.edit();
         editor.putString("name", user.getName());
         editor.putString("role", user.getRol());
+        editor.putInt("userId", user.getId());
         editor.putBoolean("sesion", true);
         editor.putString("serverAddress", serverAddress);
         editor.putInt("serverId", serverId);

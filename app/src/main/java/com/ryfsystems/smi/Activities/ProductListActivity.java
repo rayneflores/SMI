@@ -3,9 +3,6 @@ package com.ryfsystems.smi.Activities;
 import static com.ryfsystems.smi.Utils.Constants.GET_PRODUCTS_COUNT;
 import static com.ryfsystems.smi.Utils.Constants.GET_PRODUCTS_DEFECT;
 import static com.ryfsystems.smi.Utils.Constants.GET_PRODUCTS_FOLLOW;
-import static com.ryfsystems.smi.Utils.Constants.GET_PRODUCTS_LABEL;
-import static com.ryfsystems.smi.Utils.Constants.GET_PRODUCTS_LABEL2;
-import static com.ryfsystems.smi.Utils.Constants.GET_PRODUCTS_LABEL3;
 import static com.ryfsystems.smi.Utils.Constants.GET_PRODUCTS_REQUEST;
 import static com.ryfsystems.smi.Utils.Constants.INFRA_SERVER_ADDRESS;
 import static com.ryfsystems.smi.Utils.Constants.SEND_COUNT_DATA;
@@ -64,7 +61,7 @@ public class ProductListActivity extends AppCompatActivity {
 
     Button btnEnviar;
     CheckBox cbConteo, cbEtiquetas, cbSeguimiento, cbPedido, cbVencimiento;
-    int module, serverId;
+    int module, serverId, userId;
     Intent nextIntent;
     JsonObjectRequest jsonObjectRequest;
     List<Product> productList = new ArrayList<>();
@@ -121,9 +118,9 @@ public class ProductListActivity extends AppCompatActivity {
 
         cbEtiquetas.setOnCheckedChangeListener((compoundButton, b) -> {
             if (cbEtiquetas.isChecked()){
-                switch (serverId) {
+                /*switch (serverId) {
                     case 1:
-                        query = GET_PRODUCTS_LABEL;
+                        query = NEW_GET_PRODUCTS_LABEL;
                         break;
                     case 2:
                         query = GET_PRODUCTS_LABEL2;
@@ -131,7 +128,7 @@ public class ProductListActivity extends AppCompatActivity {
                     case 3:
                         query = GET_PRODUCTS_LABEL3;
                         break;
-                }
+                }*/
                 btnEnviar.setEnabled(true);
                 module = 2;
                 cbConteo.setChecked(false);
@@ -222,6 +219,7 @@ public class ProductListActivity extends AppCompatActivity {
         rol = preferences.getString("role", "");
         usuario = preferences.getString("name", "");
         serverId = preferences.getInt("serverId", 1);
+        userId = preferences.getInt("userId",1);
     }
 
     private void enviarDatos(String path, int module) {

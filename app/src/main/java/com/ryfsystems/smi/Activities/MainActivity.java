@@ -34,6 +34,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     CardView cvManualSearch;
     Intent nextIntent;
     int serverId;
+    int userId;
     ProgressDialog progressDialog;
     String rol;
     String usuario;
@@ -66,8 +67,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         cvChecklist = findViewById(R.id.cvChecklist);
         cvChecklist.setOnClickListener(this);
-        cvChecklist.setAlpha(0.3f);
-        cvChecklist.setEnabled(false);
 
         cvSeguimiento = findViewById(R.id.cvSeguimiento);
         cvSeguimiento.setOnClickListener(this);
@@ -116,6 +115,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         rol = preferences.getString("role", "");
         usuario = preferences.getString("name", "");
         serverAddress = preferences.getString("serverAddress", "");
+        userId = preferences.getInt("userId",1);
         serverId = preferences.getInt("serverId", 1);
     }
 
@@ -218,6 +218,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 break;
             case R.id.cvManualSearch:
                 extras.putInt("serverId", serverId);
+                extras.putInt("userId", userId);
                 i = new Intent(getApplicationContext(), BusquedaManualActivity.class);
                 startActivity(i);
                 finish();

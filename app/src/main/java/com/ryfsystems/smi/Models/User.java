@@ -21,7 +21,8 @@ public class User implements Serializable {
         this.rol = rol;
     }
 
-    public User(String name, String rol) {
+    public User(int id, String name, String rol) {
+        this.id = id;
         this.name = name;
         this.rol = rol;
     }
