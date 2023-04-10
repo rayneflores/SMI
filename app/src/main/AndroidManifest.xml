@@ -16,22 +16,22 @@
         android:theme="@style/Theme.SMI"
         android:usesCleartextTraffic="true">
         <activity
-            android:name=".Activities.ProductSelectionActivity"
+            android:name=".activities.ProductSelectionActivity"
             android:exported="false" />
         <activity
-            android:name=".Activities.BusquedaManualActivity"
+            android:name=".activities.BusquedaManualActivity"
             android:exported="false" />
         <activity
-            android:name=".Activities.VencimientoActivity"
+            android:name=".activities.VencimientoActivity"
             android:exported="true" />
         <activity
-            android:name=".Activities.ProductDetailActivity"
+            android:name=".activities.ProductDetailActivity"
             android:exported="true" />
         <activity
-            android:name=".Activities.ProductListActivity"
+            android:name=".activities.ProductListActivity"
             android:exported="true" />
         <activity
-            android:name=".Activities.SplashActivity"
+            android:name=".activities.SplashActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -40,28 +40,28 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".Activities.ConteoActivity"
+            android:name=".activities.ConteoActivity"
             android:exported="true" />
         <activity
-            android:name=".Activities.TomaInventarioActivity"
+            android:name=".activities.TomaInventarioActivity"
             android:exported="true" />
         <activity
-            android:name=".Activities.UsersListActivity"
+            android:name=".activities.UsersListActivity"
             android:exported="true" />
         <activity
-            android:name=".Activities.UserActivity"
+            android:name=".activities.UserActivity"
             android:exported="true" />
         <activity
-            android:name=".Activities.LoginActivity"
+            android:name=".activities.LoginActivity"
             android:exported="true" />
         <activity
-            android:name=".Activities.MainActivity"
+            android:name=".activities.MainActivity"
             android:exported="true" />
         <activity
-            android:name=".Activities.NewProductSelectionActivity"
+            android:name=".activities.NewProductSelectionActivity"
             android:exported="true" />
         <activity
-            android:name=".Activities.NewProductListActivity"
+            android:name=".activities.NewProductListActivity"
             android:exported="true" />
     </application>
 

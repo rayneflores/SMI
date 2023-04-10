@@ -7,7 +7,7 @@
     android:layout_margin="8dp"
     android:paddingBottom="8dp"
     android:background="@drawable/title_border"
-    tools:context=".Activities.ProductDetailActivity">
+    tools:context=".activities.ProductDetailActivity">
 
     <TextView
         android:id="@+id/tvDetailTitle"

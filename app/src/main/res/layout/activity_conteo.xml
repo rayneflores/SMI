@@ -8,7 +8,7 @@
     android:layout_margin="8dp"
     android:paddingBottom="8dp"
     android:background="@drawable/title_border"
-    tools:context=".Activities.ConteoActivity">
+    tools:context=".activities.ConteoActivity">
 
     <TextView
         android:id="@+id/tvConteoTitle"
