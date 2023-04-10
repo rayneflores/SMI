@@ -44,7 +44,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     TextView tvSucursal;
 
     /**
-     * En esta Version 2.0.0 Solo Habilitaremos Captura de Productos para Generar Etiquetas
+     * @version 2.0.1 Generar Etiquetas y Checklist
      * @param savedInstanceState
      */
     @Override
