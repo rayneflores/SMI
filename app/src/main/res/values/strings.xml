@@ -36,4 +36,10 @@
     <string name="byCode">Por Codigo</string>
     <string name="byDescription">Por Descripcion</string>
     <string name="lista_de_productos">Lista de Productos</string>
+    <string name="main">Main</string>
+    <string name="sucursal">Sucursal:</string>
+    <string name="toma_de_inventario">Toma de Inventario</string>
+    <string name="generacion_de_etiquetas">Generacion de Etiquetas</string>
+    <string name="consulta_individual">Consulta Individual</string>
+    <string name="configuracion">Configuracion</string>
 </resources>

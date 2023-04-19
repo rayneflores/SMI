@@ -10,7 +10,7 @@
         android:id="@+id/tvBienvenida"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Main"
+        android:text="@string/main"
         android:textStyle="bold"
         android:textSize="@dimen/fontLarge"
         android:layout_marginTop="16dp"
@@ -22,7 +22,7 @@
         android:id="@+id/tvSucursal"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Sucursal: "
+        android:text="@string/sucursal"
         android:textSize="16sp"
         android:layout_marginTop="8dp"
         app:layout_constraintLeft_toLeftOf="parent"
@@ -43,22 +43,23 @@
 
         <ImageView
             android:id="@+id/ivInventario"
-            android:layout_width="50dp"
-            android:layout_height="50dp"
+            android:layout_width="45dp"
+            android:layout_height="45dp"
             android:layout_gravity="center_vertical"
             android:layout_marginStart="4dp"
-            android:src="@drawable/ic_inventario" />
+            android:src="@drawable/inventory"
+            android:contentDescription="@string/toma_de_inventario" />
 
         <TextView
             android:id="@+id/tvInventario"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="24dp"
             android:layout_gravity="center_horizontal|center_vertical"
+            android:layout_marginStart="24dp"
             android:text="@string/inventario"
+            android:textColor="#78909C"
             android:textSize="18sp"
-            android:textStyle="bold"
-            android:textColor="#949A9A"/>
+            android:textStyle="bold" />
 
     </androidx.cardview.widget.CardView>
 
@@ -76,22 +77,23 @@
 
         <ImageView
             android:id="@+id/ivEtiquetas"
-            android:layout_width="50dp"
-            android:layout_height="50dp"
+            android:layout_width="45dp"
+            android:layout_height="45dp"
             android:layout_gravity="center_vertical"
             android:layout_marginStart="4dp"
-            android:src="@drawable/ic_etiquetas" />
+            android:src="@drawable/labels"
+            android:contentDescription="@string/generacion_de_etiquetas" />
 
         <TextView
             android:id="@+id/tvEtiquetas"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="24dp"
             android:layout_gravity="center_horizontal|center_vertical"
+            android:layout_marginStart="24dp"
             android:text="@string/etiquetas"
+            android:textColor="#78909C"
             android:textSize="18sp"
-            android:textStyle="bold"
-            android:textColor="#949A9A"/>
+            android:textStyle="bold" />
 
     </androidx.cardview.widget.CardView>
 
@@ -109,22 +111,23 @@
 
         <ImageView
             android:id="@+id/ivChecklist"
-            android:layout_width="50dp"
-            android:layout_height="50dp"
+            android:layout_width="45dp"
+            android:layout_height="45dp"
             android:layout_gravity="center_vertical"
             android:layout_marginStart="4dp"
-            android:src="@drawable/ic_checklist" />
+            android:src="@drawable/checklist"
+            android:contentDescription="@string/checklist" />
 
         <TextView
             android:id="@+id/tvChecklist"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="24dp"
             android:layout_gravity="center_horizontal|center_vertical"
+            android:layout_marginStart="24dp"
             android:text="@string/checklist"
+            android:textColor="#78909C"
             android:textSize="18sp"
-            android:textStyle="bold"
-            android:textColor="#949A9A"/>
+            android:textStyle="bold" />
 
     </androidx.cardview.widget.CardView>
 
@@ -142,22 +145,24 @@
 
         <ImageView
             android:id="@+id/ivSeguimiento"
-            android:layout_width="50dp"
-            android:layout_height="50dp"
+            android:layout_width="45dp"
+            android:layout_height="45dp"
             android:layout_gravity="center_vertical"
             android:layout_marginStart="4dp"
-            android:src="@drawable/ic_seguimiento" />
+            android:src="@drawable/follow"
+            tools:ignore="ImageContrastCheck"
+            android:contentDescription="@string/seguimiento" />
 
         <TextView
             android:id="@+id/tvSeguimiento"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="24dp"
             android:layout_gravity="center_horizontal|center_vertical"
+            android:layout_marginStart="24dp"
             android:text="@string/seguimiento"
+            android:textColor="#78909C"
             android:textSize="18sp"
-            android:textStyle="bold"
-            android:textColor="#949A9A"/>
+            android:textStyle="bold" />
 
     </androidx.cardview.widget.CardView>
 
@@ -175,22 +180,24 @@
 
         <ImageView
             android:id="@+id/ivConsulta"
-            android:layout_width="50dp"
-            android:layout_height="50dp"
+            android:layout_width="45dp"
+            android:layout_height="45dp"
             android:layout_gravity="center_vertical"
             android:layout_marginStart="4dp"
-            android:src="@drawable/ic_consulta" />
+            android:src="@drawable/individual"
+            tools:ignore="ImageContrastCheck"
+            android:contentDescription="@string/consulta_individual" />
 
         <TextView
             android:id="@+id/tvConsulta"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="24dp"
             android:layout_gravity="center_horizontal|center_vertical"
+            android:layout_marginStart="24dp"
             android:text="@string/consulta"
+            android:textColor="#78909C"
             android:textSize="18sp"
-            android:textStyle="bold"
-            android:textColor="#949A9A"/>
+            android:textStyle="bold" />
 
     </androidx.cardview.widget.CardView>
 
@@ -208,22 +215,24 @@
 
         <ImageView
             android:id="@+id/ivPedido"
-            android:layout_width="50dp"
-            android:layout_height="50dp"
+            android:layout_width="45dp"
+            android:layout_height="45dp"
             android:layout_gravity="center_vertical"
             android:layout_marginStart="4dp"
-            android:src="@drawable/ic_pedido" />
+            android:src="@drawable/order"
+            tools:ignore="ImageContrastCheck"
+            android:contentDescription="@string/pedido" />
 
         <TextView
             android:id="@+id/tvPedido"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="24dp"
             android:layout_gravity="center_horizontal|center_vertical"
+            android:layout_marginStart="24dp"
             android:text="@string/pedido"
+            android:textColor="#78909C"
             android:textSize="18sp"
-            android:textStyle="bold"
-            android:textColor="#949A9A"/>
+            android:textStyle="bold" />
 
     </androidx.cardview.widget.CardView>
 
@@ -241,22 +250,24 @@
 
         <ImageView
             android:id="@+id/ivVencimiento"
-            android:layout_width="50dp"
-            android:layout_height="50dp"
+            android:layout_width="45dp"
+            android:layout_height="45dp"
             android:layout_gravity="center_vertical"
             android:layout_marginStart="4dp"
-            android:src="@drawable/ic_vencimiento" />
+            android:src="@drawable/expired"
+            tools:ignore="ImageContrastCheck"
+            android:contentDescription="@string/vencimiento" />
 
         <TextView
             android:id="@+id/tvVencimiento"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="24dp"
             android:layout_gravity="center_horizontal|center_vertical"
+            android:layout_marginStart="24dp"
             android:text="@string/vencimiento"
+            android:textColor="#78909C"
             android:textSize="18sp"
-            android:textStyle="bold"
-            android:textColor="#949A9A"/>
+            android:textStyle="bold" />
 
     </androidx.cardview.widget.CardView>
 
@@ -274,32 +285,35 @@
 
         <ImageView
             android:id="@+id/ivManualSearch"
-            android:layout_width="50dp"
-            android:layout_height="50dp"
+            android:layout_width="45dp"
+            android:layout_height="45dp"
             android:layout_gravity="center_vertical"
             android:layout_marginStart="4dp"
-            android:src="@drawable/ic_manual" />
+            android:src="@drawable/manual_search"
+            android:contentDescription="@string/busqueda_manual" />
 
         <TextView
             android:id="@+id/tvManualSearch"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="24dp"
             android:layout_gravity="center_horizontal|center_vertical"
+            android:layout_marginStart="24dp"
             android:text="@string/busqueda_manual"
+            android:textColor="#78909C"
             android:textSize="18sp"
-            android:textStyle="bold"
-            android:textColor="#949A9A"/>
+            android:textStyle="bold" />
 
     </androidx.cardview.widget.CardView>
 
-    <Button
+    <ImageButton
         android:id="@+id/btnSettings"
         android:layout_width="50dp"
         android:layout_height="50dp"
-        android:background="@android:color/transparent"
-        android:drawableLeft="@drawable/ic_settings"
+        android:scaleType="fitStart"
+        android:src="@drawable/settings"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        tools:ignore="SpeakableTextPresentCheck"
+        android:contentDescription="@string/configuracion" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
