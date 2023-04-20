@@ -114,7 +114,6 @@ public class NewProductListActivity extends AppCompatActivity {
 
         cbConteo.setOnCheckedChangeListener((compoundButton, b) -> {
             if (cbConteo.isChecked()) {
-                btnEnviar.setEnabled(true);
                 module = 1;
                 cbEtiquetas.setChecked(false);
                 cbSeguimiento.setChecked(false);
@@ -236,7 +235,7 @@ public class NewProductListActivity extends AppCompatActivity {
                                 path + SEND_COUNT_DATA + serverId,
                                 response -> {
                                     if (response.equals("200")){
-                                        Toast.makeText(getApplicationContext(), "Datos Enviados!!!", Toast.LENGTH_SHORT).show();
+                                        //Toast.makeText(getApplicationContext(), "Datos Enviados!!!", Toast.LENGTH_SHORT).show();
                                         productList.clear();
                                         onBackPressed();
                                     } else {
@@ -258,7 +257,7 @@ public class NewProductListActivity extends AppCompatActivity {
                                 path + query,
                                 response -> {
                                     if (response.equals("200")){
-                                        Toast.makeText(getApplicationContext(), "Datos Enviados!!!", Toast.LENGTH_SHORT).show();
+                                        //Toast.makeText(getApplicationContext(), "Datos Enviados!!!", Toast.LENGTH_SHORT).show();
                                         productList.clear();
                                         onBackPressed();
                                     } else {
@@ -279,7 +278,7 @@ public class NewProductListActivity extends AppCompatActivity {
                                 path + SEND_FOLLOW_DATA + serverId,
                                 response -> {
                                     if (response.equals("200")){
-                                        Toast.makeText(getApplicationContext(), "Datos Enviados!!!", Toast.LENGTH_SHORT).show();
+                                        //Toast.makeText(getApplicationContext(), "Datos Enviados!!!", Toast.LENGTH_SHORT).show();
                                         productList.clear();
                                         onBackPressed();
                                     } else {
@@ -300,7 +299,7 @@ public class NewProductListActivity extends AppCompatActivity {
                                 path + SEND_REQUEST_DATA + serverId,
                                 response -> {
                                     if (response.equals("200")){
-                                        Toast.makeText(getApplicationContext(), "Datos Enviados!!!", Toast.LENGTH_SHORT).show();
+                                        //Toast.makeText(getApplicationContext(), "Datos Enviados!!!", Toast.LENGTH_SHORT).show();
                                         productList.clear();
                                         onBackPressed();
                                     } else {
@@ -321,7 +320,7 @@ public class NewProductListActivity extends AppCompatActivity {
                                 path + SEND_DEFECT_DATA + serverId,
                                 response -> {
                                     if (response.equals("200")){
-                                        Toast.makeText(getApplicationContext(), "Datos Enviados!!!", Toast.LENGTH_SHORT).show();
+                                        //Toast.makeText(getApplicationContext(), "Datos Enviados!!!", Toast.LENGTH_SHORT).show();
                                         productList.clear();
                                         onBackPressed();
                                     } else {
@@ -366,7 +365,10 @@ public class NewProductListActivity extends AppCompatActivity {
                             productList.add(product);
                         }
                         productAdapterCount = new ProductAdapterCount(NewProductListActivity.this, productList);
-                        rvProducts.setAdapter(productAdapterCount);*/
+                        rvProducts.setAdapter(productAdapterCount);
+                        if (productList.size() > 0) {
+                            btnEnviar.setEnabled(true);
+                        }*/
                         break;
                     case 2:
                         productList.clear();
@@ -382,6 +384,9 @@ public class NewProductListActivity extends AppCompatActivity {
                         }
                         productAdapterLabel = new NewProductAdapterLabel(NewProductListActivity.this, productList);
                         rvProducts.setAdapter(productAdapterLabel);
+                        if (productList.size() > 0) {
+                            btnEnviar.setEnabled(true);
+                        }
                         break;
                     case 3:
                         /*productList.clear();
@@ -403,7 +408,10 @@ public class NewProductListActivity extends AppCompatActivity {
                             productList.add(product);
                         }
                         productAdapterFollow = new ProductAdapterFollow(NewProductListActivity.this, productList);
-                        rvProducts.setAdapter(productAdapterFollow);*/
+                        rvProducts.setAdapter(productAdapterFollow);
+                        if (productList.size() > 0) {
+                            btnEnviar.setEnabled(true);
+                        }*/
                         break;
                     case 4:
                         /*productList.clear();
@@ -426,7 +434,10 @@ public class NewProductListActivity extends AppCompatActivity {
                             productList.add(product);
                         }
                         productAdapterRequest = new ProductAdapterRequest(NewProductListActivity.this, productList);
-                        rvProducts.setAdapter(productAdapterRequest);*/
+                        rvProducts.setAdapter(productAdapterRequest);
+                        if (productList.size() > 0) {
+                            btnEnviar.setEnabled(true);
+                        }*/
                         break;
                     case 5:
                         /*productList.clear();
@@ -440,7 +451,10 @@ public class NewProductListActivity extends AppCompatActivity {
                             productList.add(product);
                         }
                         productAdapterDefect = new ProductAdapterDefect(NewProductListActivity.this, productList);
-                        rvProducts.setAdapter(productAdapterDefect);*/
+                        rvProducts.setAdapter(productAdapterDefect);
+                        if (productList.size() > 0) {
+                            btnEnviar.setEnabled(true);
+                        }*/
                         break;
                 }
                 rvProducts.setVisibility(View.VISIBLE);

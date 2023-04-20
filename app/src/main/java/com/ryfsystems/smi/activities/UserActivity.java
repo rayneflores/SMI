@@ -46,7 +46,7 @@ public class UserActivity extends AppCompatActivity implements View.OnClickListe
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_user);
 
-        SharedPreferences preferences = getSharedPreferences("preferenciasTelcom", Context.MODE_PRIVATE);
+        SharedPreferences preferences = getSharedPreferences("smiPreferences", Context.MODE_PRIVATE);
         role = preferences.getString("role", "");
 
         btnGuardar = findViewById(R.id.btnGuardar);
@@ -212,7 +212,7 @@ public class UserActivity extends AppCompatActivity implements View.OnClickListe
                     Toast.makeText(getApplicationContext(), "Error_Det: " + error.getMessage(), Toast.LENGTH_SHORT).show();
                 }) {
                     @Override
-                    protected Map<String, String> getParams() throws AuthFailureError {
+                    protected Map<String, String> getParams() {
                         Map<String, String> params = new HashMap<>();
                         params.put("id", String.valueOf(userId));
                         params.put("name", name);
