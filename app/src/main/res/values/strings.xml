@@ -4,7 +4,7 @@
     <string name="smi_logo">magallEAN</string>
     <string name="usuario">Usuario</string>
     <string name="password">Password</string>
-    <string name="inventario">Toma de Inventario</string>
+    <string name="inventario">Inventario Ciclico</string>
     <string name="bienvenido">Bienvenido </string>
     <string name="conteo_de_articulo">Conteo de Articulo</string>
     <string name="etiquetas">Generacion de Etiquetas</string>
@@ -42,4 +42,7 @@
     <string name="generacion_de_etiquetas">Generacion de Etiquetas</string>
     <string name="consulta_individual">Consulta Individual</string>
     <string name="configuracion">Configuracion</string>
+    <string name="id_del_producto">Id del Producto:</string>
+    <string name="detalle">Detalle:</string>
+    <string name="stock">Stock:</string>
 </resources>

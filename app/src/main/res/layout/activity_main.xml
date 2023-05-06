@@ -30,7 +30,7 @@
         app:layout_constraintTop_toBottomOf="@+id/tvBienvenida" />
 
     <androidx.cardview.widget.CardView
-        android:id="@+id/cvInventario"
+        android:id="@+id/cvInventarioC"
         android:layout_width="260dp"
         android:layout_height="50dp"
         android:layout_marginTop="@dimen/upperMargin"
@@ -42,7 +42,7 @@
         app:layout_constraintTop_toBottomOf="@+id/tvSucursal">
 
         <ImageView
-            android:id="@+id/ivInventario"
+            android:id="@+id/ivInventarioC"
             android:layout_width="45dp"
             android:layout_height="45dp"
             android:layout_gravity="center_vertical"
@@ -51,7 +51,7 @@
             android:contentDescription="@string/toma_de_inventario" />
 
         <TextView
-            android:id="@+id/tvInventario"
+            android:id="@+id/tvInventarioC"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal|center_vertical"
@@ -73,7 +73,7 @@
         app:cardCornerRadius="10sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/cvInventario">
+        app:layout_constraintTop_toBottomOf="@+id/cvInventarioC">
 
         <ImageView
             android:id="@+id/ivEtiquetas"
