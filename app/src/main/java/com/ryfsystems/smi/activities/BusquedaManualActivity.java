@@ -298,7 +298,7 @@ public class BusquedaManualActivity extends AppCompatActivity {
         query = NEW_SEARCH_PRODUCT_BY_CODE;
         JsonObjectRequest jObjReq = new JsonObjectRequest(
                 Request.Method.GET,
-                path + query + code,
+                path + query + code + "&id_suc=" + serverId,
                 null,
                 response -> {
                     try {

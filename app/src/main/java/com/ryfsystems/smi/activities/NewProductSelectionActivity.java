@@ -65,7 +65,7 @@ public class NewProductSelectionActivity extends AppCompatActivity {
         module = (int) received.get("module");
         detalle = (String) received.get("detalle");
 
-        query = NEW_GET_QUERY_PRODUCT + detalle;
+        query = NEW_GET_QUERY_PRODUCT + detalle + "&id_suc=" + serverId;
 
         listProducts(INFRA_SERVER_ADDRESS + query);
     }
