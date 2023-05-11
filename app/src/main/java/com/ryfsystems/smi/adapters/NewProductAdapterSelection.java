@@ -32,7 +32,9 @@ public class NewProductAdapterSelection extends RecyclerView.Adapter<NewProductV
 
     NewProduct productSelected;
 
-    public NewProductAdapterSelection(Activity activity, List<NewProduct> productList, int module) {
+    public NewProductAdapterSelection(Activity activity,
+                                      List<NewProduct> productList,
+                                      int module) {
         this.activity = activity;
         this.productList = productList;
         this.module = module;

@@ -55,6 +55,8 @@ public class Constants {
     public static String NEW_SET_LABEL_PRODUCT = "newSetLabelProduct.php";
     public static String NEW_GET_QUERY_PRODUCT = "newGetQueryProduct.php?detalle=";
     public static String NEW_GET_PRODUCTS_LABEL = "newGetProductsLabel.php?id_suc=";
+    public static String NEW_GET_LAST_IC = "getLastInvCic.php?id_suc=";
+    public static String NEW_GET_CHECK_IC = "getLastInvCic.php?id_suc=";
     public static String NEW_INVENTARIO_CICLICO = "listInvCic.php?id_suc=";
     public static String SEND_LABEL_DATA = "sendLabelData.php?id_suc=";
 

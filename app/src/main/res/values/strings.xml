@@ -45,4 +45,5 @@
     <string name="id_del_producto">Id del Producto:</string>
     <string name="detalle">Detalle:</string>
     <string name="stock">Stock:</string>
+    <string name="lista_de_inventario_ciclico">Lista de Inventario Ciclico</string>
 </resources>

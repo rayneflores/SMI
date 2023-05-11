@@ -2,10 +2,13 @@ package com.ryfsystems.smi.adapters;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.graphics.Color;
 import android.graphics.Typeface;
 import android.os.Bundle;
+import android.text.Spannable;
 import android.text.SpannableString;
 import android.text.Spanned;
+import android.text.style.ForegroundColorSpan;
 import android.text.style.StyleSpan;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -69,6 +72,10 @@ public class NewProductAdapterCountSelect extends RecyclerView.Adapter<NewProduc
 
         SpannableString conteo = new SpannableString("Stock: " + productList.get(i).getStock_inventario());
         conteo.setSpan(new StyleSpan(Typeface.BOLD), 0, 5, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+        if (productList.get(i).getStock_inventario().equals("0")) {
+            final ForegroundColorSpan fcs = new ForegroundColorSpan(Color.rgb(0, 255, 0));
+            conteo.setSpan(fcs, 0, 5, Spannable.SPAN_INCLUSIVE_INCLUSIVE);
+        }
         viewHolder.tvListCountStockInventario.setText(conteo);
     }
 

@@ -31,7 +31,7 @@ public class NewProductCountViewHolder extends RecyclerView.ViewHolder {
         });
 
         tvListCountProductId = mView.findViewById(R.id.tvListCountProductId);
-        tvListCountProductDetalle = mView.findViewById(R.id.tvListProductDetalle);
+        tvListCountProductDetalle = mView.findViewById(R.id.tvListCountProductDetalle);
         tvListCountStockInventario = mView.findViewById(R.id.tvListCountStockInventario);
     }
 
