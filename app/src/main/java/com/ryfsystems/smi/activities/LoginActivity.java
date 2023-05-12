@@ -16,6 +16,7 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.android.volley.Request;
@@ -48,6 +49,7 @@ public class LoginActivity extends AppCompatActivity {
     RequestQueue queue;
     String path = INFRA_SERVER_ADDRESS;
     String programVersion;
+    String serverName;
     String serverAddress;
     TextView tvVersion;
     User user;
@@ -78,6 +80,7 @@ public class LoginActivity extends AppCompatActivity {
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
                 Server selectedServer = (Server) adapterView.getItemAtPosition(i);
                 serverAddress = selectedServer.getServerAddress();
+                serverName = selectedServer.getServerName();
                 serverId = selectedServer.getServerId();
             }
 
@@ -96,7 +99,20 @@ public class LoginActivity extends AppCompatActivity {
             btnLogin.setEnabled(false);
             if (!tvUsuario.getText().toString().trim().isEmpty() &&
                     !tvPassword.getText().toString().trim().isEmpty()) {
-                login(tvUsuario.getText().toString().trim(), tvPassword.getText().toString().trim());
+                AlertDialog.Builder dialog = new AlertDialog.Builder(LoginActivity.this);
+                dialog.setMessage("Esta seguro de iniciar sesion en " + serverName + "?")
+                        .setPositiveButton("Si", (d, which) -> {
+                            d.dismiss();
+                            login(
+                                    tvUsuario.getText().toString().trim(),
+                                    tvPassword.getText().toString().trim()
+                            );
+                        })
+                        .setNegativeButton("Cambiar Servidor", (d, which) -> d.dismiss())
+                        .setIcon(R.drawable.magallean)
+                        .setTitle(" ");
+                dialog.show();
+                btnLogin.setEnabled(true);
             } else {
                 btnLogin.setEnabled(true);
                 Toast.makeText(
