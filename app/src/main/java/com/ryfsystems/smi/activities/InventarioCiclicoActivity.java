@@ -1,8 +1,10 @@
 package com.ryfsystems.smi.activities;
 
 import static com.ryfsystems.smi.utils.Constants.INFRA_SERVER_ADDRESS;
+import static com.ryfsystems.smi.utils.Constants.NEW_GET_CHECK_IC;
 import static com.ryfsystems.smi.utils.Constants.NEW_GET_LAST_IC;
 import static com.ryfsystems.smi.utils.Constants.NEW_INVENTARIO_CICLICO;
+import static com.ryfsystems.smi.utils.Constants.NEW_UPLOAD_IC;
 
 import android.app.ProgressDialog;
 import android.content.Context;
@@ -20,13 +22,13 @@ import com.android.volley.RequestQueue;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
-import com.google.android.material.snackbar.Snackbar;
 import com.ryfsystems.smi.R;
 import com.ryfsystems.smi.adapters.NewProductAdapterCountSelect;
 import com.ryfsystems.smi.models.NewProduct;
 import com.ryfsystems.smi.utils.HttpsTrustManager;
 
 import org.json.JSONArray;
+import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
@@ -54,32 +56,57 @@ public class InventarioCiclicoActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_inventario_ciclico);
+
+        recuperarPreferencias();
         callLastCyclicInv(serverId);
         fabDownload = findViewById(R.id.fabDownload);
+        fabDownload.setEnabled(false);
+        fabDownload.setOnClickListener(v -> callUploadIC(serverId));
 
-        fabDownload.setOnClickListener(
-                v -> Snackbar.make(v, "Here's a Snackbar", Snackbar.LENGTH_LONG)
-                .setAction("Action", null).show()
-        );
-
-        /*progressDialog = new ProgressDialog(this);
+        progressDialog = new ProgressDialog(this);
         progressDialog.setTitle("Espere...");
         progressDialog.setMessage("Listando Productos...");
-        progressDialog.setCanceledOnTouchOutside(false);*/
+        progressDialog.setCanceledOnTouchOutside(false);
 
         /*rvCountQueryICProducts = findViewById(R.id.rvCountQueryICProducts);
         rvCountQueryICProducts.setHasFixedSize(true);
         layoutManager = new LinearLayoutManager(getApplicationContext());
         rvCountQueryICProducts.setLayoutManager(layoutManager);
-        recuperarPreferencias();
         callInventarioCiclico(serverId);*/
 
     }
 
+    private void callUploadIC(Integer serverId) {
+        HttpsTrustManager.allowAllSSL();
+        query = NEW_UPLOAD_IC;
+        JsonObjectRequest jObjReq = new JsonObjectRequest(
+                Request.Method.GET,
+                path + query + serverId,
+                null,
+                response -> {
+                    try {
+                        Toast.makeText(getApplicationContext(),
+                                response.getString("msg"),
+                                Toast.LENGTH_SHORT).show();
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
+                }, error -> {
+            Toast.makeText(
+                            getApplicationContext(),
+                            "No se Encontraron Registros, Cargue Inventario!!!",
+                            Toast.LENGTH_LONG)
+                    .show();
+            progressDialog.dismiss();
+            onResume();
+        });
+        RequestQueue requestQueue = Volley.newRequestQueue(this);
+        requestQueue.add(jObjReq);
+    }
+
+
     private void callLastCyclicInv(Integer serverId) {
         HttpsTrustManager.allowAllSSL();
-        progressDialog.setMessage("Buscando Ultimo Inventario Ciclico...");
-        progressDialog.show();
         query = NEW_GET_LAST_IC;
         JsonObjectRequest jObjReq = new JsonObjectRequest(
                 Request.Method.GET,
@@ -87,7 +114,15 @@ public class InventarioCiclicoActivity extends AppCompatActivity {
                 null,
                 response -> {
                     try {
-                        JSONArray jsonArray = response.getJSONArray("Products");
+                        if (response.getInt("id_inventario_ciclico") != 0) {
+                            checkInvCicSMI(response.getInt("id_inventario_ciclico"));
+                        } else {
+                            Toast
+                                    .makeText(getApplicationContext(),
+                                            "No hay Inventario Ciclico Disponible!!!",
+                                            Toast.LENGTH_LONG)
+                                    .show();
+                        }
                     } catch (Exception exception) {
                         exception.printStackTrace();
                         progressDialog.dismiss();
@@ -96,6 +131,42 @@ public class InventarioCiclicoActivity extends AppCompatActivity {
             Toast.makeText(
                             getApplicationContext(),
                             "No se Encontraron Registros, Cargue Inventario!!!",
+                            Toast.LENGTH_LONG)
+                    .show();
+            progressDialog.dismiss();
+            onResume();
+        });
+        RequestQueue requestQueue = Volley.newRequestQueue(this);
+        requestQueue.add(jObjReq);
+    }
+
+    private void checkInvCicSMI(int inv) {
+        HttpsTrustManager.allowAllSSL();
+        query = NEW_GET_CHECK_IC;
+        JsonObjectRequest jObjReq = new JsonObjectRequest(
+                Request.Method.GET,
+                path + query + serverId + "&id_inv=" + inv,
+                null,
+                response -> {
+                    try {
+                        if (response.getInt("id_inventario_ciclico") != 0) {
+                            /*checkInvCicSMI(response.getInt("id_inventario_ciclico"));*/
+                        } else {
+                            Toast
+                                    .makeText(getApplicationContext(),
+                                            "No esta Disponible, cargue Inventario!!!",
+                                            Toast.LENGTH_LONG)
+                                    .show();
+                            fabDownload.setEnabled(true);
+                        }
+                    } catch (Exception exception) {
+                        exception.printStackTrace();
+                        progressDialog.dismiss();
+                    }
+                }, error -> {
+            Toast.makeText(
+                            getApplicationContext(),
+                            "No se Encontraron Registros!!!",
                             Toast.LENGTH_LONG)
                     .show();
             progressDialog.dismiss();

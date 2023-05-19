@@ -27,7 +27,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     Bundle extras;
     ImageButton btnSettings;
-    CardView cvInventarioC;
+    CardView cvInventarios;
     CardView cvEtiquetas;
     CardView cvChecklist;
     CardView cvSeguimiento;
@@ -55,13 +55,12 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-
         extras = new Bundle();
 
         recuperarPreferencias();
 
-        cvInventarioC = findViewById(R.id.cvInventarioC);
-        cvInventarioC.setOnClickListener(this);
+        cvInventarios = findViewById(R.id.cvInventarios);
+        cvInventarios.setOnClickListener(this);
 
         cvEtiquetas = findViewById(R.id.cvEtiquetas);
         cvEtiquetas.setOnClickListener(this);
@@ -162,10 +161,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 startActivity(nextIntent);
                 finish();
                 break;
-            case R.id.cvInventarioC:
+            case R.id.cvInventarios:
                 extras.putInt(MODULE, 1);
                 extras.putInt(SERVER_ID, serverId);
-                i = new Intent(getApplicationContext(), InventarioCiclicoActivity.class);
+                i = new Intent(getApplicationContext(), InventariosActivity.class);
                 i.putExtras(extras);
                 startActivity(i);
                 finish();

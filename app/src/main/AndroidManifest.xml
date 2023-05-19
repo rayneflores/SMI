@@ -16,6 +16,20 @@
         android:theme="@style/Theme.SMI"
         android:usesCleartextTraffic="true">
         <activity
+            android:name=".activities.InventarioAzarActivity"
+            android:exported="false">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
+        <activity
+            android:name=".activities.InventariosActivity"
+            android:exported="false">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
+        <activity
             android:name=".activities.InventarioCiclicoActivity"
             android:exported="false">
             <meta-data
