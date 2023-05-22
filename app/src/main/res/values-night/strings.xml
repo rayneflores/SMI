@@ -8,11 +8,11 @@
     <string name="inventarios">Inventarios</string>
     <string name="bienvenido">Bienvenido </string>
     <string name="conteo_de_articulo">Conteo de Articulo</string>
-    <string name="etiquetas">Generacion de Etiquetas</string>
+    <string name="etiquetas">Etiquetas</string>
     <string name="checklist">Checklist</string>
     <string name="productos">LISTA DE PRODUCTOS</string>
-    <string name="consulta">Consulta Individual</string>
-    <string name="vencimiento">Lista de Vencidos</string>
+    <string name="consulta">Consulta</string>
+    <string name="vencimiento">Vencidos</string>
     <string name="detalle_de_articulo">Detalle de Articulo</string>
     <string name="reporte_de_articulos_vencidos">Reporte de Articulos Vencidos</string>
     <string name="guardar_producto">Guardar Producto</string>
